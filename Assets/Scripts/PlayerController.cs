@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     PlayerInput input;
     Animator anim;
+    CameraShake camShake;
 
     [Header("Movement"), SerializeField] float acceleration = 1f;
     [SerializeField] float topSpeed = 3f;
@@ -31,6 +32,9 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
+    [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
+    [SerializeField] float shootCameraShakeDuration = 1f;
+
     #endregion
 
     #region Unity Messages
@@ -39,6 +43,7 @@ public class PlayerController : MonoBehaviour {
     {
         input = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
+        camShake = Camera.main.GetComponent<CameraShake>();
     }
 
     private void FixedUpdate()
@@ -48,6 +53,8 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.Shoot)
         {
+            camShake.shakeAmount = shootCameraShakeAmount;
+            camShake.shakeDuration = shootCameraShakeDuration;
             anim.SetTrigger("Shoot");
             StartCoroutine(Shoot(shootKnockbackDuration));
         }

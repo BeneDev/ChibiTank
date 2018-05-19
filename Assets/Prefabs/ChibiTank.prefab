@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 4073941591357704}
   - component: {fileID: 114486505432685382}
   - component: {fileID: 114107903234041856}
+  - component: {fileID: 95580881237344290}
   m_Layer: 0
   m_Name: ChibiTank
   m_TagString: Untagged
@@ -727,6 +728,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042682321689876}
   m_Mesh: {fileID: 4300014, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
+--- !u!95 &95580881237344290
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820247185221480}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7901ac099cc943645a5fe7dcf71b9a62, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114107903234041856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -746,6 +765,8 @@ MonoBehaviour:
   shootKnockback: 20
   shootKnockbackDuration: 0.3
   cockPit: {fileID: 1489471278366542}
+  shootCameraShakeAmount: 0.28
+  shootCameraShakeDuration: 0.11
 --- !u!114 &114486505432685382
 MonoBehaviour:
   m_ObjectHideFlags: 1
