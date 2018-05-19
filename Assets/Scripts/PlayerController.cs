@@ -63,27 +63,11 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
         {
-            if(shotSound)
-            {
-                shotSound.Play();
-            }
-            shootTime = Time.realtimeSinceStartup;
-            GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
-            camShake.shakeAmount = shootCameraShakeAmount;
-            camShake.shakeDuration = shootCameraShakeDuration;
-            anim.SetTrigger("Shoot");
-            StartCoroutine(ShotKnockBack(shootKnockbackDuration));
+            Shoot();
         }
-        if(engineSound)
+        if (engineSound)
         {
-            if (velocity.magnitude * engineSoundGain > idleEngineVolume)
-            {
-                engineSound.volume = velocity.magnitude * engineSoundGain;
-            }
-            else
-            {
-                engineSound.volume = idleEngineVolume;
-            }
+            PlayEngineSound();
         }
         transform.position += velocity * Time.fixedDeltaTime;
     }
@@ -123,6 +107,32 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void Shoot()
+    {
+        if (shotSound)
+        {
+            shotSound.Play();
+        }
+        shootTime = Time.realtimeSinceStartup;
+        GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
+        camShake.shakeAmount = shootCameraShakeAmount;
+        camShake.shakeDuration = shootCameraShakeDuration;
+        anim.SetTrigger("Shoot");
+        StartCoroutine(ShotKnockBack(shootKnockbackDuration));
+    }
+
+    private void PlayEngineSound()
+    {
+        if (velocity.magnitude * engineSoundGain > idleEngineVolume)
+        {
+            engineSound.volume = velocity.magnitude * engineSoundGain;
+        }
+        else
+        {
+            engineSound.volume = idleEngineVolume;
+        }
+    }
+
     void CalculateVelocity()
     {
         if(velocity.magnitude < topSpeed)
@@ -141,6 +151,5 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
     }
-
     #endregion
 }
