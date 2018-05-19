@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Shooting"), SerializeField] float shootDelay = 1f;
     float shootTime;
+    [SerializeField] GameObject shootOrigin;
 
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float shootKnockback = 1f;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour {
         if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
         {
             shootTime = Time.realtimeSinceStartup;
+            GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
             camShake.shakeAmount = shootCameraShakeAmount;
             camShake.shakeDuration = shootCameraShakeDuration;
             anim.SetTrigger("Shoot");

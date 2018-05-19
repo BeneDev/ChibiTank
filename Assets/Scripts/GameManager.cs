@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
     [Header("Cannon Balls"), SerializeField] int cannonBallCount = 100;
-    [SerializeField] GameObject cannonBallParent;
+    [SerializeField] public GameObject cannonBallParent;
     [SerializeField] GameObject cannonBallPrefab;
     public Stack<GameObject> freeCannonBalls = new Stack<GameObject>();
 
@@ -32,10 +32,16 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public GameObject GetCannonBall(Vector3 positionToSpawn)
+    private void Update()
+    {
+        print(cannonBallParent.transform.childCount);
+    }
+
+    public GameObject GetCannonBall(Vector3 positionToSpawn, Vector3 direction)
     {
         GameObject ballToReturn = freeCannonBalls.Pop();
         ballToReturn.transform.position = positionToSpawn;
+        ballToReturn.transform.forward = direction;
         ballToReturn.SetActive(true);
         return ballToReturn;
     }

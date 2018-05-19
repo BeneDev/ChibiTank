@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonBallCount: 100
-  cannonBallParent: {fileID: 1057824340452916, guid: 49b65252fd70fe94883608a68dbca222,
-    type: 2}
+  cannonBallParent: {fileID: 0}
   cannonBallPrefab: {fileID: 1629740976642178, guid: 18854b74eb0d2b0438bff524804227f2,
     type: 2}
