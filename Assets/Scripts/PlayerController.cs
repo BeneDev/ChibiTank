@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     #region Private Fields
 
     PlayerInput input;
+    Animator anim;
 
     [Header("Movement"), SerializeField] float acceleration = 1f;
     [SerializeField] float topSpeed = 3f;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.Shoot)
         {
+            anim.SetTrigger("Shoot");
             StartCoroutine(Shoot(shootKnockbackDuration));
         }
         transform.position += velocity * Time.fixedDeltaTime;
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour {
         moveDirection.x = input.Horizontal;
         moveDirection.z = input.Vertical;
 
-        aimDirection.x = -input.R_Horizontal;
+        aimDirection.x = input.R_Horizontal;
         aimDirection.z = input.R_Vertical;
     }
 
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour {
         for(float t = 0; t < duration; t += Time.fixedDeltaTime)
         {
             // Apply knockback in the -aimDirection
-            velocity = cockPit.transform.forward * shootKnockback * (duration - t);
+            velocity = -cockPit.transform.forward * shootKnockback * (duration - t);
             yield return new WaitForEndOfFrame();
         }
     }
