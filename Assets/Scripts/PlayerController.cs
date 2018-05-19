@@ -19,13 +19,14 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float topSpeed = 3f;
     [SerializeField] float rotationSpeed = 1f;
     [SerializeField] float cockPitRotationSpeed = 2f;
-    Vector3 direction;
-    float velocity;
+    Vector3 moveDirection;
+    Vector3 velocity;
 
     Vector3 aimDirection;
 
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float shootKnockback = 1f;
+    [SerializeField] float shootKnockbackDuration = 0.5f;
 
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
@@ -45,9 +46,9 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.Shoot)
         {
-            Shoot();
+            StartCoroutine(Shoot(shootKnockbackDuration));
         }
-        transform.position += transform.forward * velocity * Time.fixedDeltaTime;
+        transform.position += velocity * Time.fixedDeltaTime;
     }
 
     #endregion
@@ -56,8 +57,8 @@ public class PlayerController : MonoBehaviour {
 
     void GetInput()
     {
-        direction.x = input.Horizontal;
-        direction.z = input.Vertical;
+        moveDirection.x = input.Horizontal;
+        moveDirection.z = input.Vertical;
 
         aimDirection.x = -input.R_Horizontal;
         aimDirection.z = input.R_Vertical;
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour {
         if (input.Horizontal != 0 || input.Vertical != 0)
         {
             Quaternion targetRotation = new Quaternion();
-            targetRotation.SetLookRotation(direction);
+            targetRotation.SetLookRotation(moveDirection);
 
             transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
         }
@@ -87,16 +88,21 @@ public class PlayerController : MonoBehaviour {
 
     void CalculateVelocity()
     {
-        if(velocity < topSpeed)
+        if(velocity.magnitude < topSpeed)
         {
-            velocity += acceleration * direction.magnitude;
+            velocity += moveDirection * acceleration;
         }
         velocity = velocity * (1 - Time.fixedDeltaTime * drag);
     }
 
-    void Shoot()
+    IEnumerator Shoot(float duration)
     {
-        // Apply knockback in the -aimDirection
+        for(float t = 0; t < duration; t += Time.fixedDeltaTime)
+        {
+            // Apply knockback in the -aimDirection
+            velocity = cockPit.transform.forward * shootKnockback * (duration - t);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     #endregion
