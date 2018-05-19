@@ -761,6 +761,7 @@ MonoBehaviour:
   topSpeed: 14.9
   rotationSpeed: 4
   cockPitRotationSpeed: 7
+  shootDelay: 0.4
   drag: 5.1
   shootKnockback: 20
   shootKnockbackDuration: 0.3

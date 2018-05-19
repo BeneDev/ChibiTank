@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 
     Vector3 aimDirection;
 
+    [Header("Shooting"), SerializeField] float shootDelay = 1f;
+    float shootTime;
+
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float shootKnockback = 1f;
     [SerializeField] float shootKnockbackDuration = 0.5f;
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour {
         input = GetComponent<PlayerInput>();
         anim = GetComponent<Animator>();
         camShake = Camera.main.GetComponent<CameraShake>();
+        shootTime = Time.realtimeSinceStartup;
     }
 
     private void FixedUpdate()
@@ -51,8 +55,9 @@ public class PlayerController : MonoBehaviour {
         GetInput();
         RotatePlayer();
         CalculateVelocity();
-        if(input.Shoot)
+        if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
         {
+            shootTime = Time.realtimeSinceStartup;
             camShake.shakeAmount = shootCameraShakeAmount;
             camShake.shakeDuration = shootCameraShakeDuration;
             anim.SetTrigger("Shoot");
