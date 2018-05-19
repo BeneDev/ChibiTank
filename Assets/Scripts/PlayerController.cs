@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
+    [Header("SoundS"), SerializeField] AudioSource shotSound;
+
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
 
@@ -58,12 +60,16 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
         {
+            if(shotSound)
+            {
+                shotSound.Play();
+            }
             shootTime = Time.realtimeSinceStartup;
             GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
             camShake.shakeAmount = shootCameraShakeAmount;
             camShake.shakeDuration = shootCameraShakeDuration;
             anim.SetTrigger("Shoot");
-            StartCoroutine(Shoot(shootKnockbackDuration));
+            StartCoroutine(ShotKnockBack(shootKnockbackDuration));
         }
         transform.position += velocity * Time.fixedDeltaTime;
     }
@@ -112,7 +118,7 @@ public class PlayerController : MonoBehaviour {
         velocity = velocity * (1 - Time.fixedDeltaTime * drag);
     }
 
-    IEnumerator Shoot(float duration)
+    IEnumerator ShotKnockBack(float duration)
     {
         for(float t = 0; t < duration; t += Time.fixedDeltaTime)
         {

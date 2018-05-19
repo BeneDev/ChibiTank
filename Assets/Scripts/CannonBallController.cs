@@ -16,6 +16,7 @@ public class CannonBallController : MonoBehaviour {
 
     private void OnEnable()
     {
+        rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * speed);
         timeWhenFired = Time.realtimeSinceStartup;
     }
