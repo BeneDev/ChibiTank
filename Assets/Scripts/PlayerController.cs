@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour {
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
     [Header("SoundS"), SerializeField] AudioSource shotSound;
+    [SerializeField] AudioSource engineSound;
+    [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f;
+    [Range(0f, 1f), SerializeField] float idleEngineVolume = 0.01f;
 
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
@@ -70,6 +73,17 @@ public class PlayerController : MonoBehaviour {
             camShake.shakeDuration = shootCameraShakeDuration;
             anim.SetTrigger("Shoot");
             StartCoroutine(ShotKnockBack(shootKnockbackDuration));
+        }
+        if(engineSound)
+        {
+            if (velocity.magnitude * engineSoundGain > idleEngineVolume)
+            {
+                engineSound.volume = velocity.magnitude * engineSoundGain;
+            }
+            else
+            {
+                engineSound.volume = idleEngineVolume;
+            }
         }
         transform.position += velocity * Time.fixedDeltaTime;
     }
