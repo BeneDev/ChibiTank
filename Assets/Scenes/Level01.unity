@@ -639,7 +639,7 @@ Prefab:
     - target: {fileID: 114820951599942674, guid: d4b391b6509239941a097a64e18ed336,
         type: 2}
       propertyPath: ControllerInput
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4b391b6509239941a097a64e18ed336, type: 2}

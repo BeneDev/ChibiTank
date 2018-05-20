@@ -78,13 +78,19 @@ public class PlayerController : MonoBehaviour {
 
     void GetInput()
     {
+        // Calculate the offset angle on the y axis from the Camera's forward to the global forward
+        float yAngle = Vector3.Angle(Vector3.forward, transform.forward);
         moveDirection.x = input.Horizontal;
         moveDirection.z = input.Vertical;
+        // Apply the offset angle on the y axis to the moveDirection vector --> Camera Relative Controls
+        moveDirection = Quaternion.AngleAxis(yAngle, Vector3.up) * moveDirection;
 
         if (GameManager.Instance.ControllerInput)
         {
             aimDirection.x = input.R_Horizontal;
             aimDirection.z = input.R_Vertical;
+            // Apply the offset angle on the y axis to the aimDirection vector --> Camera Relative Controls
+            aimDirection = Quaternion.AngleAxis(yAngle, Vector3.up) * aimDirection;
         }
         else
         {
