@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour {
     PlayerInput input;
     Animator anim;
     CameraShake camShake;
+    GameObject cameraArm;
 
     [Header("Movement"), SerializeField] float acceleration = 1f;
     [SerializeField] float topSpeed = 3f;
-    [SerializeField] float rotationSpeed = 1f;
+    [SerializeField] float fixedRotationSpeed = 1f;
+    float rotationSpeed;
+    [Range(0f, 1f), SerializeField] float backwardsRotationSpeedMultiplier = 0.25f;
     [SerializeField] float cockPitRotationSpeed = 2f;
     Vector3 moveDirection;
     Vector3 velocity;
@@ -54,6 +57,7 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         camShake = Camera.main.GetComponent<CameraShake>();
         shootTime = Time.realtimeSinceStartup;
+        cameraArm = Camera.main.transform.parent.gameObject;
     }
 
     private void FixedUpdate()
@@ -79,7 +83,13 @@ public class PlayerController : MonoBehaviour {
     void GetInput()
     {
         // Calculate the offset angle on the y axis from the Camera's forward to the global forward
-        float yAngle = Vector3.Angle(Vector3.forward, transform.forward);
+        float yAngle = Vector3.Angle(Vector3.forward, cameraArm.transform.forward);
+        // Calculate the real 360 degree angle for when the rotation is anti clockwise
+        if (cameraArm.transform.forward.x < 0f)
+        {
+            yAngle = 360 - yAngle;
+        }
+        //Debug.LogFormat("X: {0} | Y: {1} | Z: {2}", cameraArm.transform.forward.x, cameraArm.transform.forward.y, cameraArm.transform.forward.z);
         moveDirection.x = input.Horizontal;
         moveDirection.z = input.Vertical;
         // Apply the offset angle on the y axis to the moveDirection vector --> Camera Relative Controls
@@ -107,8 +117,16 @@ public class PlayerController : MonoBehaviour {
     void RotatePlayer()
     {
         // Rotate the player smoothly, depending on the velocity
-        if (input.Horizontal != 0 || input.Vertical != 0)
+        if (input.Horizontal != 0 || input.Vertical > 0)
         {
+            if (input.Vertical > -0.5f)
+            {
+                rotationSpeed = fixedRotationSpeed;
+            }
+            else
+            {
+                rotationSpeed = fixedRotationSpeed * backwardsRotationSpeedMultiplier;
+            }
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
 

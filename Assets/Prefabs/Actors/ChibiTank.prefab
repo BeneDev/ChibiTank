@@ -776,7 +776,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &65047947781748476
 BoxCollider:
@@ -1030,8 +1030,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 1.1
   topSpeed: 14.9
-  rotationSpeed: 4
-  cockPitRotationSpeed: 7
+  fixedRotationSpeed: 3
+  backwardsRotationSpeedMultiplier: 0.25
+  cockPitRotationSpeed: 9
   shootDelay: 0.4
   shootOrigin: {fileID: 1060568240328814}
   drag: 5.1
