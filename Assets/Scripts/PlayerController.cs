@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Physics.Raycast(ray, out hit, 100f);
+            Physics.Raycast(ray, out hit, 500f);
             Vector3 mousePosInWorld = hit.point;
             Vector3 targetAim = mousePosInWorld - transform.position;
             aimDirection.x = targetAim.normalized.x;
