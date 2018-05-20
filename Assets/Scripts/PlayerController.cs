@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour {
             Physics.Raycast(ray, out hit, 100f);
             Vector3 mousePosInWorld = hit.point;
             Vector3 targetAim = mousePosInWorld - transform.position;
-            //Debug.LogFormat("X: {0} | Y: {1} | Z: {2}", mousePosInWorld.x, mousePosInWorld.y, mousePosInWorld.z);
             aimDirection.x = targetAim.normalized.x;
             aimDirection.z = targetAim.normalized.z;
         }
