@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour {
 
     Vector3 aimDirection;
 
+    bool bIsGrounded = false;
+
     [Header("Shooting"), SerializeField] float shootDelay = 1f;
     float shootTime;
     [SerializeField] GameObject shootOrigin;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float shootKnockback = 1f;
     [SerializeField] float shootKnockbackDuration = 0.5f;
+    [SerializeField] float mass = 10f;
 
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
@@ -46,6 +49,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
+
+    //LayerMask terrainLayer;
 
     #endregion
 
@@ -58,12 +63,17 @@ public class PlayerController : MonoBehaviour {
         camShake = Camera.main.GetComponent<CameraShake>();
         shootTime = Time.realtimeSinceStartup;
         cameraArm = Camera.main.transform.parent.gameObject;
+
+        // Create the terrain layer mask
+        //int layer = LayerMask.NameToLayer("Terrain");
+        //terrainLayer = 1 << layer;
     }
 
     private void FixedUpdate()
     {
         GetInput();
         RotatePlayer();
+        //UpdateIsGrounded();
         CalculateVelocity();
         if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
         {
@@ -73,6 +83,8 @@ public class PlayerController : MonoBehaviour {
         {
             PlayEngineSound();
         }
+        // Apply the gravity
+        velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
@@ -95,7 +107,7 @@ public class PlayerController : MonoBehaviour {
         // Apply the offset angle on the y axis to the moveDirection vector --> Camera Relative Controls
         moveDirection = Quaternion.AngleAxis(yAngle, Vector3.up) * moveDirection;
 
-        if (GameManager.Instance.ControllerInput)
+        if (GameManager.Instance.isControllerInput)
         {
             aimDirection.x = input.R_Horizontal;
             aimDirection.z = input.R_Vertical;
@@ -127,6 +139,10 @@ public class PlayerController : MonoBehaviour {
             {
                 rotationSpeed = fixedRotationSpeed * backwardsRotationSpeedMultiplier;
             }
+            if(!GameManager.Instance.isControllerInput)
+            {
+                rotationSpeed *= 0.66666666f;
+            }
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
 
@@ -142,6 +158,17 @@ public class PlayerController : MonoBehaviour {
 
             cockPit.transform.rotation = Quaternion.Lerp(cockPit.transform.rotation, targetRotation, cockPitRotationSpeed * Time.fixedDeltaTime);
         }
+    }
+    void UpdateIsGrounded()
+    {
+        //if (Physics.Raycast(transform.position, Vector3.down, 3f, terrainLayer))
+        //{
+        //    bIsGrounded = true;
+        //}
+        //else
+        //{
+        //    bIsGrounded = false;
+        //}
     }
 
     private void Shoot()

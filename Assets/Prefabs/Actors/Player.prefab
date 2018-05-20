@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 1.1
   topSpeed: 14.9
-  fixedRotationSpeed: 1
+  fixedRotationSpeed: 3
   backwardsRotationSpeedMultiplier: 0.25
   cockPitRotationSpeed: 9
   shootDelay: 0.4
@@ -1038,6 +1038,7 @@ MonoBehaviour:
   drag: 5.1
   shootKnockback: 20
   shootKnockbackDuration: 0.3
+  gravity: 9.81
   cockPit: {fileID: 1112228992774638}
   shotSound: {fileID: 82887555961569794}
   engineSound: {fileID: 82154836985891580}

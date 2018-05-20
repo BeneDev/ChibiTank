@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] GameObject cannonBallPrefab;
     public Stack<GameObject> freeCannonBalls = new Stack<GameObject>();
 
-    [SerializeField] public bool ControllerInput = false;
+    private int controllerCount = 0;
+
+    [SerializeField] public bool isControllerInput = false;
 
     private void Awake()
     {
@@ -30,6 +32,32 @@ public class GameManager : MonoBehaviour {
                 ballToPush.SetActive(false);
                 ballToPush.transform.SetParent(cannonBallParent.transform);
                 freeCannonBalls.Push(ballToPush);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        GetControllerCount();
+        if(controllerCount > 0)
+        {
+            isControllerInput = true;
+        }
+        else
+        {
+            isControllerInput = false;
+        }
+    }
+
+    void GetControllerCount()
+    {
+        string[] names = Input.GetJoystickNames();
+        controllerCount = 0;
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (!string.IsNullOrEmpty(names[i]))
+            {
+                controllerCount++;
             }
         }
     }
