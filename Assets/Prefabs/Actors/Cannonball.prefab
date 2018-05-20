@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4fc7f287cbadc43bcc35289c986f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3000
+  speed: 2500
   durationUntilDespawn: 3
   impactSounds:
   - {fileID: 8300000, guid: c938f7907815eed4abebd44792b7162f, type: 3}

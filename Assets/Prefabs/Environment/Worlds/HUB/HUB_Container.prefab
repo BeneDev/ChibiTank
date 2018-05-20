@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4618537019100902}
   - component: {fileID: 65948842106332694}
   - component: {fileID: 114990259459146082}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HUB_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 65448194165205246}
   - component: {fileID: 65304160690533274}
   - component: {fileID: 65642213718276100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4703342822001870}
   - component: {fileID: 33528641993535256}
   - component: {fileID: 23694326993560730}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
