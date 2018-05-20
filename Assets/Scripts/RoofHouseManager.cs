@@ -1,18 +1,16 @@
 ﻿using System.Collections;
-
 using System.Collections.Generic;
-
 using UnityEngine;
 
 
-public class RoofHouseManager : MonoBehaviour
-{
-
+public class RoofHouseManager : MonoBehaviour {
 
     [SerializeField] GameObject roof;
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 1f;
     [SerializeField] float fadedOutValue = 0.1f;
+
+    #region Unity Messages
 
     void OnTriggerEnter(Collider collider)
 
@@ -47,6 +45,10 @@ public class RoofHouseManager : MonoBehaviour
         }
 
     }
+
+    #endregion
+
+    #region Private Methods
 
     private void SetMaterialTransparent()
 
@@ -116,5 +118,7 @@ public class RoofHouseManager : MonoBehaviour
         color.a = value;
         roof.GetComponent<MeshRenderer>().material.color = color;
     }
+
+    #endregion
 
 }

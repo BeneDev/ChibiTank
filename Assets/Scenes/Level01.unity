@@ -498,6 +498,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114545469805523700, guid: 66fd1a429922096499f245bce89fc659,
+        type: 2}
+      propertyPath: rotationSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81512540178335548, guid: 66fd1a429922096499f245bce89fc659, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 66fd1a429922096499f245bce89fc659, type: 2}
