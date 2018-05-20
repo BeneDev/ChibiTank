@@ -7,7 +7,13 @@ public class PlayerController : MonoBehaviour {
 
     #region Properties
 
-
+    public Vector3 CockPitForward
+    {
+        get
+        {
+            return cockPit.transform.forward;
+        }
+    }
 
     #endregion
 
@@ -139,10 +145,13 @@ public class PlayerController : MonoBehaviour {
             {
                 rotationSpeed = fixedRotationSpeed * backwardsRotationSpeedMultiplier;
             }
-            if(!GameManager.Instance.isControllerInput)
-            {
-                rotationSpeed *= 0.66666666f;
-            }
+
+            // Set the rotationspeed to 2/3 if on keyboard, because it was feeling different for KBM and Controller as the cam rotated with the tank itself and not the aim Direction
+            //if(!GameManager.Instance.isControllerInput)
+            //{
+            //    rotationSpeed *= 0.66666666f;
+            //}
+
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
 

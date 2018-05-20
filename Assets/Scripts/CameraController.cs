@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour {
 
     [SerializeField] float speed = 5f;
     [SerializeField] float rotationSpeed = 3f;
+    [SerializeField] float controllerRotationSpeed = 4f;
 
     private void Awake()
     {
@@ -17,6 +18,19 @@ public class CameraController : MonoBehaviour {
     private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, player.transform.position, speed);
-        transform.forward = Vector3.Lerp(transform.forward, player.transform.forward, rotationSpeed);
+
+        // Rotate with the player tanks forward
+        //transform.forward = Vector3.Lerp(transform.forward, player.transform.forward, rotationSpeed);
+
+        // Rotate based on the player aim Direction
+        if(GameManager.Instance.isControllerInput)
+        {
+            print(Time.deltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, player.GetComponent<PlayerController>().CockPitForward, controllerRotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.forward = Vector3.Lerp(transform.forward, player.GetComponent<PlayerController>().CockPitForward, rotationSpeed * Time.deltaTime);
+        }
     }
 }
