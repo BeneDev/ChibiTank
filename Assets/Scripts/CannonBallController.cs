@@ -73,7 +73,6 @@ public class CannonBallController : MonoBehaviour {
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Metal"))
         {
             PlaySound(impactSounds[sounds.metal]);
-            print("metal");
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Organic"))
         {

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] GameObject cannonBallPrefab;
     public Stack<GameObject> freeCannonBalls = new Stack<GameObject>();
 
+    [SerializeField] public bool ControllerInput = false;
+
     private void Awake()
     {
         if (Instance != null)

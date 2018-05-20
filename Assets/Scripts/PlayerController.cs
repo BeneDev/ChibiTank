@@ -81,8 +81,22 @@ public class PlayerController : MonoBehaviour {
         moveDirection.x = input.Horizontal;
         moveDirection.z = input.Vertical;
 
-        aimDirection.x = input.R_Horizontal;
-        aimDirection.z = input.R_Vertical;
+        if (GameManager.Instance.ControllerInput)
+        {
+            aimDirection.x = input.R_Horizontal;
+            aimDirection.z = input.R_Vertical;
+        }
+        else
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit, 100f);
+            Vector3 mousePosInWorld = hit.point;
+            Vector3 targetAim = mousePosInWorld - transform.position;
+            //Debug.LogFormat("X: {0} | Y: {1} | Z: {2}", mousePosInWorld.x, mousePosInWorld.y, mousePosInWorld.z);
+            aimDirection.x = targetAim.normalized.x;
+            aimDirection.z = targetAim.normalized.z;
+        }
     }
 
     void RotatePlayer()
@@ -97,7 +111,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Rotate the guns on the ship depending on the input of the right stick
-        if (input.R_Horizontal != 0 || input.R_Vertical != 0 && cockPit)
+        if (aimDirection.magnitude > 0.1f && cockPit)
         {
             //gunObject.transform.forward = shootDirection;
             Quaternion targetRotation = new Quaternion();
