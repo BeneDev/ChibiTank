@@ -13,15 +13,28 @@ public class CannonBallController : MonoBehaviour {
 
     [SerializeField] AudioClip[] impactSounds;
 
-    Dictionary<string, int> audioDict = new Dictionary<string, int>();
+    struct Sounds
+    {
+        public int terrain;
+        public int mechanical;
+        public int metal;
+        public int organic;
+    }
+    Sounds sounds;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        audioDict["terrain"] = 0;
-        audioDict["mechanical"] = 1;
-        audioDict["organic"] = 2;
+        BindSounds();
+    }
+
+    void BindSounds()
+    {
+        sounds.terrain = 0;
+        sounds.mechanical = 1;
+        sounds.metal = 2;
+        sounds.organic = 3;
     }
 
     private void OnEnable()
@@ -51,15 +64,20 @@ public class CannonBallController : MonoBehaviour {
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
-            PlaySound(impactSounds[audioDict["terrain"]]);
+            PlaySound(impactSounds[sounds.terrain]);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Mechanical"))
         {
-            PlaySound(impactSounds[audioDict["mechanical"]]);
+            PlaySound(impactSounds[sounds.mechanical]);
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Metal"))
+        {
+            PlaySound(impactSounds[sounds.metal]);
+            print("metal");
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Organic"))
         {
-            PlaySound(impactSounds[audioDict["organic"]]);
+            PlaySound(impactSounds[sounds.organic]);
         }
     }
 }

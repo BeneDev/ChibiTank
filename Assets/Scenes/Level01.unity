@@ -145,6 +145,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!81 &215670514
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 215670507}
+  m_Enabled: 1
 --- !u!1001 &217369030
 Prefab:
   m_ObjectHideFlags: 0
@@ -210,7 +217,7 @@ GameObject:
   - component: {fileID: 476085440}
   - component: {fileID: 476085439}
   - component: {fileID: 476085438}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,6 +474,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 55.026
       objectReference: {fileID: 0}
+    - target: {fileID: 81044826965214234, guid: 9a6a0c05a94c39a408e14da420b8c48c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9a6a0c05a94c39a408e14da420b8c48c, type: 2}
   m_IsPrefabParent: 0
@@ -645,6 +657,11 @@ Prefab:
         type: 2}
       propertyPath: rayDistanceForCollision
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 82021880080937842, guid: 39c127eb68a3b0f4ebbda6e3c0612919,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39c127eb68a3b0f4ebbda6e3c0612919, type: 2}

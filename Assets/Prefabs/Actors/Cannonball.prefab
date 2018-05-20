@@ -113,7 +113,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   impactSounds:
   - {fileID: 8300000, guid: c938f7907815eed4abebd44792b7162f, type: 3}
   - {fileID: 8300000, guid: 3ecebcd18ba3cd74d81c90de8e6e01d7, type: 3}
+  - {fileID: 8300000, guid: b33a37253b82a624783a0116c7e81aca, type: 3}
   - {fileID: 8300000, guid: 4676e97477cd0ee44a7f20273b166c5d, type: 3}
 --- !u!135 &135679059351849592
 SphereCollider:
