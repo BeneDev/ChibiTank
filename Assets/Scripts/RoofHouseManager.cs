@@ -39,7 +39,8 @@ public class RoofHouseManager : MonoBehaviour
             // Set material to opaque
             iTween.FadeTo(roof, 1, fadeInDuration);
 
-            Invoke("SetMaterialOpaque", 1.0f);
+            // This brings back the ambient occlusion usw. but causes a bug where, when you reenter the building quickly, the roof stays opaque
+            //Invoke("SetMaterialOpaque", 1.0f);
 
         }
 

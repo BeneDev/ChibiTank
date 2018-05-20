@@ -753,7 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roof: {fileID: 650375751}
   fadeInDuration: 1
-  fadeOutDuration: 1
+  fadeOutDuration: 0.5
   fadedOutValue: 0
 --- !u!1001 &1586991188
 Prefab:
