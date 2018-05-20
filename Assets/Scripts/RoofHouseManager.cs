@@ -25,6 +25,7 @@ public class RoofHouseManager : MonoBehaviour
             SetMaterialTransparent();
 
             iTween.FadeTo(roof, fadedOutValue, fadeOutDuration);
+            //FadeAlphaTo(fadedOutValue, fadeOutDuration);
         }
 
     }
@@ -38,6 +39,7 @@ public class RoofHouseManager : MonoBehaviour
         {
             // Set material to opaque
             iTween.FadeTo(roof, 1, fadeInDuration);
+            //FadeAlphaTo(1, fadeInDuration);
 
             // This brings back the ambient occlusion usw. but causes a bug where, when you reenter the building quickly, the roof stays opaque
             //Invoke("SetMaterialOpaque", 1.0f);
@@ -100,4 +102,19 @@ public class RoofHouseManager : MonoBehaviour
         }
 
     }
+
+    IEnumerator FadeAlphaTo(float value, float duration)
+    {
+        Color color = roof.GetComponent<MeshRenderer>().material.color;
+        float initalAlpha = color.a;
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            color.a = Mathf.Lerp(initalAlpha, value, duration);
+            roof.GetComponent<MeshRenderer>().material.color = color;
+            yield return new WaitForEndOfFrame();
+        }
+        color.a = value;
+        roof.GetComponent<MeshRenderer>().material.color = color;
+    }
+
 }
