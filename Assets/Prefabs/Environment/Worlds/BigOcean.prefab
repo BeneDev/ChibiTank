@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114152438791327020}
   - component: {fileID: 114377046438734852}
   m_Layer: 0
-  m_Name: Water
+  m_Name: BigOcean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
