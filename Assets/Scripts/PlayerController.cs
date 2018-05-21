@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour {
         RotatePlayer();
         //UpdateIsGrounded();
         CalculateVelocity();
-        if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
+        if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay && !EventSystem.current.IsPointerOverGameObject())
         {
             Shoot();
         }
@@ -122,13 +123,16 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit, 500f);
-            Vector3 mousePosInWorld = hit.point;
-            Vector3 targetAim = mousePosInWorld - transform.position;
-            aimDirection.x = targetAim.normalized.x;
-            aimDirection.z = targetAim.normalized.z;
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                Physics.Raycast(ray, out hit, 500f);
+                Vector3 mousePosInWorld = hit.point;
+                Vector3 targetAim = mousePosInWorld - transform.position;
+                aimDirection.x = targetAim.normalized.x;
+                aimDirection.z = targetAim.normalized.z;
+            }
         }
     }
 
