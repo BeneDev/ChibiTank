@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : StandardMenu {
+public class PauseMenu : Menu<PauseMenu> {
+
+    public static void Show()
+    {
+        Open();
+    }
+
+    public static void Hide()
+    {
+        Close();
+    }
 
     public void OnOptionsButtonClicked()
     {
