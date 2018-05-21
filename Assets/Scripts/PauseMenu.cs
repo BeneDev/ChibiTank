@@ -37,7 +37,7 @@ public class PauseMenu : StandardMenu {
 
     public void OnQuitButtonClicked()
     {
-
+        QuitConfirmationMenu.Show();
     }
 
 }

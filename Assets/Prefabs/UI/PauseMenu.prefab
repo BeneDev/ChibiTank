@@ -585,8 +585,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnMapButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -665,8 +665,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnStatusButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -718,8 +718,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnSaveButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -918,8 +918,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnQuitButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -971,8 +971,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnOptionsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1216,8 +1216,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnQuestsButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1330,8 +1330,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1661730810776526}
-        m_MethodName: 
+      - m_Target: {fileID: 114935852898681876}
+        m_MethodName: OnLoadoutButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
