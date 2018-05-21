@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6cfa7fd152d1cd42afe8dd582543209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyWhenClosed: 0
+  destroyWhenClosed: 1
   disableMenusUnderneath: 1
 --- !u!114 &114945858109924826
 MonoBehaviour:

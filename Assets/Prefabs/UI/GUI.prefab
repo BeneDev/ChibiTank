@@ -82,7 +82,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885e2b255507a1f40ba72826f511bfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuPrefabs: []
+  menuPrefabs:
+  - {fileID: 114935852898681876, guid: 9cf412a2c2ee3864c95b200289f3c846, type: 2}
+  - {fileID: 114798745619858458, guid: b214e163a246f8e47a54f448fe903d71, type: 2}
+  - {fileID: 114131065423900228, guid: 1f4e748de69fb0241b4869d97c99ff98, type: 2}
+  - {fileID: 114956698414619968, guid: c7dd75290320dfa4ba400cb69c7a5d5c, type: 2}
+  - {fileID: 114747841107042672, guid: 85b505085e892a44595d3eb6038d88d5, type: 2}
+  - {fileID: 114236397840597068, guid: 92177b386d3f87c45a2c9a50aa0b2197, type: 2}
+  - {fileID: 114607351559210782, guid: ac819756847f58d4a8fb5b0825c9c69c, type: 2}
+  - {fileID: 114362422771561642, guid: c77c314085829604791342a0b2686c87, type: 2}
 --- !u!114 &114546779481530268
 MonoBehaviour:
   m_ObjectHideFlags: 1
