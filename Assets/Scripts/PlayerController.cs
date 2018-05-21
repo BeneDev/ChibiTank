@@ -82,9 +82,19 @@ public class PlayerController : MonoBehaviour {
         RotatePlayer();
         //UpdateIsGrounded();
         CalculateVelocity();
-        if(input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay && !EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current)
         {
-            Shoot();
+            if (input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay && !EventSystem.current.IsPointerOverGameObject())
+            {
+                Shoot();
+            }
+        }
+        else
+        {
+            if (input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
+            {
+                Shoot();
+            }
         }
         if (engineSound)
         {
@@ -123,7 +133,20 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    Physics.Raycast(ray, out hit, 500f);
+                    Vector3 mousePosInWorld = hit.point;
+                    Vector3 targetAim = mousePosInWorld - transform.position;
+                    aimDirection.x = targetAim.normalized.x;
+                    aimDirection.z = targetAim.normalized.z;
+                }
+            }
+            else
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
