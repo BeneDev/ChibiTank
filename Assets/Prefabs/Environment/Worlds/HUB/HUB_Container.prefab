@@ -59,7 +59,6 @@ GameObject:
   - component: {fileID: 4703342822001870}
   - component: {fileID: 33528641993535256}
   - component: {fileID: 23694326993560730}
-  - component: {fileID: 65239509197075262}
   m_Layer: 11
   m_Name: Roof
   m_TagString: Untagged
@@ -192,18 +191,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969924274089538}
   m_Mesh: {fileID: 4300000, guid: 32f1daf154cc70d40af1159bfd53ae20, type: 3}
---- !u!65 &65239509197075262
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1969924274089538}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.020910937, y: 0.020000001, z: 0.0019106283}
-  m_Center: {x: 0, y: 3.64342e-17, z: 0.010255312}
 --- !u!65 &65304160690533274
 BoxCollider:
   m_ObjectHideFlags: 1
