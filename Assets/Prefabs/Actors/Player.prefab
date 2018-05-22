@@ -773,7 +773,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1031,9 +1031,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 1.1
   topSpeed: 14.9
-  fixedRotationSpeed: 3
+  fixedTankRotationSpeed: 3
   backwardsRotationSpeedMultiplier: 0.25
-  cockPitRotationSpeed: 9
+  cockPitRotationSpeed: 5
   shootDelay: 0.4
   shootOrigin: {fileID: 1643878805221960}
   drag: 5.1

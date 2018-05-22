@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float fixedTankRotationSpeed = 1f;
     float rotationSpeed;
     [Range(0f, 1f), SerializeField] float backwardsRotationSpeedMultiplier = 0.25f;
-    float cockPitRotationSpeed = 2f;
+    [SerializeField] float cockPitRotationSpeed = 5f;
     Vector3 moveDirection;
     Vector3 velocity;
 
