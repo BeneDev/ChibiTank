@@ -681,30 +681,6 @@ Prefab:
       propertyPath: m_Name
       value: LittleStone (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -67.12701
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -92.338005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 56.137585
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 56.1376
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 56.13759
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
   m_IsPrefabParent: 0
@@ -840,14 +816,6 @@ Prefab:
     - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 56.137554
-      objectReference: {fileID: 0}
-    - target: {fileID: 4521720784067918, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 56.137554
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e4a01bc638fad341afaf3821739170b, type: 2}
