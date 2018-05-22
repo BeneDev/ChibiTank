@@ -20,12 +20,12 @@ public class SaveMenu : Menu<SaveMenu> {
 
     public void OnSaveButtonClicked()
     {
-
+        //TODO save the game somehow
     }
 
     public void OnCancelButtonClicked()
     {
-        Close();
+        Hide();
     }
 
 }
