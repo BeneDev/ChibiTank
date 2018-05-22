@@ -17,15 +17,16 @@ public class CameraController : MonoBehaviour {
 
     private void Update()
     {
+        FollowPlayer();
+    }
+
+    private void FollowPlayer()
+    {
         transform.position = Vector3.Lerp(transform.position, player.transform.position, speed);
-
-        // Rotate with the player tanks forward
-        //transform.forward = Vector3.Lerp(transform.forward, player.transform.forward, rotationSpeed);
-
+        
         // Rotate based on the player aim Direction
-        if(GameManager.Instance.isControllerInput)
+        if (GameManager.Instance.isControllerInput)
         {
-            print(Time.deltaTime);
             transform.forward = Vector3.Lerp(transform.forward, player.GetComponent<PlayerController>().CockPitForward, controllerRotationSpeed * Time.deltaTime);
         }
         else

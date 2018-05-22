@@ -709,11 +709,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 54628357737214426, guid: 66d1ffc2d4f29684690c7782e39c9b91,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66d1ffc2d4f29684690c7782e39c9b91, type: 2}
   m_IsPrefabParent: 0
@@ -769,24 +764,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94ab11159449a424299bcd82360be7b2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1629261906 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1775387570561068, guid: 66d1ffc2d4f29684690c7782e39c9b91,
-    type: 2}
-  m_PrefabInternal: {fileID: 1501760865}
---- !u!136 &1629261910
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1629261906}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.01
-  m_Height: 0
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.0006, z: -0.01}
 --- !u!1001 &1674480777
 Prefab:
   m_ObjectHideFlags: 0

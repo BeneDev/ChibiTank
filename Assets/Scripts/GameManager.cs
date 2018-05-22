@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
 
     private int controllerCount = 0;
 
+    bool isPaused = false;
+
     [SerializeField] public bool isControllerInput = false;
 
     private void Awake()
