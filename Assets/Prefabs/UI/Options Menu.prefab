@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c5f1e524545a34b8990b83dfbe90e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyWhenClosed: 1
+  destroyWhenClosed: 0
   disableMenusUnderneath: 1
   cockPitRotationSpeedSlider: {fileID: 114753367214737248}
 --- !u!114 &114753367214737248
