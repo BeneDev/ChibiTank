@@ -11,4 +11,6 @@ public interface IInput
     float R_Vertical { get; }
 
     bool Shoot { get; }
+
+    bool Cancel { get; }
 }

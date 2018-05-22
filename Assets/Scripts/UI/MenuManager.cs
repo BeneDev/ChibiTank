@@ -9,21 +9,31 @@ public class MenuManager : Singleton<MenuManager> {
     private Stack<Menu> menuStack = new Stack<Menu>();
     [SerializeField] private Menu[] menuPrefabs;
 
+    PlayerInput input;
+
     #endregion
 
     #region Unity Messages
 
+    private void Start()
+    {
+        input = GetComponent<PlayerInput>();
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(input)
         {
-            if(menuStack.Count > 0)
+            if (input.Cancel)
             {
-                menuStack.Peek().OnBackPressed();
-            }
-            else
-            {
-                PauseMenu.Show();
+                if (menuStack.Count > 0)
+                {
+                    menuStack.Peek().OnBackPressed();
+                }
+                else
+                {
+                    PauseMenu.Show();
+                }
             }
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour, IInput {
 
     bool bShootInUse = false;
+    bool bCancelInUse = false;
 
     // The input for horizontal movement
     public float Horizontal
@@ -57,6 +58,26 @@ public class PlayerInput : MonoBehaviour, IInput {
             if (Input.GetAxisRaw("Shoot") == 0)
             {
                 bShootInUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool Cancel
+    {
+        get
+        {
+            if (Input.GetAxisRaw("Cancel") != 0)
+            {
+                if (bCancelInUse == false)
+                {
+                    bCancelInUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("Cancel") == 0)
+            {
+                bCancelInUse = false;
             }
             return false;
         }
