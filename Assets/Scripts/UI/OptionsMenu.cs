@@ -24,6 +24,11 @@ public class OptionsMenu : Menu<OptionsMenu> {
         Close();
     }
 
+    public void OnBackButtonPressed()
+    {
+        Hide();
+    }
+
     public void OnTurretRotationspeedSliderChange()
     {
         if (cockPitRotationSpeedSlider)
