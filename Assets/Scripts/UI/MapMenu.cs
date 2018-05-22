@@ -14,4 +14,9 @@ public class MapMenu : Menu<MapMenu> {
         Close();
     }
 
+    public void OnBackButton()
+    {
+        Hide();
+    }
+
 }

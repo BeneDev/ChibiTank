@@ -13,4 +13,9 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
     {
         Close();
     }
+
+    public void OnBackButton()
+    {
+        Hide();
+    }
 }

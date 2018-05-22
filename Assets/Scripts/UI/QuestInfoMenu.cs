@@ -14,4 +14,9 @@ public class QuestInfoMenu : Menu<QuestInfoMenu> {
         Close();
     }
 
+    public void OnBackButton()
+    {
+        Hide();
+    }
+
 }

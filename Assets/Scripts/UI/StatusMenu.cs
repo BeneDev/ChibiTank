@@ -14,4 +14,9 @@ public class StatusMenu : Menu<StatusMenu> {
         Close();
     }
 
+    public void OnBackButton()
+    {
+        Hide();
+    }
+
 }
