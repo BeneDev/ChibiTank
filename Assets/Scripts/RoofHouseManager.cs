@@ -9,41 +9,53 @@ public class RoofHouseManager : MonoBehaviour {
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 1f;
     [SerializeField] float fadedOutValue = 0.1f;
+    [SerializeField] float distanceUntilMaterialSwitch = 10f;
+
+    GameObject player;
+    Vector3 toPlayer;
+
+    bool isMaterialTransparent = false;
 
     #region Unity Messages
 
-    void OnTriggerEnter(Collider collider)
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
+    private void Update()
+    {
+        // Set material to opaque again
+        if (isMaterialTransparent)
+        {
+            toPlayer = transform.position - player.transform.position;
+            if (toPlayer.magnitude > distanceUntilMaterialSwitch)
+            {
+                Invoke("SetMaterialOpaque", 1.0f);
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
     {
         // Fade out the roof
         if (collider.tag == "Player")
-
         {
             // Set material to transparent
             SetMaterialTransparent();
 
             iTween.FadeTo(roof, fadedOutValue, fadeOutDuration);
-            //FadeAlphaTo(fadedOutValue, fadeOutDuration);
         }
-
     }
 
     void OnTriggerExit(Collider collider)
-
     {
         // Fade in the roof again
         if (collider.tag == "Player")
-
         {
-            // Set material to opaque
+            // Fade in the roof again
             iTween.FadeTo(roof, 1, fadeInDuration);
-            //FadeAlphaTo(1, fadeInDuration);
-
-            // This brings back the ambient occlusion usw. but causes a bug where, when you reenter the building quickly, the roof stays opaque
-            //Invoke("SetMaterialOpaque", 1.0f);
-
         }
-
     }
 
     #endregion
@@ -51,58 +63,35 @@ public class RoofHouseManager : MonoBehaviour {
     #region Private Methods
 
     private void SetMaterialTransparent()
-
     {
-
         foreach (Material m in roof.GetComponent<Renderer>().materials)
-
         {
-
             m.SetFloat("_Mode", 2);
-
             m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-
             m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-
             m.SetInt("_ZWrite", 0);
-
             m.DisableKeyword("_ALPHATEST_ON");
-
             m.EnableKeyword("_ALPHABLEND_ON");
-
             m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-
             m.renderQueue = 3000;
-
         }
-
+        isMaterialTransparent = true;
     }
 
 
     private void SetMaterialOpaque()
-
     {
-
         foreach (Material m in roof.GetComponent<Renderer>().materials)
-
         {
-
             m.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-
             m.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-
             m.SetInt("_ZWrite", 1);
-
             m.DisableKeyword("_ALPHATEST_ON");
-
             m.DisableKeyword("_ALPHABLEND_ON");
-
             m.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-
             m.renderQueue = -1;
-
         }
-
+        isMaterialTransparent = false;
     }
 
     IEnumerator FadeAlphaTo(float value, float duration)
