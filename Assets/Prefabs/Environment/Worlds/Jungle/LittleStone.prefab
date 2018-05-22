@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4521720784067918}
   - component: {fileID: 33405117886487668}
   - component: {fileID: 23248278531095206}
-  - component: {fileID: 135554203292168076}
   m_Layer: 9
   m_Name: LittleStone
   m_TagString: Untagged
@@ -35,8 +34,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948252632329928}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -235.94, y: -0.01, z: -44.16}
+  m_LocalRotation: {x: -0.38287544, y: -0.39882925, z: -0.6011121, w: 0.57706666}
+  m_LocalPosition: {x: -228.14, y: -1.29, z: -51.18}
   m_LocalScale: {x: 56.137585, y: 56.137554, z: 56.137554}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,15 +83,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948252632329928}
   m_Mesh: {fileID: 4300000, guid: fca8f62472ce05341b5c00692eb0517f, type: 3}
---- !u!135 &135554203292168076
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1948252632329928}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.009
-  m_Center: {x: 0.002, y: 0, z: 0.001}
