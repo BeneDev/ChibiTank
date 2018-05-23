@@ -15,10 +15,14 @@ public class GameManager : MonoBehaviour {
 
     bool isPaused = false;
 
+    CursorLockMode lockedToWindow;
+
     [SerializeField] public bool isControllerInput = false;
 
     private void Awake()
     {
+        lockedToWindow = CursorLockMode.Confined;
+        Cursor.lockState = lockedToWindow;
         if (Instance != null)
         {
             Destroy(gameObject);

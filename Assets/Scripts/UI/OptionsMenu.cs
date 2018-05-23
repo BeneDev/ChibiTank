@@ -37,4 +37,10 @@ public class OptionsMenu : Menu<OptionsMenu> {
         }
     }
 
+    public void SetGraphicsQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+        Debug.LogFormat("Quality Settings has been changed to {0}", qualityIndex);
+    }
+
 }
