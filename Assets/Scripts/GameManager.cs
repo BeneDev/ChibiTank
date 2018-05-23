@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour {
 
     public GameObject GetCannonBall(Vector3 positionToSpawn, Vector3 direction)
     {
-        // TODO make direction aim a little bit higher for nicer flying curve
         GameObject ballToReturn = freeCannonBalls.Pop();
         ballToReturn.transform.position = positionToSpawn;
         ballToReturn.transform.forward = direction;
