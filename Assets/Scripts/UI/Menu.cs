@@ -10,11 +10,22 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
         private set;
     }
 
+    AudioSource aS;
+
     #region Unity Messages
 
     protected virtual void Awake()
     {
         Instance = (T)this;
+        aS = GetComponent<AudioSource>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        if (aS)
+        {
+            aS.Play();
+        }
     }
 
     protected virtual void OnDestroy()
@@ -47,7 +58,6 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
             Debug.LogErrorFormat("No menu of type {0} is currently open.", typeof(T));
             return;
         }
-
         MenuManager.Instance.CloseMenu(Instance);
     }
 

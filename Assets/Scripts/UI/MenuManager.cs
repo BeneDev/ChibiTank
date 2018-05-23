@@ -29,6 +29,10 @@ public class MenuManager : Singleton<MenuManager> {
                 if (menuStack.Count > 0)
                 {
                     menuStack.Peek().OnBackPressed();
+                    if(Time.timeScale == 0f)
+                    {
+                        Time.timeScale = 1f;
+                    }
                 }
                 else
                 {

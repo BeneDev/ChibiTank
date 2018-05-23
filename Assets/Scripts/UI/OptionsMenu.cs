@@ -9,8 +9,9 @@ public class OptionsMenu : Menu<OptionsMenu> {
 
     [SerializeField] Slider cockPitRotationSpeedSlider;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
