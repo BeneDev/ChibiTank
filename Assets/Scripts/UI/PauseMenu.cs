@@ -25,11 +25,6 @@ public class PauseMenu : Menu<PauseMenu> {
         MapMenu.Show();
     }
 
-    public void OnQuestsButtonClicked()
-    {
-        QuestInfoMenu.Show();
-    }
-
     public void OnStatusButtonClicked()
     {
         StatusMenu.Show();

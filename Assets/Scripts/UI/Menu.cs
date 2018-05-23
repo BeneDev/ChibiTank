@@ -11,6 +11,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
     }
 
     AudioSource aS;
+    Animator anim;
 
     #region Unity Messages
 
@@ -18,14 +19,12 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
     {
         Instance = (T)this;
         aS = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     protected virtual void OnEnable()
     {
-        if (aS)
-        {
-            aS.Play();
-        }
+        PlaySwoosh();
     }
 
     protected virtual void OnDestroy()
@@ -53,7 +52,12 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
 
     protected static void Close()
     {
-        if(Instance == null)
+        Instance.OnBackPressed();
+    }
+
+    void CloseMenu()
+    {
+        if (Instance == null)
         {
             Debug.LogErrorFormat("No menu of type {0} is currently open.", typeof(T));
             return;
@@ -63,10 +67,29 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
 
     public override void OnBackPressed()
     {
-        Close();
+        // Make the swoosh away animation trigger, which then closes the menu
+        PlaySwoosh();
+        if(anim)
+        {
+            anim.SetTrigger("Close");
+        }
+        //CloseMenu();
     }
 
     #endregion
+
+    void PlaySwoosh()
+    {
+        if (aS)
+        {
+            aS.Play();
+        }
+    }
+
+    public void OnCloseAnimation()
+    {
+        CloseMenu();
+    }
 
 }
 
