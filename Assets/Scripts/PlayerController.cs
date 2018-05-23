@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float topSpeed = 3f;
     [SerializeField] float fixedTankRotationSpeed = 1f;
     float rotationSpeed;
-    [Range(0f, 1f), SerializeField] float backwardsRotationSpeedMultiplier = 0.25f;
     [SerializeField] float cockPitRotationSpeed = 5f;
     Vector3 moveDirection;
     Vector3 velocity;
@@ -182,7 +181,7 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                rotationSpeed = fixedTankRotationSpeed * backwardsRotationSpeedMultiplier;
+                rotationSpeed = fixedTankRotationSpeed;
             }
 
             // Set the rotationspeed to 2/3 if on keyboard, because it was feeling different for KBM and Controller as the cam rotated with the tank itself and not the aim Direction
