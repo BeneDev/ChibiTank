@@ -129,6 +129,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] GameObject shootOrigin;
 
     [Header("Physics"), SerializeField] float drag = 1f;
+    [SerializeField] float rayToGroundLength = 1f;
+    [SerializeField] float gravityCap = 3f;
 
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
@@ -139,6 +141,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
+
+    LayerMask terrainLayer;
 
     // Attributes of the player
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
@@ -184,6 +188,10 @@ public class PlayerController : MonoBehaviour {
         shootTime = Time.realtimeSinceStartup;
         cameraArm = Camera.main.transform.parent.gameObject;
 
+        // Create the layer Mask for the terrain
+        int layer = LayerMask.NameToLayer("Terrain");
+        terrainLayer = 1 << layer;
+
         // Initialize Attributes with base Values
         attack = baseAttack;
         fireRate = basefireRate;
@@ -206,7 +214,7 @@ public class PlayerController : MonoBehaviour {
     {
         GetInput();
         RotatePlayer();
-        //UpdateIsGrounded();
+        UpdateIsGrounded();
         CalculateVelocity();
         if (EventSystem.current)
         {
@@ -227,7 +235,10 @@ public class PlayerController : MonoBehaviour {
             PlayEngineSound();
         }
         // Apply the gravity
-        velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
+        if (velocity.y < gravityCap)
+        {
+            velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
+        }
         transform.position += velocity * Time.fixedDeltaTime;
     }
 
@@ -249,7 +260,6 @@ public class PlayerController : MonoBehaviour {
         {
             yAngle = 360 - yAngle;
         }
-        //Debug.LogFormat("X: {0} | Y: {1} | Z: {2}", cameraArm.transform.forward.x, cameraArm.transform.forward.y, cameraArm.transform.forward.z);
         moveDirection.x = input.Horizontal;
         moveDirection.z = input.Vertical;
         // Apply the offset angle on the y axis to the moveDirection vector --> Camera Relative Controls
@@ -293,7 +303,7 @@ public class PlayerController : MonoBehaviour {
     void RotatePlayer()
     {
         // Rotate the player smoothly, depending on the velocity
-        if (input.Horizontal != 0 || input.Vertical > 0)
+        if (input.Horizontal != 0 || input.Vertical != 0)
         {
 
             Quaternion targetRotation = new Quaternion();
@@ -311,17 +321,6 @@ public class PlayerController : MonoBehaviour {
 
             cockPit.transform.rotation = Quaternion.Lerp(cockPit.transform.rotation, targetRotation, cockPitRotationSpeed * Time.fixedDeltaTime);
         }
-    }
-    void UpdateIsGrounded()
-    {
-        //if (Physics.Raycast(transform.position, Vector3.down, 3f, terrainLayer))
-        //{
-        //    bIsGrounded = true;
-        //}
-        //else
-        //{
-        //    bIsGrounded = false;
-        //}
     }
 
     private void Shoot()
@@ -357,6 +356,18 @@ public class PlayerController : MonoBehaviour {
             velocity += moveDirection * acceleration;
         }
         velocity = velocity * (1 - Time.fixedDeltaTime * drag);
+    }
+
+    void UpdateIsGrounded()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, rayToGroundLength, terrainLayer))
+        {
+            bIsGrounded = true;
+        }
+        else
+        {
+            bIsGrounded = false;
+        }
     }
 
     IEnumerator ShotKnockBack(float duration)
