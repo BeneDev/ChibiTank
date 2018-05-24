@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 224282580082433750}
   - component: {fileID: 114040802825243690}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: ControllerInputToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -985,6 +985,7 @@ MonoBehaviour:
   destroyWhenClosed: 0
   disableMenusUnderneath: 1
   cockPitRotationSpeedSlider: {fileID: 114712909013071048}
+  controllerInputToggle: {fileID: 114040802825243690}
 --- !u!114 &114176649371959722
 MonoBehaviour:
   m_ObjectHideFlags: 1

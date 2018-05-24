@@ -8,6 +8,7 @@ public class OptionsMenu : Menu<OptionsMenu> {
     PlayerController player;
 
     [SerializeField] Slider cockPitRotationSpeedSlider;
+    [SerializeField] Toggle controllerInputToggle;
 
     protected override void OnEnable()
     {
@@ -47,6 +48,10 @@ public class OptionsMenu : Menu<OptionsMenu> {
     public void OnControllerToggleChanged(bool value)
     {
         GameManager.Instance.IsControllerInput = value;
+        if (controllerInputToggle)
+        {
+            controllerInputToggle.isOn = GameManager.Instance.IsControllerInput;
+        }
     }
 
 }

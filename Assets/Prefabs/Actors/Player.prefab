@@ -332,7 +332,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1510876757218522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -249.71, y: 0, z: -53.299995}
+  m_LocalPosition: {x: 22.089981, y: 0, z: -53.299995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4620003938992324}
@@ -1031,17 +1031,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe383b2d4887cf540a641a5f478745d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 1.1
-  topSpeed: 14.9
-  fixedTankRotationSpeed: 3
-  backwardsRotationSpeedMultiplier: 0.25
   cockPitRotationSpeed: 5
-  shootDelay: 0.4
   shootOrigin: {fileID: 1643878805221960}
   drag: 5.1
-  shootKnockback: 20
-  shootKnockbackDuration: 0.3
-  mass: 3
   cockPit: {fileID: 1112228992774638}
   shotSound: {fileID: 82887555961569794}
   engineSound: {fileID: 82154836985891580}
@@ -1049,6 +1041,17 @@ MonoBehaviour:
   idleEngineVolume: 0.04
   shootCameraShakeAmount: 0.28
   shootCameraShakeDuration: 0.11
+  baseAttack: 1
+  basefireRate: 0.4
+  baseReloadSpeed: 1
+  baseShootKnockback: 20
+  baseShootKnockbackDuration: 0.3
+  baseHealth: 5
+  baseDefense: 1
+  baseTopSpeed: 14.9
+  baseAcceleration: 1.1
+  baseRotationSpeed: 3
+  baseMass: 3
 --- !u!114 &114180295969708528
 MonoBehaviour:
   m_ObjectHideFlags: 1

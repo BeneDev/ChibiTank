@@ -28,6 +28,86 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+    }
+
+    public int Attack
+    {
+        get
+        {
+            return attack;
+        }
+    }
+
+    public float FireRate
+    {
+        get
+        {
+            return fireRate;
+        }
+    }
+
+    public float ReloadSpeed
+    {
+        get
+        {
+            return reloadSpeed;
+        }
+    }
+
+    public float KnockBack
+    {
+        get
+        {
+            return shootKnockback * shootKnockbackDuration;
+        }
+    }
+
+    public int Defense
+    {
+        get
+        {
+            return defense;
+        }
+    }
+
+    public float TopSpeed
+    {
+        get
+        {
+            return topSpeed;
+        }
+    }
+
+    public float Acceleration
+    {
+        get
+        {
+            return acceleration;
+        }
+    }
+
+    public float RotationSpeed
+    {
+        get
+        {
+            return rotationSpeed;
+        }
+    }
+
+    public float Mass
+    {
+        get
+        {
+            return mass;
+        }
+    }
+
     #endregion
 
     #region Private Fields
@@ -36,11 +116,7 @@ public class PlayerController : MonoBehaviour {
     Animator anim;
     CameraShake camShake;
     GameObject cameraArm;
-
-    [Header("Movement"), SerializeField] float acceleration = 1f;
-    [SerializeField] float topSpeed = 3f;
-    [SerializeField] float fixedTankRotationSpeed = 1f;
-    float rotationSpeed;
+    
     [SerializeField] float cockPitRotationSpeed = 5f;
     Vector3 moveDirection;
     Vector3 velocity;
@@ -48,15 +124,11 @@ public class PlayerController : MonoBehaviour {
     Vector3 aimDirection;
 
     bool bIsGrounded = false;
-
-    [Header("Shooting"), SerializeField] float shootDelay = 1f;
+    
     float shootTime;
     [SerializeField] GameObject shootOrigin;
 
     [Header("Physics"), SerializeField] float drag = 1f;
-    [SerializeField] float shootKnockback = 1f;
-    [SerializeField] float shootKnockbackDuration = 0.5f;
-    [SerializeField] float mass = 10f;
 
     [Header("Tank Components"), SerializeField] GameObject cockPit;
 
@@ -68,7 +140,37 @@ public class PlayerController : MonoBehaviour {
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
 
-    //LayerMask terrainLayer;
+    // Attributes of the player
+    [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
+    [SerializeField] float basefireRate = 1f;
+    [SerializeField] float baseReloadSpeed = 1f;
+    [SerializeField] float baseShootKnockback = 1f;
+    [SerializeField] float baseShootKnockbackDuration = 1f;
+
+    [Header("Defensive Attributes"), SerializeField] int baseHealth = 1;
+    [SerializeField] int baseDefense = 1;
+
+    [Header("Agility Attributes"), SerializeField] float baseTopSpeed = 1f;
+    [SerializeField] float baseAcceleration = 1f;
+    [SerializeField] float baseRotationSpeed = 1f;
+
+    [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
+
+    int level = 1;
+    int attack;
+    float fireRate;
+    float reloadSpeed;
+    float shootKnockback;
+    float shootKnockbackDuration;
+
+    int health;
+    int defense;
+
+    float topSpeed;
+    float acceleration;
+    float rotationSpeed;
+
+    float mass;
 
     #endregion
 
@@ -82,9 +184,22 @@ public class PlayerController : MonoBehaviour {
         shootTime = Time.realtimeSinceStartup;
         cameraArm = Camera.main.transform.parent.gameObject;
 
-        // Create the terrain layer mask
-        //int layer = LayerMask.NameToLayer("Terrain");
-        //terrainLayer = 1 << layer;
+        // Initialize Attributes with base Values
+        attack = baseAttack;
+        fireRate = basefireRate;
+        reloadSpeed = baseReloadSpeed;
+        shootKnockback = baseShootKnockback;
+        shootKnockbackDuration = baseShootKnockbackDuration;
+
+        health = baseHealth;
+        defense = baseDefense;
+
+        topSpeed = baseTopSpeed;
+        acceleration = baseAcceleration;
+        rotationSpeed = baseRotationSpeed;
+
+        mass = baseMass;
+
     }
 
     private void FixedUpdate()
@@ -95,14 +210,14 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if (EventSystem.current)
         {
-            if (input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay && !EventSystem.current.IsPointerOverGameObject())
+            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject())
             {
                 Shoot();
             }
         }
         else
         {
-            if (input.Shoot && Time.realtimeSinceStartup > shootTime + shootDelay)
+            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate)
             {
                 Shoot();
             }
@@ -119,6 +234,11 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region Private Methods
+
+    public void SpendPointOnAttribute()
+    {
+
+    }
 
     void GetInput()
     {
@@ -175,20 +295,6 @@ public class PlayerController : MonoBehaviour {
         // Rotate the player smoothly, depending on the velocity
         if (input.Horizontal != 0 || input.Vertical > 0)
         {
-            if (input.Vertical > -0.5f)
-            {
-                rotationSpeed = fixedTankRotationSpeed;
-            }
-            else
-            {
-                rotationSpeed = fixedTankRotationSpeed;
-            }
-
-            // Set the rotationspeed to 2/3 if on keyboard, because it was feeling different for KBM and Controller as the cam rotated with the tank itself and not the aim Direction
-            //if(!GameManager.Instance.isControllerInput)
-            //{
-            //    rotationSpeed *= 0.66666666f;
-            //}
 
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
