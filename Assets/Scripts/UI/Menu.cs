@@ -73,7 +73,6 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
         {
             anim.SetTrigger("Close");
         }
-        //CloseMenu();
     }
 
     #endregion

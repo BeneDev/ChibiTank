@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 224567660553608494}
   - component: {fileID: 222173440508240912}
   - component: {fileID: 114093294978151868}
-  - component: {fileID: 95988928160341764}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -97,6 +96,7 @@ GameObject:
   - component: {fileID: 114580188762806338}
   - component: {fileID: 114798745619858458}
   - component: {fileID: 82285473993792622}
+  - component: {fileID: 95444814861603332}
   m_Layer: 5
   m_Name: QuitConfirmationMenu
   m_TagString: Untagged
@@ -269,13 +269,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &95988928160341764
+--- !u!95 &95444814861603332
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1261287344703816}
+  m_GameObject: {fileID: 1429509605266722}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f8540d5c7672b4b449cdaca51ab97127, type: 2}

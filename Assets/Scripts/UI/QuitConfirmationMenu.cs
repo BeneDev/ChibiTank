@@ -13,9 +13,9 @@ public class QuitConfirmationMenu : Menu<QuitConfirmationMenu>
 
     public static void Hide()
     {
-        Close();
         // Unpause the game
         Time.timeScale = 1f;
+        Close();
     }
 
     public void OnNoButtonClicked()
