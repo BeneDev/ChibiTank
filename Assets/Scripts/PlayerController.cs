@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour {
         // Apply the offset angle on the y axis to the moveDirection vector --> Camera Relative Controls
         moveDirection = Quaternion.AngleAxis(yAngle, Vector3.up) * moveDirection;
 
-        if (GameManager.Instance.isControllerInput)
+        if (GameManager.Instance.IsControllerInput)
         {
             aimDirection.x = input.R_Horizontal;
             aimDirection.z = input.R_Vertical;

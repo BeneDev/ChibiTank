@@ -6,6 +6,28 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance { get; private set; }
 
+    public bool IsControllerInput
+    {
+        get
+        {
+            return isControllerInput;
+        }
+        set
+        {
+            if (value)
+            {
+                if (controllerCount > 0)
+                {
+                    isControllerInput = value;
+                }
+            }
+            else
+            {
+                isControllerInput = value;
+            }
+        }
+    }
+
     [Header("Cannon Balls"), SerializeField] int cannonBallCount = 100;
     [SerializeField] public GameObject cannonBallParent;
     [SerializeField] GameObject cannonBallPrefab;
@@ -17,7 +39,7 @@ public class GameManager : MonoBehaviour {
 
     CursorLockMode lockedToWindow;
 
-    [SerializeField] public bool isControllerInput = false;
+    [SerializeField] bool isControllerInput = false;
 
     private void Awake()
     {
@@ -45,14 +67,6 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         GetControllerCount();
-        if(controllerCount > 0)
-        {
-            isControllerInput = true;
-        }
-        else
-        {
-            isControllerInput = false;
-        }
     }
 
     void GetControllerCount()

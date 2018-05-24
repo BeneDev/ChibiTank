@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
         transform.position = Vector3.Lerp(transform.position, player.transform.position, speed);
         
         // Rotate based on the player aim Direction
-        if (GameManager.Instance.isControllerInput)
+        if (GameManager.Instance.IsControllerInput)
         {
             transform.forward = Vector3.Lerp(transform.forward, player.GetComponent<PlayerController>().CockPitForward, controllerRotationSpeed * Time.deltaTime);
         }

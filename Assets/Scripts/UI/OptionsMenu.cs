@@ -44,4 +44,9 @@ public class OptionsMenu : Menu<OptionsMenu> {
         Debug.LogFormat("Quality Settings has been changed to {0}", qualityIndex);
     }
 
+    public void OnControllerToggleChanged(bool value)
+    {
+        GameManager.Instance.IsControllerInput = value;
+    }
+
 }
