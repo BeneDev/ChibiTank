@@ -12,5 +12,7 @@ public interface IInput
 
     bool Shoot { get; }
 
+    bool ResetCam { get; }
+
     bool Cancel { get; }
 }

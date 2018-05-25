@@ -216,6 +216,10 @@ public class PlayerController : MonoBehaviour {
         RotatePlayer();
         UpdateIsGrounded();
         CalculateVelocity();
+        if(input.ResetCam)
+        {
+            cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
+        }
         if (EventSystem.current)
         {
             if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject())

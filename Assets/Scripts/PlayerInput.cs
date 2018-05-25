@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour, IInput {
 
     bool bShootInUse = false;
     bool bCancelInUse = false;
+    bool bResetCamInUse = false;
 
     // The input for horizontal movement
     public float Horizontal
@@ -58,6 +59,26 @@ public class PlayerInput : MonoBehaviour, IInput {
             if (Input.GetAxisRaw("Shoot") == 0)
             {
                 bShootInUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool ResetCam
+    {
+        get
+        {
+            if (Input.GetAxisRaw("ResetCam") != 0)
+            {
+                if (bResetCamInUse == false)
+                {
+                    bResetCamInUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("ResetCam") == 0)
+            {
+                bResetCamInUse = false;
             }
             return false;
         }

@@ -4,11 +4,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    #region Properties
+
+    public Vector3 CamResetRotation
+    {
+        get
+        {
+            return playerAimDirectionForCamReset;
+        }
+        set
+        {
+            playerAimDirectionForCamReset = value;
+        }
+    }
+
+    #endregion
+
     GameObject player;
 
     [SerializeField] float speed = 5f;
     [SerializeField] float rotationSpeed = 3f;
     [SerializeField] float controllerRotationSpeed = 4f;
+    
+    Vector3 playerAimDirectionForCamReset;
 
     private void Awake()
     {
@@ -24,14 +42,14 @@ public class CameraController : MonoBehaviour {
     {
         transform.position = Vector3.Lerp(transform.position, player.transform.position, speed);
         
-        // Rotate based on the player aim Direction
-        if (GameManager.Instance.IsControllerInput)
+        // Rotate based on the aim Direction, the player set the cam to be in
+        if (GameManager.Instance.IsControllerInput && playerAimDirectionForCamReset != null)
         {
-            transform.forward = Vector3.Lerp(transform.forward, player.GetComponent<PlayerController>().CockPitForward, controllerRotationSpeed * Time.deltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, playerAimDirectionForCamReset, controllerRotationSpeed * Time.deltaTime);
         }
-        else
+        else if(playerAimDirectionForCamReset != null)
         {
-            transform.forward = Vector3.Lerp(transform.forward, player.GetComponent<PlayerController>().CockPitForward, rotationSpeed * Time.deltaTime);
+            transform.forward = Vector3.Lerp(transform.forward, playerAimDirectionForCamReset, rotationSpeed * Time.deltaTime);
         }
     }
 }
