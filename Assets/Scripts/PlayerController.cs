@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour {
     Animator anim;
     CameraShake camShake;
     GameObject cameraArm;
+    [SerializeField] BoxCollider enemyFinder;
+    GameObject enemyInFront;
     
     [SerializeField] float cockPitRotationSpeed = 5f;
     Vector3 moveDirection;
@@ -218,16 +220,7 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.ResetCam)
         {
-            // TODO check if there is an enemy in front and then pass this one in for focussed mode
-            //if(there is an enemy)
-            //{
-            //    cameraArm.GetComponent<CameraController>().FocussedObject = enemy in front;
-            //}
-            //else
-            //{
-            //    cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
-            //}
-            cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
+            SetCamera();
         }
         if (EventSystem.current)
         {
@@ -253,6 +246,33 @@ public class PlayerController : MonoBehaviour {
             velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         }
         transform.position += velocity * Time.fixedDeltaTime;
+    }
+
+    private void SetCamera()
+    {
+        if (enemyInFront)
+        {
+            cameraArm.GetComponent<CameraController>().FocussedObject = enemyInFront;
+            return;
+        }
+        cameraArm.GetComponent<CameraController>().FocussedObject = null;
+        cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            enemyInFront = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            enemyInFront = null;
+        }
     }
 
     #endregion
@@ -392,5 +412,6 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
     }
+
     #endregion
 }

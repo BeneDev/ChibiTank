@@ -26,8 +26,15 @@ public class CameraController : MonoBehaviour {
         }
         set
         {
-            focussedObject = value;
-            playerAimDirectionForCamReset = transform.position - value.transform.position;
+            if (value != null)
+            {
+                focussedObject = value;
+                playerAimDirectionForCamReset = transform.position - value.transform.position;
+            }
+            else
+            {
+                focussedObject = null;
+            }
         }
     }
 
@@ -63,7 +70,7 @@ public class CameraController : MonoBehaviour {
 
     private void FocusObject()
     {
-        Vector3 faceDirection = transform.position - focussedObject.transform.position;
+        Vector3 faceDirection = focussedObject.transform.position - transform.position;
         // Rotate based to always face the focussed object
         if (GameManager.Instance.IsControllerInput && playerAimDirectionForCamReset != null)
         {
