@@ -10,6 +10,19 @@ public class OptionsMenu : Menu<OptionsMenu> {
     [SerializeField] Slider cockPitRotationSpeedSlider;
     [SerializeField] Toggle controllerInputToggle;
 
+    Dictionary<int, int[]> resolutionDict;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        resolutionDict.Add(0, new int[] { 640, 480 });
+        resolutionDict.Add(1, new int[] { 800, 600 });
+        resolutionDict.Add(2, new int[] { 1280, 720 });
+        resolutionDict.Add(3, new int[] { 1360, 768 });
+        resolutionDict.Add(4, new int[] { 1600, 900 });
+        resolutionDict.Add(5, new int[] { 1920, 1080 });
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -51,6 +64,23 @@ public class OptionsMenu : Menu<OptionsMenu> {
         if (controllerInputToggle)
         {
             controllerInputToggle.isOn = GameManager.Instance.IsControllerInput;
+        }
+    }
+
+    public void OnFullscreenToggleChanged(bool value)
+    {
+        Screen.fullScreen = value;
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        if(resolutionIndex < 5)
+        {
+            Screen.SetResolution(resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1], false);
+        }
+        else
+        {
+            Screen.SetResolution(resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1], true);
         }
     }
 
