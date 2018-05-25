@@ -218,6 +218,15 @@ public class PlayerController : MonoBehaviour {
         CalculateVelocity();
         if(input.ResetCam)
         {
+            // TODO check if there is an enemy in front and then pass this one in for focussed mode
+            //if(there is an enemy)
+            //{
+            //    cameraArm.GetComponent<CameraController>().FocussedObject = enemy in front;
+            //}
+            //else
+            //{
+            //    cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
+            //}
             cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
         }
         if (EventSystem.current)
