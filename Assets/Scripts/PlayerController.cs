@@ -116,9 +116,12 @@ public class PlayerController : MonoBehaviour {
     Animator anim;
     CameraShake camShake;
     GameObject cameraArm;
-    [SerializeField] BoxCollider enemyFinder;
+
+    // Stores an enemy if the player aims at one
     GameObject enemyInFront;
-    
+    // Stores the gameobject of an npc if the player aims at one
+    GameObject npcToTalkTo;
+
     [SerializeField] float cockPitRotationSpeed = 5f;
     Vector3 moveDirection;
     Vector3 velocity;
@@ -224,16 +227,24 @@ public class PlayerController : MonoBehaviour {
         }
         if (EventSystem.current)
         {
-            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject())
+            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject() && npcToTalkTo == null)
             {
                 Shoot();
+            }
+            else if(npcToTalkTo != null)
+            {
+                // TODO open dialogue of the npc you can talk to
             }
         }
         else
         {
-            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate)
+            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && npcToTalkTo == null)
             {
                 Shoot();
+            }
+            else if(npcToTalkTo != null)
+            {
+                // TODO open dialogue of the npc you can talk to
             }
         }
         if (engineSound)
@@ -265,6 +276,10 @@ public class PlayerController : MonoBehaviour {
         {
             enemyInFront = other.gameObject;
         }
+        if(other.tag == "NPC")
+        {
+            npcToTalkTo = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -272,6 +287,10 @@ public class PlayerController : MonoBehaviour {
         if (other.tag == "Enemy")
         {
             enemyInFront = null;
+        }
+        if(other.tag == "NPC")
+        {
+            npcToTalkTo = null;
         }
     }
 
