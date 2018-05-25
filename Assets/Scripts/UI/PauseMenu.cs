@@ -15,6 +15,11 @@ public class PauseMenu : Menu<PauseMenu> {
         Close();
     }
 
+    public void OnBackButtonClicked()
+    {
+        Hide();
+    }
+
     public void OnOptionsButtonClicked()
     {
         OptionsMenu.Show();
