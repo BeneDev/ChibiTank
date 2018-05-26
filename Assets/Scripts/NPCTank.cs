@@ -6,7 +6,7 @@ public class NPCTank : BaseNPCTank {
 
 	public void Interact()
     {
-        OpenSaveDialogue();
+        OpenSaveMenu();
     }
 
 }

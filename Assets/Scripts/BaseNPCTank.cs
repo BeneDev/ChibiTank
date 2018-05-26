@@ -20,17 +20,17 @@ public class BaseNPCTank : BaseTank {
         toPlayer = player.transform.position - transform.position;
 		if(toPlayer.magnitude < attentionDistance)
         {
-            aimDirection = -toPlayer;
+            aimDirection = toPlayer;
             RotateTank();
         }
 	}
 
-    protected void OpenSaveDialogue()
+    protected void OpenSaveMenu()
     {
         SaveMenu.Show();
     }
 
-    protected void Talk(string text)
+    protected void OpenDialogue(string text)
     {
         // TODO open dialogue window with the text param shown
     }

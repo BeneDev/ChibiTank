@@ -113,7 +113,6 @@ public class PlayerController : BaseTank {
     #region Private Fields
 
     PlayerInput input;
-    Animator anim;
     CameraShake camShake;
     GameObject cameraArm;
 
@@ -123,15 +122,11 @@ public class PlayerController : BaseTank {
     GameObject npcToTalkTo;
 
     bool bIsGrounded = false;
-    
-    float shootTime;
-    [SerializeField] GameObject shootOrigin;
 
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float rayToGroundLength = 1f;
     [SerializeField] float gravityCap = 3f;
-
-    [Header("SoundS"), SerializeField] AudioSource shotSound;
+    
     [SerializeField] AudioSource engineSound;
     [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f;
     [Range(0f, 1f), SerializeField] float idleEngineVolume = 0.01f;
@@ -157,31 +152,15 @@ public class PlayerController : BaseTank {
 
     [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
 
-    int level = 1;
-    int attack;
-    float fireRate;
-    float reloadSpeed;
-    float shootKnockback;
-    float shootKnockbackDuration;
-
-    int health;
-    int defense;
-
-    float topSpeed;
-    float acceleration;
-
-    float mass;
-
     #endregion
 
     #region Unity Messages
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         input = GetComponent<PlayerInput>();
-        anim = GetComponent<Animator>();
         camShake = Camera.main.GetComponent<CameraShake>();
-        shootTime = Time.realtimeSinceStartup;
         cameraArm = Camera.main.transform.parent.gameObject;
 
         // Create the layer Mask for the terrain
@@ -373,18 +352,11 @@ public class PlayerController : BaseTank {
         }
     }
 
-    private void Shoot()
+    protected override void Shoot()
     {
-        if (shotSound)
-        {
-            shotSound.Play();
-        }
-        shootTime = Time.realtimeSinceStartup;
-        GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
+        base.Shoot();
         camShake.shakeAmount = shootCameraShakeAmount;
         camShake.shakeDuration = shootCameraShakeDuration;
-        anim.SetTrigger("Shoot");
-        StartCoroutine(ShotKnockBack(shootKnockbackDuration));
     }
 
     private void PlayEngineSound()
@@ -417,16 +389,6 @@ public class PlayerController : BaseTank {
         else
         {
             bIsGrounded = false;
-        }
-    }
-
-    IEnumerator ShotKnockBack(float duration)
-    {
-        for(float t = 0; t < duration; t += Time.fixedDeltaTime)
-        {
-            // Apply knockback in the -aimDirection
-            velocity = -cockPit.transform.forward * shootKnockback * (duration - t);
-            yield return new WaitForEndOfFrame();
         }
     }
 

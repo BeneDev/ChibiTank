@@ -7,13 +7,41 @@ using UnityEngine;
 /// </summary>
 public class BaseTank : MonoBehaviour {
 
+    protected Animator anim;
+
     protected Vector3 aimDirection;
     [SerializeField] protected float cockPitRotationSpeed;
     protected float rotationSpeed;
     protected Vector3 moveDirection;
     protected Vector3 velocity;
 
+    protected float shootTime;
+
     [SerializeField] protected GameObject cockPit;
+    [SerializeField] protected GameObject shootOrigin;
+
+    [Header("SoundS"), SerializeField] protected AudioSource shotSound;
+
+    protected int level = 1;
+    protected int attack;
+    protected float reloadSpeed;
+    protected float fireRate;
+    protected float shootKnockback;
+    protected float shootKnockbackDuration;
+
+    protected int health;
+    protected int defense;
+
+    protected float topSpeed;
+    protected float acceleration;
+
+    protected float mass;
+
+    protected virtual void Awake()
+    {
+        shootTime = Time.realtimeSinceStartup;
+        anim = GetComponent<Animator>();
+    }
 
     protected void RotateTankFixed()
     {
@@ -58,6 +86,28 @@ public class BaseTank : MonoBehaviour {
             targetRotation.SetLookRotation(aimDirection);
 
             cockPit.transform.rotation = Quaternion.Lerp(cockPit.transform.rotation, targetRotation, cockPitRotationSpeed * Time.deltaTime);
+        }
+    }
+
+    protected virtual void Shoot()
+    {
+        if (shotSound)
+        {
+            shotSound.Play();
+        }
+        shootTime = Time.realtimeSinceStartup;
+        GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
+        anim.SetTrigger("Shoot");
+        StartCoroutine(ShotKnockBack(shootKnockbackDuration));
+    }
+
+    protected IEnumerator ShotKnockBack(float duration)
+    {
+        for (float t = 0; t < duration; t += Time.fixedDeltaTime)
+        {
+            // Apply knockback in the -aimDirection
+            velocity = -cockPit.transform.forward * shootKnockback * (duration - t);
+            yield return new WaitForEndOfFrame();
         }
     }
 
