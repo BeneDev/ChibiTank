@@ -898,5 +898,6 @@ MonoBehaviour:
   cockPit: {fileID: 1656780836304248}
   shootOrigin: {fileID: 1507376867925792}
   shotSound: {fileID: 82733096872132338}
-  sightReach: 10
+  sightReach: 20
+  aimingTolerance: 0.01
   baseFireRate: 2

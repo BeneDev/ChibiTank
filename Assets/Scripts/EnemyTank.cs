@@ -6,7 +6,9 @@ public class EnemyTank : BaseTank {
 
     GameObject player;
     Vector3 toPlayer;
+    bool bAimingAtPlayer = false;
     [SerializeField] float sightReach;
+    [SerializeField] float aimingTolerance = 0.1f;
 
     [Header("Attributes"), SerializeField] float baseFireRate = 1f;
 
@@ -20,10 +22,24 @@ public class EnemyTank : BaseTank {
     private void Update()
     {
         AttackPlayerIfClose();
-        if (Time.realtimeSinceStartup > shootTime + fireRate)
+        if(V3Equal(cockPit.transform.forward.normalized, aimDirection.normalized))
+        {
+            print("aiming right");
+            bAimingAtPlayer = true;
+        }
+        else
+        {
+            bAimingAtPlayer = false;
+        }
+        if (Time.realtimeSinceStartup > shootTime + fireRate && bAimingAtPlayer)
         {
             Shoot();
         }
+    }
+
+    bool V3Equal(Vector3 a, Vector3 b)
+    {
+        return Vector3.SqrMagnitude(a - b) < aimingTolerance;
     }
 
     void AttackPlayerIfClose()
@@ -35,4 +51,5 @@ public class EnemyTank : BaseTank {
             RotateTank();
         }
     }
+
 }
