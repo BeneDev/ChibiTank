@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This is the script, all tank enemies inherit from
 /// </summary>
-public class EnemyParent : MonoBehaviour {
+public class BaseEnemy : MonoBehaviour {
 
     
 

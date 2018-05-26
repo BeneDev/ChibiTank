@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : BaseTank {
 
     #region Properties
 
@@ -122,12 +122,6 @@ public class PlayerController : MonoBehaviour {
     // Stores the gameobject of an npc if the player aims at one
     GameObject npcToTalkTo;
 
-    [SerializeField] float cockPitRotationSpeed = 5f;
-    Vector3 moveDirection;
-    Vector3 velocity;
-
-    Vector3 aimDirection;
-
     bool bIsGrounded = false;
     
     float shootTime;
@@ -136,8 +130,6 @@ public class PlayerController : MonoBehaviour {
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float rayToGroundLength = 1f;
     [SerializeField] float gravityCap = 3f;
-
-    [Header("Tank Components"), SerializeField] GameObject cockPit;
 
     [Header("SoundS"), SerializeField] AudioSource shotSound;
     [SerializeField] AudioSource engineSound;
@@ -177,7 +169,6 @@ public class PlayerController : MonoBehaviour {
 
     float topSpeed;
     float acceleration;
-    float rotationSpeed;
 
     float mass;
 
@@ -218,7 +209,8 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate()
     {
         GetInput();
-        RotatePlayer();
+        //RotatePlayer();
+        RotateTankFixed();
         UpdateIsGrounded();
         CalculateVelocity();
         if(input.ResetCam)
