@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class NPCTank : BaseNPCTank {
 
-	
+	public void Interact()
+    {
+        OpenSaveDialogue();
+    }
+
 }

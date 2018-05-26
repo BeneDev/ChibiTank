@@ -24,4 +24,14 @@ public class BaseNPCTank : BaseTank {
             RotateTank();
         }
 	}
+
+    protected void OpenSaveDialogue()
+    {
+        SaveMenu.Show();
+    }
+
+    protected void Talk(string text)
+    {
+        // TODO open dialogue window with the text param shown
+    }
 }

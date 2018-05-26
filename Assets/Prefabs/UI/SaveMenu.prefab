@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114907388171153912}
   - component: {fileID: 114426201319754408}
   - component: {fileID: 82426663002080606}
+  - component: {fileID: 95227098775929690}
   m_Layer: 5
   m_Name: SaveMenu
   m_TagString: Untagged
@@ -41,7 +42,6 @@ GameObject:
   - component: {fileID: 224533587866588920}
   - component: {fileID: 222148122138916992}
   - component: {fileID: 114551616555047278}
-  - component: {fileID: 95448476682845850}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -251,16 +251,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &95448476682845850
+--- !u!95 &95227098775929690
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1186836922918690}
+  m_GameObject: {fileID: 1152885101446394}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 99e05f6915c86dd4e8aa5d1634106d95, type: 2}
+  m_Controller: {fileID: 9100000, guid: cf48d1410f73d9648a167a0a30ec00a6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
   m_ApplyRootMotion: 0

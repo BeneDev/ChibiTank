@@ -13,9 +13,9 @@ public class SaveMenu : Menu<SaveMenu> {
 
     public static void Hide()
     {
-        Close();
         // Unpause the game
         Time.timeScale = 1f;
+        Close();
     }
 
     public void OnSaveButtonClicked()

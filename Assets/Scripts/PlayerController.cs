@@ -219,24 +219,30 @@ public class PlayerController : BaseTank {
         }
         if (EventSystem.current)
         {
-            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject() && npcToTalkTo == null)
+            if (input.Shoot)
             {
-                Shoot();
-            }
-            else if(npcToTalkTo != null)
-            {
-                // TODO open dialogue of the npc you can talk to
+                if (Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject() && npcToTalkTo == null)
+                {
+                    Shoot();
+                }
+                else if (npcToTalkTo != null && !EventSystem.current.IsPointerOverGameObject())
+                {
+                    npcToTalkTo.GetComponent<NPCTank>().Interact();
+                }
             }
         }
         else
         {
-            if (input.Shoot && Time.realtimeSinceStartup > shootTime + fireRate && npcToTalkTo == null)
+            if (input.Shoot)
             {
-                Shoot();
-            }
-            else if(npcToTalkTo != null)
-            {
-                // TODO open dialogue of the npc you can talk to
+                if (Time.realtimeSinceStartup > shootTime + fireRate && npcToTalkTo == null)
+                {
+                    Shoot();
+                }
+                else if (npcToTalkTo != null)
+                {
+                    npcToTalkTo.GetComponent<NPCTank>().Interact();
+                }
             }
         }
         if (engineSound)
