@@ -46,18 +46,14 @@ public class BaseNPCTank : BaseTank {
         moveDirection = Vector3.zero;
     }
 
-    // Update is called once per frame
-    void Update () {
-        toPlayer = player.transform.position - transform.position;
-		if(toPlayer.magnitude < attentionDistance)
-        {
-            aimDirection = toPlayer;
-            RotateTank();
-        }
-	}
-
     protected override void FixedUpdate()
     {
+        toPlayer = player.transform.position - transform.position;
+        if (toPlayer.magnitude < attentionDistance)
+        {
+            aimDirection = toPlayer;
+            RotateTurret();
+        }
         base.FixedUpdate();
     }
 

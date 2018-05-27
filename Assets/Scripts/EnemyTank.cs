@@ -45,14 +45,20 @@ public class EnemyTank : BaseTank {
         base.Awake();
         player = GameObject.FindGameObjectWithTag("Player");
 
+        attack = baseAttack;
         fireRate = basefireRate;
+        reloadSpeed = baseReloadSpeed;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
-        acceleration = baseAcceleration;
-        topSpeed = baseTopSpeed;
-        attack = baseAttack;
+
         health = baseHealth;
         defense = baseDefense;
+
+        topSpeed = baseTopSpeed;
+        acceleration = baseAcceleration;
+        rotationSpeed = baseRotationSpeed;
+
+        mass = baseMass;
     }
 
     protected override void FixedUpdate()
@@ -80,7 +86,6 @@ public class EnemyTank : BaseTank {
         }
         else if(state == EnemyState.searchingForPlayer)
         {
-            // TODO move towards the position, the player was last spotted
             MoveTo(pointWherePlayerLastSpotted);
             if(toPlayer.magnitude < sightReach)
             {
@@ -105,7 +110,7 @@ public class EnemyTank : BaseTank {
     private void Attack()
     {
         aimDirection = toPlayer;
-        RotateTank();
+        RotateTurret();
         if (V3Equal(cockPit.transform.forward.normalized, aimDirection.normalized))
         {
             bAimingAtPlayer = true;
@@ -122,11 +127,12 @@ public class EnemyTank : BaseTank {
 
     void MoveTo(Vector3 point)
     {
+        // TODO fix bug where the enemy tank rotates weirdly when going back into idle state
         // Move to the point
         Vector3 toPoint = point - transform.position;
         aimDirection = toPoint;
         moveDirection = toPoint;
-        RotateTankFixed();
+        RotateBody();
         CalculateVelocity();
     }
 

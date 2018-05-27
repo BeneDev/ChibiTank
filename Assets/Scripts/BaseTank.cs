@@ -58,18 +58,17 @@ public class BaseTank : BaseCharacter {
         }
     }
 
-    protected void RotateTankFixed()
+    protected virtual void CalculateVelocity()
     {
-        // Rotate the player smoothly, depending on the velocity
-        if (moveDirection.x != 0 || moveDirection.y != 0)
+        if (velocity.magnitude < topSpeed)
         {
-
-            Quaternion targetRotation = new Quaternion();
-            targetRotation.SetLookRotation(moveDirection);
-
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            velocity += moveDirection * acceleration;
         }
+        velocity = velocity * (1 - Time.fixedDeltaTime * drag);
+    }
 
+    protected void RotateTurret()
+    {
         // Rotate the guns on the ship depending on the input of the right stick
         if (aimDirection.magnitude > 0.1f && cockPit)
         {
@@ -81,16 +80,7 @@ public class BaseTank : BaseCharacter {
         }
     }
 
-    protected virtual void CalculateVelocity()
-    {
-        if (velocity.magnitude < topSpeed)
-        {
-            velocity += moveDirection * acceleration;
-        }
-        velocity = velocity * (1 - Time.fixedDeltaTime * drag);
-    }
-
-    protected void RotateTank()
+    protected void RotateBody()
     {
         // Rotate the player smoothly, depending on the velocity
         if (moveDirection.x != 0 || moveDirection.y != 0)
@@ -98,17 +88,7 @@ public class BaseTank : BaseCharacter {
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
 
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        // Rotate the guns on the ship depending on the input of the right stick
-        if (aimDirection.magnitude > 0.1f && cockPit)
-        {
-            //gunObject.transform.forward = shootDirection;
-            Quaternion targetRotation = new Quaternion();
-            targetRotation.SetLookRotation(aimDirection);
-
-            cockPit.transform.rotation = Quaternion.Lerp(cockPit.transform.rotation, targetRotation, cockPitRotationSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
         }
     }
 

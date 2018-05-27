@@ -186,8 +186,8 @@ public class PlayerController : BaseTank {
     protected override void FixedUpdate()
     {
         GetInput();
-        //RotatePlayer();
-        RotateTankFixed();
+        RotateTurret();
+        RotateBody();
         UpdateIsGrounded();
         CalculateVelocity();
         if(input.ResetCam)
@@ -319,29 +319,6 @@ public class PlayerController : BaseTank {
                 aimDirection.x = targetAim.normalized.x;
                 aimDirection.z = targetAim.normalized.z;
             }
-        }
-    }
-
-    void RotatePlayer()
-    {
-        // Rotate the player smoothly, depending on the velocity
-        if (input.Horizontal != 0 || input.Vertical != 0)
-        {
-
-            Quaternion targetRotation = new Quaternion();
-            targetRotation.SetLookRotation(moveDirection);
-
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
-        }
-
-        // Rotate the guns on the ship depending on the input of the right stick
-        if (aimDirection.magnitude > 0.1f && cockPit)
-        {
-            //gunObject.transform.forward = shootDirection;
-            Quaternion targetRotation = new Quaternion();
-            targetRotation.SetLookRotation(aimDirection);
-
-            cockPit.transform.rotation = Quaternion.Lerp(cockPit.transform.rotation, targetRotation, cockPitRotationSpeed * Time.fixedDeltaTime);
         }
     }
 
