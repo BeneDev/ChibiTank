@@ -15,6 +15,8 @@ public class BaseTank : MonoBehaviour {
     protected Vector3 moveDirection;
     protected Vector3 velocity;
 
+    [SerializeField] float gravityCap = 3f;
+
     protected float shootTime;
 
     [SerializeField] protected GameObject cockPit;
@@ -41,6 +43,17 @@ public class BaseTank : MonoBehaviour {
     {
         shootTime = Time.realtimeSinceStartup;
         anim = GetComponent<Animator>();
+    }
+
+    // This should be called at the end of each fixed update 
+    protected virtual void FixedUpdate()
+    {
+        // Apply the gravity
+        if (velocity.y < gravityCap)
+        {
+            velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
+        }
+        transform.position += velocity * Time.fixedDeltaTime;
     }
 
     protected void RotateTankFixed()

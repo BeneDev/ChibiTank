@@ -10,21 +10,29 @@ public class EnemyTank : BaseTank {
     [SerializeField] float sightReach;
     [SerializeField] float aimingTolerance = 0.1f;
 
-    [Header("Attributes"), SerializeField] float baseFireRate = 1f;
+    [Header("Attributes"), SerializeField] float baseShootKnockback = 1f;
+    [SerializeField] float baseShootKnockbackDuration = 1f;
+    [SerializeField] float baseFireRate = 1f;
 
     protected override void Awake()
     {
         base.Awake();
         player = GameObject.FindGameObjectWithTag("Player");
         fireRate = baseFireRate;
+        shootKnockback = baseShootKnockback;
+        shootKnockbackDuration = baseShootKnockbackDuration;
     }
 
-    private void Update()
+    protected override void FixedUpdate()
     {
         AttackPlayerIfClose();
-        if(V3Equal(cockPit.transform.forward.normalized, aimDirection.normalized))
+        base.FixedUpdate();
+    }
+
+    private void Attack()
+    {
+        if (V3Equal(cockPit.transform.forward.normalized, aimDirection.normalized))
         {
-            print("aiming right");
             bAimingAtPlayer = true;
         }
         else
@@ -49,6 +57,7 @@ public class EnemyTank : BaseTank {
         {
             aimDirection = toPlayer;
             RotateTank();
+            Attack();
         }
     }
 

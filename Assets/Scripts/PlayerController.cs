@@ -125,7 +125,6 @@ public class PlayerController : BaseTank {
 
     [Header("Physics"), SerializeField] float drag = 1f;
     [SerializeField] float rayToGroundLength = 1f;
-    [SerializeField] float gravityCap = 3f;
     
     [SerializeField] AudioSource engineSound;
     [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f;
@@ -185,7 +184,7 @@ public class PlayerController : BaseTank {
 
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         GetInput();
         //RotatePlayer();
@@ -228,12 +227,7 @@ public class PlayerController : BaseTank {
         {
             PlayEngineSound();
         }
-        // Apply the gravity
-        if (velocity.y < gravityCap)
-        {
-            velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
-        }
-        transform.position += velocity * Time.fixedDeltaTime;
+        base.FixedUpdate();
     }
 
     private void SetCamera()

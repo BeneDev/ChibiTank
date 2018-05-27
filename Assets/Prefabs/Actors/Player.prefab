@@ -775,7 +775,7 @@ Rigidbody:
   m_GameObject: {fileID: 1510876757218522}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1.5
   m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -1045,12 +1045,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cockPitRotationSpeed: 5
-  shootOrigin: {fileID: 1643878805221960}
-  drag: 5.1
-  rayToGroundLength: 1
   gravityCap: 3
   cockPit: {fileID: 1112228992774638}
+  shootOrigin: {fileID: 1643878805221960}
   shotSound: {fileID: 82887555961569794}
+  drag: 5.1
+  rayToGroundLength: 1
   engineSound: {fileID: 82154836985891580}
   engineSoundGain: 0.0116
   idleEngineVolume: 0.04
@@ -1112,7 +1112,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1775387570561068}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.01
   m_Height: 0
   m_Direction: 2
