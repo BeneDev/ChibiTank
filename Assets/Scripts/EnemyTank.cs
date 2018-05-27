@@ -7,31 +7,45 @@ public class EnemyTank : BaseTank {
     GameObject player;
     Vector3 toPlayer;
     bool bAimingAtPlayer = false;
-    bool isTimeWhenPlayerLeftSightSaved = false;
     float timeWhenPlayerLeftSight;
 
-    [SerializeField] float lookForPlayerDuration = 3f;
+    Vector3 pointWherePlayerLastSpotted;
+
+    [SerializeField] float searchPlayerDuration = 3f;
 
     [SerializeField] float sightReach;
     [SerializeField] float aimingTolerance = 0.1f;
 
-    [Header("Attributes"), SerializeField] float baseShootKnockback = 1f;
+    // Attributes
+    [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
+    [SerializeField] float basefireRate = 1f;
+    [SerializeField] float baseReloadSpeed = 1f;
+    [SerializeField] float baseShootKnockback = 1f;
     [SerializeField] float baseShootKnockbackDuration = 1f;
-    [SerializeField] float baseFireRate = 1f;
-    [SerializeField] int baseAttack = 1;
 
+    [Header("Defensive Attributes"), SerializeField] int baseHealth = 1;
     [SerializeField] int baseDefense = 1;
-    [SerializeField] int baseHealth = 1;
 
+    [Header("Agility Attributes"), SerializeField] float baseTopSpeed = 1f;
     [SerializeField] float baseAcceleration = 1f;
-    [SerializeField] float baseTopSpeed = 1f;
+    [SerializeField] float baseRotationSpeed = 1f;
+
+    [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
+
+    enum EnemyState
+    {
+        idle,
+        playerSpotted,
+        searchingForPlayer
+    };
+    EnemyState state = EnemyState.idle;
 
     protected override void Awake()
     {
         base.Awake();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        fireRate = baseFireRate;
+        fireRate = basefireRate;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
         acceleration = baseAcceleration;
@@ -43,13 +57,55 @@ public class EnemyTank : BaseTank {
 
     protected override void FixedUpdate()
     {
-        AttackPlayerIfClose();
-        Move();
+        toPlayer = player.transform.position - transform.position;
+        if (state == EnemyState.idle)
+        {
+            if(toPlayer.magnitude < sightReach)
+            {
+                state = EnemyState.playerSpotted;
+            }
+        }
+        else if(state == EnemyState.playerSpotted)
+        {
+            if(toPlayer.magnitude < sightReach + 5f)
+            {
+                Attack();
+            }
+            else
+            {
+                state = EnemyState.searchingForPlayer;
+                pointWherePlayerLastSpotted = player.transform.position;
+                timeWhenPlayerLeftSight = Time.realtimeSinceStartup;
+            }
+        }
+        else if(state == EnemyState.searchingForPlayer)
+        {
+            // TODO move towards the position, the player was last spotted
+            MoveTo(pointWherePlayerLastSpotted);
+            if(toPlayer.magnitude < sightReach)
+            {
+                state = EnemyState.playerSpotted;
+            }
+            if(Time.realtimeSinceStartup > timeWhenPlayerLeftSight + searchPlayerDuration)
+            {
+                state = EnemyState.idle;
+            }
+        }
         base.FixedUpdate();
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        pointWherePlayerLastSpotted = player.transform.position;
+        timeWhenPlayerLeftSight = Time.realtimeSinceStartup;
+        state = EnemyState.searchingForPlayer;
     }
 
     private void Attack()
     {
+        aimDirection = toPlayer;
+        RotateTank();
         if (V3Equal(cockPit.transform.forward.normalized, aimDirection.normalized))
         {
             bAimingAtPlayer = true;
@@ -64,42 +120,18 @@ public class EnemyTank : BaseTank {
         }
     }
 
-    private void Move()
+    void MoveTo(Vector3 point)
     {
-        if(toPlayer.magnitude < sightReach)
-        {
-            // TODO move sidewards to evade player bullets
-            isTimeWhenPlayerLeftSightSaved = false;
-        }
-        else
-        {
-            if(!isTimeWhenPlayerLeftSightSaved)
-            {
-                timeWhenPlayerLeftSight = Time.realtimeSinceStartup;
-                isTimeWhenPlayerLeftSightSaved = true;
-            }
-            if(Time.realtimeSinceStartup < timeWhenPlayerLeftSight + lookForPlayerDuration)
-            {
-                moveDirection = aimDirection;
-                CalculateVelocity();
-            }
-        }
+        // Move to the point
+        Vector3 toPoint = point - transform.position;
+        aimDirection = toPoint;
+        moveDirection = toPoint;
+        RotateTankFixed();
+        CalculateVelocity();
     }
 
     bool V3Equal(Vector3 a, Vector3 b)
     {
         return Vector3.SqrMagnitude(a - b) < aimingTolerance;
     }
-
-    void AttackPlayerIfClose()
-    {
-        toPlayer = player.transform.position - transform.position;
-        if(toPlayer.magnitude < sightReach)
-        {
-            aimDirection = toPlayer;
-            RotateTank();
-            Attack();
-        }
-    }
-
 }
