@@ -7,12 +7,20 @@ public class EnemyTank : BaseTank {
     GameObject player;
     Vector3 toPlayer;
     bool bAimingAtPlayer = false;
+    bool isTimeWhenPlayerLeftSightSaved = false;
+    float timeWhenPlayerLeftSight;
+
+    [SerializeField] float lookForPlayerDuration = 3f;
+
     [SerializeField] float sightReach;
     [SerializeField] float aimingTolerance = 0.1f;
 
     [Header("Attributes"), SerializeField] float baseShootKnockback = 1f;
     [SerializeField] float baseShootKnockbackDuration = 1f;
     [SerializeField] float baseFireRate = 1f;
+
+    [SerializeField] float baseAcceleration = 1f;
+    [SerializeField] float baseTopSpeed = 1f;
 
     protected override void Awake()
     {
@@ -21,11 +29,14 @@ public class EnemyTank : BaseTank {
         fireRate = baseFireRate;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
+        acceleration = baseAcceleration;
+        topSpeed = baseTopSpeed;
     }
 
     protected override void FixedUpdate()
     {
         AttackPlayerIfClose();
+        Move();
         base.FixedUpdate();
     }
 
@@ -42,6 +53,28 @@ public class EnemyTank : BaseTank {
         if (Time.realtimeSinceStartup > shootTime + fireRate && bAimingAtPlayer)
         {
             Shoot();
+        }
+    }
+
+    private void Move()
+    {
+        if(toPlayer.magnitude < sightReach)
+        {
+            // TODO move sidewards to evade player bullets
+            isTimeWhenPlayerLeftSightSaved = false;
+        }
+        else
+        {
+            if(!isTimeWhenPlayerLeftSightSaved)
+            {
+                timeWhenPlayerLeftSight = Time.realtimeSinceStartup;
+                isTimeWhenPlayerLeftSightSaved = true;
+            }
+            if(Time.realtimeSinceStartup < timeWhenPlayerLeftSight + lookForPlayerDuration)
+            {
+                moveDirection = aimDirection;
+                CalculateVelocity();
+            }
         }
     }
 

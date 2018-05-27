@@ -122,8 +122,7 @@ public class PlayerController : BaseTank {
     GameObject npcToTalkTo;
 
     bool bIsGrounded = false;
-
-    [Header("Physics"), SerializeField] float drag = 1f;
+    
     [SerializeField] float rayToGroundLength = 1f;
     
     [SerializeField] AudioSource engineSound;
@@ -363,15 +362,6 @@ public class PlayerController : BaseTank {
         {
             engineSound.volume = idleEngineVolume;
         }
-    }
-
-    void CalculateVelocity()
-    {
-        if(velocity.magnitude < topSpeed)
-        {
-            velocity += moveDirection * acceleration;
-        }
-        velocity = velocity * (1 - Time.fixedDeltaTime * drag);
     }
 
     void UpdateIsGrounded()

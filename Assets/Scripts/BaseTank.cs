@@ -15,6 +15,7 @@ public class BaseTank : MonoBehaviour {
     protected Vector3 moveDirection;
     protected Vector3 velocity;
 
+    [SerializeField] protected float drag = 1f;
     [SerializeField] float gravityCap = 3f;
 
     protected float shootTime;
@@ -79,12 +80,20 @@ public class BaseTank : MonoBehaviour {
         }
     }
 
+    protected virtual void CalculateVelocity()
+    {
+        if (velocity.magnitude < topSpeed)
+        {
+            velocity += moveDirection * acceleration;
+        }
+        velocity = velocity * (1 - Time.fixedDeltaTime * drag);
+    }
+
     protected void RotateTank()
     {
         // Rotate the player smoothly, depending on the velocity
         if (moveDirection.x != 0 || moveDirection.y != 0)
         {
-
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
 

@@ -911,12 +911,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cockPitRotationSpeed: 3
+  drag: 2.66
   gravityCap: 3
   cockPit: {fileID: 1656780836304248}
   shootOrigin: {fileID: 1507376867925792}
   shotSound: {fileID: 82733096872132338}
+  lookForPlayerDuration: 3
   sightReach: 20
   aimingTolerance: 0.01
   baseShootKnockback: 20
   baseShootKnockbackDuration: 0.5
   baseFireRate: 2
+  baseAcceleration: 0.3
+  baseTopSpeed: 2
