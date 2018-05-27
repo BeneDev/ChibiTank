@@ -229,6 +229,12 @@ public class PlayerController : BaseTank {
         base.FixedUpdate();
     }
 
+    protected override void Die()
+    {
+        health = baseHealth;
+        transform.position = GameManager.Instance.RespawnPoint;
+    }
+
     private void SetCamera()
     {
         if (enemyInFront)

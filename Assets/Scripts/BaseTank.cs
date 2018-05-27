@@ -54,9 +54,15 @@ public class BaseTank : BaseCharacter {
         transform.position += velocity * Time.fixedDeltaTime;
         if(health <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
     }
+
+    protected virtual void Die()
+    {
+        Destroy(gameObject);
+    }
+
 
     protected virtual void CalculateVelocity()
     {

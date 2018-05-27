@@ -28,10 +28,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public Vector3 RespawnPoint
+    {
+        get
+        {
+            return respawnPoint;
+        }
+        set
+        {
+            respawnPoint = value;
+        }
+    }
+
     [Header("Cannon Balls"), SerializeField] int cannonBallCount = 100;
     [SerializeField] public GameObject cannonBallParent;
     [SerializeField] GameObject cannonBallPrefab;
     public Stack<GameObject> freeCannonBalls = new Stack<GameObject>();
+
+    Vector3 respawnPoint = new Vector3(22f, 0f, -60);
 
     private int controllerCount = 0;
 

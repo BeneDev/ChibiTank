@@ -21,6 +21,8 @@ public class SaveMenu : Menu<SaveMenu> {
     public void OnSaveButtonClicked()
     {
         //TODO save the game somehow
+        GameManager.Instance.RespawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Hide();
     }
 
     public void OnCancelButtonClicked()

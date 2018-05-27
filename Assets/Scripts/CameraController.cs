@@ -45,7 +45,9 @@ public class CameraController : MonoBehaviour {
     [SerializeField] float speed = 5f;
     [SerializeField] float rotationSpeed = 3f;
     [SerializeField] float controllerRotationSpeed = 4f;
-    
+
+    bool cameOutOfFocussedMode = false;
+
     Vector3 playerAimDirectionForCamReset;
     GameObject focussedObject;
 
@@ -61,9 +63,15 @@ public class CameraController : MonoBehaviour {
         if(focussedObject)
         {
             FocusObject();
+            cameOutOfFocussedMode = true;
         }
         else
         {
+            if(cameOutOfFocussedMode)
+            {
+                playerAimDirectionForCamReset = transform.forward;
+                cameOutOfFocussedMode = false;
+            }
             RotateCamera();
         }
     }
