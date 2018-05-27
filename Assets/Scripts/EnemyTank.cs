@@ -18,6 +18,10 @@ public class EnemyTank : BaseTank {
     [Header("Attributes"), SerializeField] float baseShootKnockback = 1f;
     [SerializeField] float baseShootKnockbackDuration = 1f;
     [SerializeField] float baseFireRate = 1f;
+    [SerializeField] int baseAttack = 1;
+
+    [SerializeField] int baseDefense = 1;
+    [SerializeField] int baseHealth = 1;
 
     [SerializeField] float baseAcceleration = 1f;
     [SerializeField] float baseTopSpeed = 1f;
@@ -26,11 +30,15 @@ public class EnemyTank : BaseTank {
     {
         base.Awake();
         player = GameObject.FindGameObjectWithTag("Player");
+
         fireRate = baseFireRate;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
         acceleration = baseAcceleration;
         topSpeed = baseTopSpeed;
+        attack = baseAttack;
+        health = baseHealth;
+        defense = baseDefense;
     }
 
     protected override void FixedUpdate()

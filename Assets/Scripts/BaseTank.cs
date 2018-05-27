@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// The script from which everything, controlling a tank inherits, to gain access to methods and variables, making it easy to controll and configure the tank
 /// </summary>
-public class BaseTank : MonoBehaviour {
+public class BaseTank : BaseCharacter {
 
     protected Animator anim;
 
@@ -32,9 +32,6 @@ public class BaseTank : MonoBehaviour {
     protected float shootKnockback;
     protected float shootKnockbackDuration;
 
-    protected int health;
-    protected int defense;
-
     protected float topSpeed;
     protected float acceleration;
 
@@ -55,6 +52,10 @@ public class BaseTank : MonoBehaviour {
             velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         }
         transform.position += velocity * Time.fixedDeltaTime;
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected void RotateTankFixed()
@@ -119,6 +120,8 @@ public class BaseTank : MonoBehaviour {
         }
         shootTime = Time.realtimeSinceStartup;
         GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
+        currentBall.GetComponent<CannonBallController>().Damage = attack;
+        currentBall.GetComponent<CannonBallController>().Owner = gameObject;
         anim.SetTrigger("Shoot");
         StartCoroutine(ShotKnockBack(shootKnockbackDuration));
     }

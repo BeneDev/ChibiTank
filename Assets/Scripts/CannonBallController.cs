@@ -4,12 +4,41 @@ using UnityEngine;
 
 public class CannonBallController : MonoBehaviour {
 
+    public int Damage
+    {
+        get
+        {
+            return damage;
+        }
+        set
+        {
+            damage = value;
+        }
+    }
+
+    public GameObject Owner
+    {
+        get
+        {
+            return owner;
+        }
+        set
+        {
+            owner = value;
+        }
+    }
+
     Rigidbody rb;
     AudioSource audioSource;
 
     [SerializeField] float speed = 1f;
     [SerializeField] float durationUntilDespawn = 3f;
     float timeWhenFired = 0f;
+
+    int damage;
+    bool isStillDamaging = true;
+
+    GameObject owner;
 
     [SerializeField] AudioClip[] impactSounds;
 
@@ -42,6 +71,7 @@ public class CannonBallController : MonoBehaviour {
         rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * speed);
         timeWhenFired = Time.realtimeSinceStartup;
+        isStillDamaging = true;
     }
 
     private void Update()
@@ -62,6 +92,7 @@ public class CannonBallController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject == owner) { return; }
         if(collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
             PlaySound(impactSounds[sounds.terrain]);
@@ -77,6 +108,11 @@ public class CannonBallController : MonoBehaviour {
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Organic"))
         {
             PlaySound(impactSounds[sounds.organic]);
+        }
+        if(collision.gameObject.GetComponent<BaseCharacter>() && isStillDamaging)
+        {
+            collision.gameObject.GetComponent<BaseCharacter>().TakeDamage(damage);
+            isStillDamaging = false;
         }
     }
 }
