@@ -221,7 +221,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976809855731978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44, y: 0, z: -58.42}
+  m_LocalPosition: {x: -7.8824463, y: 0, z: -56.2731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4285072578085702}
@@ -916,14 +916,17 @@ MonoBehaviour:
   cockPit: {fileID: 1656780836304248}
   shootOrigin: {fileID: 1507376867925792}
   shotSound: {fileID: 82733096872132338}
-  lookForPlayerDuration: 3
+  searchPlayerDuration: 3
   sightReach: 20
   aimingTolerance: 0.01
+  baseAttack: 1
+  basefireRate: 1
+  baseReloadSpeed: 1
   baseShootKnockback: 20
   baseShootKnockbackDuration: 0.5
-  baseFireRate: 2
-  baseAttack: 1
-  baseDefense: 1
   baseHealth: 3
-  baseAcceleration: 0.3
+  baseDefense: 1
   baseTopSpeed: 2
+  baseAcceleration: 0.3
+  baseRotationSpeed: 1
+  baseMass: 1

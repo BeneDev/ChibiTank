@@ -47,7 +47,7 @@ public class BaseTank : BaseCharacter {
     protected virtual void FixedUpdate()
     {
         // Apply the gravity
-        if (velocity.y < gravityCap)
+        if (velocity.y > -gravityCap)
         {
             velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         }
