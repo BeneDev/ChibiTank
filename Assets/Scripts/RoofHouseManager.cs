@@ -55,6 +55,9 @@ public class RoofHouseManager : MonoBehaviour {
         {
             // Fade in the roof again
             iTween.FadeTo(roof, 1, fadeInDuration);
+
+            // If you want to make material appear normal again right after fade in animation (the player can spot that) then activate invoke call here
+            //Invoke("SetMaterialOpaque", 1.0f);
         }
     }
 
