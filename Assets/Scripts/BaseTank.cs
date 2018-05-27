@@ -89,7 +89,7 @@ public class BaseTank : BaseCharacter {
     protected void RotateBody()
     {
         // Rotate the player smoothly, depending on the velocity
-        if (moveDirection.x != 0 || moveDirection.y != 0)
+        if (moveDirection.magnitude > 0.1f)
         {
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
