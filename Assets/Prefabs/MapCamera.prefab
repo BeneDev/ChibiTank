@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 20953670181655186}
   m_Layer: 0
   m_Name: MapCamera
-  m_TagString: Untagged
+  m_TagString: MapCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ Camera:
   far clip plane: 2000
   field of view: 60
   orthographic: 1
-  orthographic size: 484.5
+  orthographic size: 375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
