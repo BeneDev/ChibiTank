@@ -10,7 +10,7 @@ public class OptionsMenu : Menu<OptionsMenu> {
     [SerializeField] Slider cockPitRotationSpeedSlider;
     [SerializeField] Toggle controllerInputToggle;
 
-    Dictionary<int, int[]> resolutionDict;
+    Dictionary<int, int[]> resolutionDict = new Dictionary<int, int[]>();
 
     protected override void Awake()
     {
@@ -74,14 +74,8 @@ public class OptionsMenu : Menu<OptionsMenu> {
 
     public void SetResolution(int resolutionIndex)
     {
-        if(resolutionIndex < 5)
-        {
-            Screen.SetResolution(resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1], false);
-        }
-        else
-        {
-            Screen.SetResolution(resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1], true);
-        }
+        Debug.LogFormat("width : {0} |height : {1}", resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1]);
+        Screen.SetResolution(resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1], Screen.fullScreen);
     }
 
 }

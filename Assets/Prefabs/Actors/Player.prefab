@@ -1065,7 +1065,7 @@ MonoBehaviour:
   baseDefense: 1
   baseTopSpeed: 14.9
   baseAcceleration: 1.1
-  baseRotationSpeed: 3
+  baseRotationSpeed: 4
   baseMass: 3
 --- !u!114 &114180295969708528
 MonoBehaviour:
