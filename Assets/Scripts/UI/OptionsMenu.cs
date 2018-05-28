@@ -74,7 +74,6 @@ public class OptionsMenu : Menu<OptionsMenu> {
 
     public void SetResolution(int resolutionIndex)
     {
-        Debug.LogFormat("width : {0} |height : {1}", resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1]);
         Screen.SetResolution(resolutionDict[resolutionIndex][0], resolutionDict[resolutionIndex][1], Screen.fullScreen);
     }
 
