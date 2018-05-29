@@ -92,7 +92,7 @@ public class BaseTank : BaseCharacter {
         {
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(moveDirection);
-
+            targetRotation = Quaternion.Euler(new Vector3(0f, targetRotation.eulerAngles.y, 0f));
             transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
         }
     }

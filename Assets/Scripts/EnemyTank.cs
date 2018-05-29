@@ -9,6 +9,9 @@ public class EnemyTank : BaseTank {
     bool bAimingAtPlayer = false;
     float timeWhenPlayerLeftSight;
 
+    bool isInRightArea = true;
+    Vector3 initialPos;
+
     Vector3 pointWherePlayerLastSpotted;
 
     [SerializeField] float searchPlayerDuration = 3f;
@@ -59,6 +62,8 @@ public class EnemyTank : BaseTank {
         rotationSpeed = baseRotationSpeed;
 
         mass = baseMass;
+
+        initialPos = transform.position;
     }
 
     protected override void FixedUpdate()
@@ -70,9 +75,25 @@ public class EnemyTank : BaseTank {
             {
                 state = EnemyState.playerSpotted;
             }
+            if (V3Equal(initialPos, transform.position) && !isInRightArea)
+            {
+                isInRightArea = true;
+            }
+            if(!isInRightArea)
+            {
+                MoveTo(initialPos);
+            }
+            else
+            {
+                MoveTo(Random.insideUnitCircle * 10f);
+            }
         }
         else if(state == EnemyState.playerSpotted)
         {
+            if (isInRightArea)
+            {
+                isInRightArea = false;
+            }
             if(player.GetComponent<PlayerController>().IsDead)
             {
                 state = EnemyState.idle;
@@ -90,6 +111,10 @@ public class EnemyTank : BaseTank {
         }
         else if(state == EnemyState.searchingForPlayer)
         {
+            if(isInRightArea)
+            {
+                isInRightArea = false;
+            }
             MoveTo(pointWherePlayerLastSpotted);
             if(toPlayer.magnitude < sightReach && !player.GetComponent<PlayerController>().IsDead)
             {
@@ -113,7 +138,7 @@ public class EnemyTank : BaseTank {
 
     private void Attack()
     {
-        aimDirection = toPlayer;
+        aimDirection = toPlayer.normalized;
         RotateTurret();
         if (V3Equal(cockPit.transform.forward.normalized, aimDirection.normalized))
         {
@@ -131,11 +156,10 @@ public class EnemyTank : BaseTank {
 
     void MoveTo(Vector3 point)
     {
-        // TODO fix bug where the enemy tank rotates weirdly when going back into idle state
         // Move to the point
         Vector3 toPoint = point - transform.position;
-        aimDirection = toPoint;
-        moveDirection = toPoint;
+        aimDirection = toPoint.normalized;
+        moveDirection = toPoint.normalized;
         RotateBody();
         CalculateVelocity();
     }
