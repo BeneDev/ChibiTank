@@ -39,6 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046530647474158}
   - component: {fileID: 114545469805523700}
+  - component: {fileID: 95342558533995724}
   m_Layer: 0
   m_Name: CameraArm
   m_TagString: Untagged
@@ -53,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323044834678700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -249.71, y: 0, z: -53.299995}
+  m_LocalPosition: {x: 22.09, y: 0, z: -53.299995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4648258828277130}
@@ -116,6 +117,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273713289741688}
   m_Enabled: 0
+--- !u!95 &95342558533995724
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323044834678700}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c455b8498d9ad164fb16607c1a742156, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114029392404316330
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,9 +5,34 @@ using UnityEngine.UI;
 
 public class PauseMenu : Menu<PauseMenu> {
 
+    Animator camAnim;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        camAnim = Camera.main.GetComponentInParent<Animator>();
+    }
+
     public static void Show()
     {
         Open();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        if (MenuManager.Instance.MenuStack.Count < 1)
+        {
+            camAnim.SetTrigger("ZoomIn");
+        }
+    }
+
+    void OnDisable()
+    {
+        if (MenuManager.Instance.MenuStack.Count < 1)
+        {
+            camAnim.SetTrigger("ZoomOut");
+        }
     }
 
     public static void Hide()

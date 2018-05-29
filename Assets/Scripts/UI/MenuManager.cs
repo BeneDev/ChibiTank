@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class MenuManager : Singleton<MenuManager> {
 
+    public Stack<Menu> MenuStack
+    {
+        get
+        {
+            return menuStack;
+        }
+    }
+
     #region Private Fields
 
     private Stack<Menu> menuStack = new Stack<Menu>();
