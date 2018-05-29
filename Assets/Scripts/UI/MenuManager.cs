@@ -10,6 +10,10 @@ public class MenuManager : Singleton<MenuManager> {
         {
             return menuStack;
         }
+        set
+        {
+            menuStack = value;
+        }
     }
 
     #region Private Fields

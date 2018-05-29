@@ -274,19 +274,23 @@ public class PlayerController : BaseTank {
 
     protected override void Die()
     {
-        bIsDead = true;
-        GameoverMenu.Show();
+        if (!bIsDead)
+        {
+            bIsDead = true;
+            GameoverMenu.Show();
+        }
     }
 
     public void ResetPlayerTank()
     {
-        for(int i = 0; i < MenuManager.Instance.MenuStack.Count; i++)
+        health = baseHealth;
+        foreach(var menu in MenuManager.Instance.MenuStack)
         {
-            MenuManager.Instance.MenuStack.Peek().OnBackPressed();
+            Destroy(menu.gameObject);
         }
+        MenuManager.Instance.MenuStack.Clear();
         transform.position = GameManager.Instance.RespawnPoint;
         bIsDead = false;
-        health = baseHealth;
     }
 
     private void SetCamera()
