@@ -5,18 +5,34 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MouseOverEquipmentController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-
-    // TODO Fix bug, when player switches too fast between several images
+    
+    bool isOver = false;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         MenuManager.Instance.SpriteUnderMouse = GetComponent<Image>().sprite;
-        HoverOverMenu.Show();
+        isOver = true;
+        if (HoverOverMenu.Instance == null)
+        {
+            HoverOverMenu.Show();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         MenuManager.Instance.SpriteUnderMouse = null;
-        HoverOverMenu.Hide();
+        isOver = false;
+        if (HoverOverMenu.Instance != null)
+        {
+            HoverOverMenu.Hide();
+        }
+    }
+
+    private void Update()
+    {
+        if(isOver && HoverOverMenu.Instance == null)
+        {
+            HoverOverMenu.Show();
+        }
     }
 }
