@@ -9,8 +9,12 @@ public class EnemyTank : BaseTank {
     bool bAimingAtPlayer = false;
     float timeWhenPlayerLeftSight;
 
-    bool isInRightArea = true;
+    [SerializeField] float patrolRadius = 10f;
+    
     Vector3 initialPos;
+
+    Vector3 targetPosition;
+    bool hasTarget = false;
 
     Vector3 pointWherePlayerLastSpotted;
 
@@ -37,11 +41,11 @@ public class EnemyTank : BaseTank {
 
     enum EnemyState
     {
-        idle,
+        patroling,
         playerSpotted,
         searchingForPlayer
     };
-    EnemyState state = EnemyState.idle;
+    EnemyState state = EnemyState.patroling;
 
     protected override void Awake()
     {
@@ -69,38 +73,39 @@ public class EnemyTank : BaseTank {
     protected override void FixedUpdate()
     {
         toPlayer = player.transform.position - transform.position;
-        if (state == EnemyState.idle)
+        if (state == EnemyState.patroling)
         {
+            acceleration = baseAcceleration / 2;
             if (toPlayer.magnitude < sightReach && !player.GetComponent<PlayerController>().IsDead)
             {
                 state = EnemyState.playerSpotted;
             }
-            if (V3Equal(initialPos, transform.position) && !isInRightArea)
+            if(!hasTarget)
             {
-                isInRightArea = true;
+                Vector2 relativePoint = Random.insideUnitCircle * patrolRadius;
+                targetPosition = transform.position + new Vector3(relativePoint.x, 0f, relativePoint.y);
+                hasTarget = true;
             }
-            if(!isInRightArea)
+            MoveTo(targetPosition);
+            if(V3Equal(transform.position, targetPosition))
             {
-                MoveTo(initialPos);
-            }
-            else
-            {
-                MoveTo(Random.insideUnitCircle * 10f);
+                hasTarget = false;
             }
         }
         else if(state == EnemyState.playerSpotted)
         {
-            if (isInRightArea)
-            {
-                isInRightArea = false;
-            }
+            acceleration = baseAcceleration;
             if(player.GetComponent<PlayerController>().IsDead)
             {
-                state = EnemyState.idle;
+                state = EnemyState.patroling;
             }
-            if(toPlayer.magnitude < sightReach + 5f)
+            if(toPlayer.magnitude < sightReach - 5f)
             {
                 Attack();
+            }
+            else if(toPlayer.magnitude < sightReach + 5f)
+            {
+                MoveTo(player.transform.position);
             }
             else
             {
@@ -111,10 +116,7 @@ public class EnemyTank : BaseTank {
         }
         else if(state == EnemyState.searchingForPlayer)
         {
-            if(isInRightArea)
-            {
-                isInRightArea = false;
-            }
+            acceleration = baseAcceleration;
             MoveTo(pointWherePlayerLastSpotted);
             if(toPlayer.magnitude < sightReach && !player.GetComponent<PlayerController>().IsDead)
             {
@@ -122,7 +124,7 @@ public class EnemyTank : BaseTank {
             }
             if(Time.realtimeSinceStartup > timeWhenPlayerLeftSight + searchPlayerDuration)
             {
-                state = EnemyState.idle;
+                state = EnemyState.patroling;
             }
         }
         base.FixedUpdate();
