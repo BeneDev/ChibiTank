@@ -21,8 +21,8 @@ public class LoadMenu : Menu<LoadMenu> {
     public void OnLoadButtonClicked()
     {
         //TODO load game somehow
-        GameObject.FindGameObjectWithTag("Player").transform.position = GameManager.Instance.RespawnPoint;
         Hide();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayerTank();
     }
 
     public void OnCancelButtonClicked()

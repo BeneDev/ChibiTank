@@ -122,6 +122,7 @@ public class PlayerController : BaseTank {
     GameObject npcToTalkTo;
 
     bool bIsGrounded = false;
+    bool bIsDead = false;
     
     [SerializeField] float rayToGroundLength = 1f;
     
@@ -185,6 +186,7 @@ public class PlayerController : BaseTank {
 
     protected override void FixedUpdate()
     {
+        if(bIsDead) { return; }
         GetInput();
         RotateTurret();
         RotateBody();
@@ -229,23 +231,6 @@ public class PlayerController : BaseTank {
         base.FixedUpdate();
     }
 
-    protected override void Die()
-    {
-        health = baseHealth;
-        transform.position = GameManager.Instance.RespawnPoint;
-    }
-
-    private void SetCamera()
-    {
-        if (enemyInFront)
-        {
-            cameraArm.GetComponent<CameraController>().FocussedObject = enemyInFront;
-            return;
-        }
-        cameraArm.GetComponent<CameraController>().FocussedObject = null;
-        cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
@@ -277,6 +262,31 @@ public class PlayerController : BaseTank {
     public void SpendPointOnAttribute()
     {
 
+    }
+
+    protected override void Die()
+    {
+        bIsDead = true;
+        GameoverMenu.Show();
+    }
+
+    public void ResetPlayerTank()
+    {
+        GameoverMenu.Hide();
+        transform.position = GameManager.Instance.RespawnPoint;
+        bIsDead = false;
+        health = baseHealth;
+    }
+
+    private void SetCamera()
+    {
+        if (enemyInFront)
+        {
+            cameraArm.GetComponent<CameraController>().FocussedObject = enemyInFront;
+            return;
+        }
+        cameraArm.GetComponent<CameraController>().FocussedObject = null;
+        cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
     }
 
     void GetInput()

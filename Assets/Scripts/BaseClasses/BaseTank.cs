@@ -63,7 +63,6 @@ public class BaseTank : BaseCharacter {
         Destroy(gameObject);
     }
 
-
     protected virtual void CalculateVelocity()
     {
         if (velocity.magnitude < topSpeed)
