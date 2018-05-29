@@ -7,15 +7,17 @@ public class MouseOverEquipmentController : MonoBehaviour, IPointerEnterHandler,
 
     bool isOver = false;
 
+    // TODO Fix bug, when player switches too fast between several images
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("is over");
+        HoverOverMenu.Show();
         isOver = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        print("leaves");
+        HoverOverMenu.Hide();
         isOver = false;
     }
 }
