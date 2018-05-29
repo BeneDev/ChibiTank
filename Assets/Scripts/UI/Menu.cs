@@ -13,6 +13,8 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
     AudioSource aS;
     Animator anim;
 
+    [SerializeField] GameObject[] buttonArray;
+
     #region Unity Messages
 
     protected virtual void Awake()
