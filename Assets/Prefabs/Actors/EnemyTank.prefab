@@ -910,13 +910,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b6b90bf29fa0941805ea59be5d4a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cockPitRotationSpeed: 3
+  cockPitRotationSpeed: 6
   drag: 5
   gravityCap: 3
   cockPit: {fileID: 1656780836304248}
   shootOrigin: {fileID: 1507376867925792}
   shotSound: {fileID: 82733096872132338}
   patrolRadius: 20
+  patrolSpeedMultiplier: 0.3
   searchPlayerDuration: 6
   sightReach: 25
   aimingTolerance: 0.01
@@ -927,7 +928,7 @@ MonoBehaviour:
   baseShootKnockbackDuration: 0.5
   baseHealth: 3
   baseDefense: 1
-  baseTopSpeed: 6
-  baseAcceleration: 0.9
-  baseRotationSpeed: 3
+  baseTopSpeed: 8
+  baseAcceleration: 1.5
+  baseRotationSpeed: 9
   baseMass: 1

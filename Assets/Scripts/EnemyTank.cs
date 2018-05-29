@@ -10,7 +10,9 @@ public class EnemyTank : BaseTank {
     float timeWhenPlayerLeftSight;
 
     [SerializeField] float patrolRadius = 10f;
-    
+    [Range(0, 1), SerializeField] float patrolSpeedMultiplier = 0.3f;
+
+
     Vector3 initialPos;
 
     Vector3 targetPosition;
@@ -75,7 +77,7 @@ public class EnemyTank : BaseTank {
         toPlayer = player.transform.position - transform.position;
         if (state == EnemyState.patroling)
         {
-            acceleration = baseAcceleration / 2;
+            acceleration = baseAcceleration * patrolSpeedMultiplier;
             if (toPlayer.magnitude < sightReach && !player.GetComponent<PlayerController>().IsDead)
             {
                 state = EnemyState.playerSpotted;
