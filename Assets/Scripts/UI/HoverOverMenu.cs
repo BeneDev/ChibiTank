@@ -12,9 +12,9 @@ public class HoverOverMenu : Menu<HoverOverMenu> {
     protected override void OnEnable()
     {
         base.OnEnable();
-        if(objectName)
+        if(objectName && MenuManager.Instance.SpriteUnderMouse)
         {
-            objectName.text = "";
+            objectName.text = MenuManager.Instance.SpriteUnderMouse.name;
         }
     }
 

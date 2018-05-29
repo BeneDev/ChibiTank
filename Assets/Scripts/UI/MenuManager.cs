@@ -16,12 +16,26 @@ public class MenuManager : Singleton<MenuManager> {
         }
     }
 
+    public Sprite SpriteUnderMouse
+    {
+        get
+        {
+            return spriteUnderMouse;
+        }
+        set
+        {
+            spriteUnderMouse = value;
+        }
+    }
+
     #region Private Fields
 
     private Stack<Menu> menuStack = new Stack<Menu>();
     [SerializeField] private Menu[] menuPrefabs;
 
     PlayerInput input;
+
+    Sprite spriteUnderMouse;
 
     #endregion
 
