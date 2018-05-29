@@ -8,14 +8,14 @@ public class MapMenu : Menu<MapMenu> {
     {
         Open();
         // Pause the game
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     public static void Hide()
     {
         Close();
         // Unpause the game
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 
     public void OnBackButton()
