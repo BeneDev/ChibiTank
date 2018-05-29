@@ -66,13 +66,17 @@ public class EnemyTank : BaseTank {
         toPlayer = player.transform.position - transform.position;
         if (state == EnemyState.idle)
         {
-            if(toPlayer.magnitude < sightReach)
+            if (toPlayer.magnitude < sightReach && !player.GetComponent<PlayerController>().IsDead)
             {
                 state = EnemyState.playerSpotted;
             }
         }
         else if(state == EnemyState.playerSpotted)
         {
+            if(player.GetComponent<PlayerController>().IsDead)
+            {
+                state = EnemyState.idle;
+            }
             if(toPlayer.magnitude < sightReach + 5f)
             {
                 Attack();
@@ -87,7 +91,7 @@ public class EnemyTank : BaseTank {
         else if(state == EnemyState.searchingForPlayer)
         {
             MoveTo(pointWherePlayerLastSpotted);
-            if(toPlayer.magnitude < sightReach)
+            if(toPlayer.magnitude < sightReach && !player.GetComponent<PlayerController>().IsDead)
             {
                 state = EnemyState.playerSpotted;
             }

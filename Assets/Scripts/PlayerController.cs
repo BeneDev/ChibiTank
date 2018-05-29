@@ -8,6 +8,14 @@ public class PlayerController : BaseTank {
 
     #region Properties
 
+    public bool IsDead
+    {
+        get
+        {
+            return bIsDead;
+        }
+    }
+
     public Vector3 CockPitForward
     {
         get
@@ -272,7 +280,10 @@ public class PlayerController : BaseTank {
 
     public void ResetPlayerTank()
     {
-        GameoverMenu.Hide();
+        for(int i = 0; i < MenuManager.Instance.MenuStack.Count; i++)
+        {
+            MenuManager.Instance.MenuStack.Peek().OnBackPressed();
+        }
         transform.position = GameManager.Instance.RespawnPoint;
         bIsDead = false;
         health = baseHealth;
