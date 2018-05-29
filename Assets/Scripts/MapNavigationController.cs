@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MapNavigationController : MonoBehaviour {
+public class MapNavigationController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     Camera mapCam;
     [SerializeField] float zoomSpeed = 5f;
@@ -14,6 +14,18 @@ public class MapNavigationController : MonoBehaviour {
     Vector3 mouseOrigin;
     bool isPanning = false;
 
+    bool isMouseOver = false;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        isMouseOver = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        isMouseOver = false;
+    }
+
     private void Awake()
     {
         mapCam = GameObject.FindGameObjectWithTag("MapCam").GetComponent<Camera>() as Camera;
@@ -22,6 +34,7 @@ public class MapNavigationController : MonoBehaviour {
 
     private void Update()
     {
+        if(!isMouseOver) { return; }
         // Zoom the camera
         mapCam.orthographicSize = Mathf.Clamp(mapCam.orthographicSize - (Input.GetAxis("Mouse ScrollWheel") * zoomSpeed != 0 ? Mathf.Sign(Input.GetAxis("Mouse ScrollWheel")) * zoomSpeed : 0), minZoom, maxZoom);
 
