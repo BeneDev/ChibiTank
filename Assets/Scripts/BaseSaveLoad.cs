@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-public class BaseSaveLoad<T> where T : SaveFile
+public class BaseSaveLoad<T> where T : class
 {
 
     #region XML Conversion
@@ -30,7 +30,7 @@ public class BaseSaveLoad<T> where T : SaveFile
         }
     }
 
-    public static SaveFile Load(string filename)
+    public static T Load(string filename)
     {
         string name = Application.dataPath + "/Data/" + filename + ".xml";
 
@@ -38,7 +38,7 @@ public class BaseSaveLoad<T> where T : SaveFile
 
         using (StreamReader stream = new StreamReader(filename, System.Text.Encoding.GetEncoding("UTF-8")))
         {
-            SaveFile data = serializer.Deserialize(stream) as T;
+            T data = serializer.Deserialize(stream) as T;
             return data;
         }
     }

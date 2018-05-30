@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake()
     {
+        SaveFileManager.LoadGame();
         lockedToWindow = CursorLockMode.Confined;
         Cursor.lockState = lockedToWindow;
         if (Instance != null)

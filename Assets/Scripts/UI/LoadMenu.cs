@@ -20,7 +20,6 @@ public class LoadMenu : Menu<LoadMenu> {
 
     public void OnLoadButtonClicked()
     {
-        //TODO load game somehow
         SaveFileManager.LoadGame();
         Hide();
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().ResetPlayerTank();
