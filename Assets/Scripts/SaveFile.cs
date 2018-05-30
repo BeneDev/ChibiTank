@@ -9,7 +9,7 @@ using System.IO;
 /// The save file data type
 /// </summary>
 [XmlRoot("SaveFile")]
-public class SaveFile {
+public class SaveFile : BaseSaveLoad<SaveFile> {
 
     [XmlElement("name")]
     public string name;
@@ -33,40 +33,4 @@ public class SaveFile {
         this.level = level;
         this.position = pos;
     }
-
-    #region XML Conversion
-
-    // Overload for save, which creates the filename itself
-    public void Save()
-    {
-        string filename = "savedata";
-        Save(filename);
-    }
-
-    public void Save(string filename)
-    {
-        string name = Application.dataPath + "/Data/" + filename + ".xml";
-
-        XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
-
-        // Stream is only opened in this following codeblock
-        using (StreamWriter stream = new StreamWriter(name, false, System.Text.Encoding.GetEncoding("UTF-8")))
-        {
-            serializer.Serialize(stream, this);
-        }
-    }
-
-    public static SaveFile Load(string filename)
-    {
-        XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
-
-        using (StreamReader stream = new StreamReader(filename, System.Text.Encoding.GetEncoding("UTF-8")))
-        {
-            SaveFile data = serializer.Deserialize(stream) as SaveFile;
-            return data;
-        }
-    }
-
-    #endregion
-
 }
