@@ -18,13 +18,13 @@ public class SaveFile : BaseSaveLoad<SaveFile> {
     [XmlElement("position")]
     public Vector3 playerPos;
 
-    // TODO get all the fields, which can only have one value, like level, name and player position here and write them into the member fields
     // Otherwise you could make this a generics class and then inherit from this class to save certain objects
     public SaveFile()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         name = "Player";
         level = 1;
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        playerPos = player.transform.position;
     }
 
     //public SaveFile(string name, int level, Vector3 pos)
