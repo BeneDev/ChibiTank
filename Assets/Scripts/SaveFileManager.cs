@@ -18,7 +18,7 @@ public class SaveFileManager : MonoBehaviour {
     // Save data this way give in true as second param to make the file save appendingly
     public static void SaveGame()
     {
-        SaveFile save = new SaveFile("PlayerName", 1, Vector3.zero);
+        SaveFile save = new SaveFile();
         save.Save("savefile");
     }
 
@@ -27,6 +27,6 @@ public class SaveFileManager : MonoBehaviour {
     {
         string filename = "savefile";
         SaveFile save = SaveFile.Load(filename);
-        Debug.LogFormat("Name: {0}", save.name);
+        GameObject.FindGameObjectWithTag("Player").transform.position = save.playerPos;
     }
 }
