@@ -34,12 +34,20 @@ public class BaseSaveLoad<T> where T : class
     {
         string name = Application.dataPath + "/Data/" + filename + ".xml";
 
-        XmlSerializer serializer = new XmlSerializer(typeof(T));
-
-        using (StreamReader stream = new StreamReader(filename, System.Text.Encoding.GetEncoding("UTF-8")))
+        if (System.IO.File.Exists(name))
         {
-            T data = serializer.Deserialize(stream) as T;
-            return data;
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+
+            using (StreamReader stream = new StreamReader(name, System.Text.Encoding.GetEncoding("UTF-8")))
+            {
+                T data = serializer.Deserialize(stream) as T;
+                return data;
+            }
+        }
+        else
+        {
+            Debug.LogFormat("The Savefile {0} could not be loaded.", name);
+            return null;
         }
     }
 

@@ -290,7 +290,6 @@ public class PlayerController : BaseTank {
         }
         MenuManager.Instance.MenuStack.Clear();
         Camera.main.GetComponentInParent<Animator>().SetTrigger("Idle");
-        transform.position = GameManager.Instance.RespawnPoint;
         bIsDead = false;
     }
 

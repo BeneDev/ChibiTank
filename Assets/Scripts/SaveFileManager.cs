@@ -20,7 +20,7 @@ public class SaveFileManager : MonoBehaviour {
     {
         SaveFile save = new SaveFile();
         save.Save("savefile");
-        Debug.LogFormat("Save - Pose.x: {0} | Pos.Y: {1} | Pos.Z: {2}", save.playerPos.x, save.playerPos.y, save.playerPos.z);
+        //Debug.LogFormat("Save - Pose.x: {0} | Pos.Y: {1} | Pos.Z: {2}", save.playerPos.x, save.playerPos.y, save.playerPos.z);
     }
 
     // Load data this way
@@ -28,7 +28,10 @@ public class SaveFileManager : MonoBehaviour {
     {
         string filename = "savefile";
         SaveFile save = SaveFile.Load(filename);
-        GameObject.FindGameObjectWithTag("Player").transform.position = save.playerPos;
-        Debug.LogFormat("Load - Pos.x: {0} | Pos.y: {1} | Pos.z: {2}", save.playerPos.x, save.playerPos.y, save.playerPos.z);
+        if(save != null)
+        {
+            GameObject.FindGameObjectWithTag("Player").transform.position = save.playerPos;
+        }
+        //Debug.LogFormat("Load - Pos.x: {0} | Pos.y: {1} | Pos.z: {2}", save.playerPos.x, save.playerPos.y, save.playerPos.z);
     }
 }
