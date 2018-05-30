@@ -19,6 +19,11 @@ public class BaseSaveLoad<T> where T : class
 
     public void Save(string filename)
     {
+        if (!Directory.Exists(Application.dataPath + "/Data/"))
+        {
+            Directory.CreateDirectory(Application.dataPath + "/Data/");
+        }
+
         string name = Application.dataPath + "/Data/" + filename + ".xml";
 
         XmlSerializer serializer = new XmlSerializer(typeof(T));
