@@ -9,8 +9,7 @@ using System.IO;
 /// The save file data type
 /// </summary>
 [XmlRoot("SaveFile")]
-
-public class PlayerSave {
+public class SaveFile {
 
     [XmlElement("name")]
     public string name;
@@ -19,14 +18,16 @@ public class PlayerSave {
     [XmlElement("position")]
     public Vector3 position;
 
-    public PlayerSave()
+    // TODO get all the fields, which can only have one value, like level, name and player position here and write them into the member fields
+    // Otherwise you could make this a generics class and then inherit from this class to save certain objects
+    public SaveFile()
     {
         name = "";
         level = 1;
         position = Vector3.zero;
     }
 
-    public PlayerSave(string name, int level, Vector3 pos)
+    public SaveFile(string name, int level, Vector3 pos)
     {
         this.name = name;
         this.level = level;
@@ -38,28 +39,30 @@ public class PlayerSave {
     // Overload for save, which creates the filename itself
     public void Save()
     {
-        string filename = Application.dataPath + "/Data/" + name + ".xml";
+        string filename = "savedata";
         Save(filename);
     }
 
     public void Save(string filename)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(PlayerSave));
+        string name = Application.dataPath + "/Data/" + filename + ".xml";
+
+        XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
 
         // Stream is only opened in this following codeblock
-        using (StreamWriter stream = new StreamWriter(filename, false, System.Text.Encoding.GetEncoding("UTF-8")))
+        using (StreamWriter stream = new StreamWriter(name, false, System.Text.Encoding.GetEncoding("UTF-8")))
         {
             serializer.Serialize(stream, this);
         }
     }
 
-    public static PlayerSave Load(string filename)
+    public static SaveFile Load(string filename)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(PlayerSave));
+        XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
 
         using (StreamReader stream = new StreamReader(filename, System.Text.Encoding.GetEncoding("UTF-8")))
         {
-            PlayerSave data = serializer.Deserialize(stream) as PlayerSave;
+            SaveFile data = serializer.Deserialize(stream) as SaveFile;
             return data;
         }
     }

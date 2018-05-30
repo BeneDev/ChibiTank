@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4620428991158764}
   - component: {fileID: 114820951599942674}
+  - component: {fileID: 114467817427244240}
+  - component: {fileID: 114660146499856020}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,6 +42,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114467817427244240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027826352335856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4e64e7928785742a17f4fe1c949b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114660146499856020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027826352335856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5ec804419a10b49ab25178cd683443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114820951599942674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,3 +79,4 @@ MonoBehaviour:
   cannonBallParent: {fileID: 0}
   cannonBallPrefab: {fileID: 1629740976642178, guid: 18854b74eb0d2b0438bff524804227f2,
     type: 2}
+  isControllerInput: 0

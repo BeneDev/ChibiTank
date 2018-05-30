@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the saving of the data into the save file type
+/// </summary>
 public class SaveFileManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //PlayerSave player = new PlayerSave("player", 1, Vector3.zero);
-        //player.Save();
+        // Save data this way give in true as second param to make the file save appendingly
+        SaveFile save = new SaveFile("PlayerName", 1, Vector3.zero);
+        save.Save("savefile");
 
-        string filename = Application.dataPath + "/Data/player" + ".xml";
-        PlayerSave player = PlayerSave.Load(filename);
-        Debug.LogFormat("Name: {0}", player.name);
+        // Load data this way
+        //string filename = "savefile.xml";
+        //SaveFile player = SaveFile.Load(filename);
+        //Debug.LogFormat("Name: {0}", player.name);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

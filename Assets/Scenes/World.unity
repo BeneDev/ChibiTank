@@ -717,7 +717,7 @@ GameObject:
   m_PrefabParentObject: {fileID: 1027826352335856, guid: d4b391b6509239941a097a64e18ed336,
     type: 2}
   m_PrefabInternal: {fileID: 1460376140}
---- !u!114 &1015916519
+--- !u!114 &1015916517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1015916516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd4e64e7928785742a17f4fe1c949b14, type: 3}
+  m_Script: {fileID: 11500000, guid: bd5ec804419a10b49ab25178cd683443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1146458773 stripped
@@ -1053,7 +1053,9 @@ Prefab:
       propertyPath: cannonBallParent
       value: 
       objectReference: {fileID: 432510793}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114467817427244240, guid: d4b391b6509239941a097a64e18ed336, type: 2}
+    - {fileID: 114660146499856020, guid: d4b391b6509239941a097a64e18ed336, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d4b391b6509239941a097a64e18ed336, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1466956606
@@ -1753,43 +1755,3 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04f34af722f9ff5409df38eed57f316c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2090816360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2090816362}
-  - component: {fileID: 2090816361}
-  m_Layer: 0
-  m_Name: XMLSaver
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2090816361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2090816360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5ec804419a10b49ab25178cd683443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2090816362
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2090816360}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.11449, y: 9.883974, z: -43.62243}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
