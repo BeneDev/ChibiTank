@@ -23,6 +23,8 @@ public class BaseTank : BaseCharacter {
     [SerializeField] protected GameObject cockPit;
     [SerializeField] protected GameObject shootOrigin;
 
+    [Header("Particles"), SerializeField] ParticleSystem shotSparks;
+
     [Header("SoundS"), SerializeField] protected AudioSource shotSound;
 
     protected int level = 1;
@@ -102,6 +104,10 @@ public class BaseTank : BaseCharacter {
         if (shotSound)
         {
             shotSound.Play();
+        }
+        if (shotSparks)
+        {
+            shotSparks.Play();
         }
         shootTime = Time.realtimeSinceStartup;
         GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
