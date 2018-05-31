@@ -78,7 +78,7 @@ public class CannonBallController : MonoBehaviour {
 
     private void Update()
     {
-        if (rb.velocity.magnitude < 8f)
+        if (rb.velocity.magnitude < 10f)
         {
             isStillDamaging = false;
         }

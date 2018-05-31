@@ -27,6 +27,8 @@ public class BaseTank : BaseCharacter {
 
     [Header("Particles"), SerializeField] ParticleSystem shotSparks;
     [SerializeField] ParticleSystem deathParticle;
+    [SerializeField] ParticleSystem engineSmoke;
+    [SerializeField] ParticleSystem deathSmoke;
 
     [Header("SoundS"), SerializeField] protected AudioSource shotSound;
 
@@ -68,6 +70,14 @@ public class BaseTank : BaseCharacter {
         if(deathParticle && !deathParticle.isPlaying)
         {
             deathParticle.Play();
+        }
+        if(engineSmoke && engineSmoke.isPlaying)
+        {
+            engineSmoke.Stop();
+        }
+        if(deathSmoke && !deathSmoke.isPlaying)
+        {
+            deathSmoke.Play();
         }
         isDead = true;
     }
