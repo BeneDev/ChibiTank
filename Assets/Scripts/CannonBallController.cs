@@ -35,6 +35,8 @@ public class CannonBallController : MonoBehaviour {
     [SerializeField] float durationUntilDespawn = 3f;
     float timeWhenFired = 0f;
 
+    [SerializeField] ParticleSystem onContactExplosion;
+
     int damage;
     bool isStillDamaging = true;
 
@@ -76,7 +78,11 @@ public class CannonBallController : MonoBehaviour {
 
     private void Update()
     {
-        if(Time.realtimeSinceStartup > timeWhenFired + durationUntilDespawn)
+        if (rb.velocity.magnitude < 8f)
+        {
+            isStillDamaging = false;
+        }
+        if (Time.realtimeSinceStartup > timeWhenFired + durationUntilDespawn)
         {
             gameObject.SetActive(false);
             gameObject.transform.SetParent(GameManager.Instance.cannonBallParent.transform);
@@ -92,8 +98,12 @@ public class CannonBallController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == owner) { return; }
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        if (collision.gameObject == owner) { return; }
+        if (onContactExplosion && isStillDamaging)
+        {
+            onContactExplosion.Play();
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
             PlaySound(impactSounds[sounds.terrain]);
         }
