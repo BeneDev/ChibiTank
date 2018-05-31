@@ -98,8 +98,8 @@ public class CannonBallController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == owner) { return; }
-        if (onContactExplosion && isStillDamaging)
+        if (collision.gameObject == owner || !isStillDamaging) { return; }
+        if (onContactExplosion)
         {
             onContactExplosion.Play();
         }
@@ -119,7 +119,7 @@ public class CannonBallController : MonoBehaviour {
         {
             PlaySound(impactSounds[sounds.organic]);
         }
-        if(collision.gameObject.GetComponent<BaseCharacter>() && isStillDamaging)
+        if(collision.gameObject.GetComponent<BaseCharacter>())
         {
             collision.gameObject.GetComponent<BaseCharacter>().TakeDamage(damage);
             isStillDamaging = false;

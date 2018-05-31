@@ -9,6 +9,8 @@ public class BaseTank : BaseCharacter {
 
     protected Animator anim;
 
+    protected bool isDead = false;
+
     protected Vector3 aimDirection;
     [SerializeField] protected float cockPitRotationSpeed;
     protected float rotationSpeed;
@@ -24,6 +26,7 @@ public class BaseTank : BaseCharacter {
     [SerializeField] protected GameObject shootOrigin;
 
     [Header("Particles"), SerializeField] ParticleSystem shotSparks;
+    [SerializeField] ParticleSystem deathParticle;
 
     [Header("SoundS"), SerializeField] protected AudioSource shotSound;
 
@@ -62,7 +65,11 @@ public class BaseTank : BaseCharacter {
 
     protected virtual void Die()
     {
-        Destroy(gameObject);
+        if(deathParticle && !deathParticle.isPlaying)
+        {
+            deathParticle.Play();
+        }
+        isDead = true;
     }
 
     protected virtual void CalculateVelocity()

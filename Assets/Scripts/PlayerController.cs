@@ -12,7 +12,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return bIsDead;
+            return isDead;
         }
     }
 
@@ -130,7 +130,6 @@ public class PlayerController : BaseTank {
     GameObject npcToTalkTo;
 
     bool bIsGrounded = false;
-    bool bIsDead = false;
     
     [SerializeField] float rayToGroundLength = 1f;
     
@@ -194,7 +193,7 @@ public class PlayerController : BaseTank {
 
     protected override void FixedUpdate()
     {
-        if(bIsDead) { return; }
+        if(isDead) { return; }
         GetInput();
         RotateTurret();
         RotateBody();
@@ -274,11 +273,8 @@ public class PlayerController : BaseTank {
 
     protected override void Die()
     {
-        if (!bIsDead)
-        {
-            bIsDead = true;
-            GameoverMenu.Show();
-        }
+        base.Die();
+        GameoverMenu.Show();
     }
 
     public void ResetPlayerTank()
@@ -290,7 +286,7 @@ public class PlayerController : BaseTank {
         }
         MenuManager.Instance.MenuStack.Clear();
         Camera.main.GetComponentInParent<Animator>().SetTrigger("Idle");
-        bIsDead = false;
+        isDead = false;
     }
 
     private void SetCamera()

@@ -74,6 +74,7 @@ public class EnemyTank : BaseTank {
 
     protected override void FixedUpdate()
     {
+        if(isDead) { return; }
         toPlayer = player.transform.position - transform.position;
         if (state == EnemyState.patroling)
         {
