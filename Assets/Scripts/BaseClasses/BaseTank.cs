@@ -59,6 +59,10 @@ public class BaseTank : BaseCharacter {
             velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         }
         transform.position += velocity * Time.fixedDeltaTime;
+        if(!isDead && deathSmoke.isPlaying)
+        {
+            deathSmoke.Stop();
+        }
         if(health <= 0)
         {
             Die();

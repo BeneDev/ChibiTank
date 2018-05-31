@@ -74,8 +74,16 @@ public class EnemyTank : BaseTank {
 
     protected override void FixedUpdate()
     {
-        if(isDead) { return; }
         toPlayer = player.transform.position - transform.position;
+        if(isDead)
+        {
+            // TODO Let the player control this value in options menu
+            if(toPlayer.magnitude > 150f)
+            {
+                Destroy(gameObject);
+            }
+            return;
+        }
         if (state == EnemyState.patroling)
         {
             acceleration = baseAcceleration * patrolSpeedMultiplier;
