@@ -77,8 +77,7 @@ public class BaseTank : BaseCharacter {
 
     protected virtual void Die()
     {
-        camShake.shakeAmount = deathCamShakeAmount;
-        camShake.shakeDuration = deathCamShakeDuration;
+        StartCoroutine(ExplosionCameraShake());
         if(deathParticle && !deathParticle.isPlaying)
         {
             deathParticle.Play();
@@ -92,6 +91,15 @@ public class BaseTank : BaseCharacter {
             deathSmoke.Play();
         }
         isDead = true;
+    }
+
+    protected virtual IEnumerator ExplosionCameraShake()
+    {
+        camShake.shakeAmount = deathCamShakeAmount;
+        camShake.shakeDuration = deathCamShakeDuration;
+        yield return new WaitForSeconds(1f);
+        camShake.shakeAmount = deathCamShakeAmount * 2f;
+        camShake.shakeDuration = deathCamShakeDuration * 2f;
     }
 
     protected virtual void CalculateVelocity()
