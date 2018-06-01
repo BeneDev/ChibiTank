@@ -123,6 +123,7 @@ public class BaseTank : BaseCharacter {
 
     protected virtual void CalculateVelocity()
     {
+        // TODO make tank movement smoother
         if (velocity.magnitude < topSpeed)
         {
             velocity += moveDirection * acceleration;
