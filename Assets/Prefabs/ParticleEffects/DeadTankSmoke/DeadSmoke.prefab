@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198746418163414740}
   - component: {fileID: 199020390033821868}
   m_Layer: 0
-  m_Name: DeathSmoke
+  m_Name: DeadSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1136562524229448}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.14999962, y: 0, z: -0.020000458}
+  m_LocalPosition: {x: 23.973633, y: 0, z: -40.446594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4597,7 +4597,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 11cce15530e32fa41abcb1ccdad3361e, type: 2}
+  - {fileID: 2100000, guid: 7fcbd3642c5ec1f459acb24b8853292c, type: 2}
   - {fileID: 2100000, guid: 7fcbd3642c5ec1f459acb24b8853292c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

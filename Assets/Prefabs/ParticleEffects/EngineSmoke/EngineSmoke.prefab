@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198353912689845180}
   - component: {fileID: 199734401247874358}
   m_Layer: 0
-  m_Name: TankSmoke
+  m_Name: EngineSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
