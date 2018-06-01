@@ -121,7 +121,6 @@ public class PlayerController : BaseTank {
     #region Private Fields
 
     PlayerInput input;
-    CameraShake camShake;
     GameObject cameraArm;
 
     // Stores an enemy if the player aims at one
@@ -166,7 +165,6 @@ public class PlayerController : BaseTank {
     {
         base.Awake();
         input = GetComponent<PlayerInput>();
-        camShake = Camera.main.GetComponent<CameraShake>();
         cameraArm = Camera.main.transform.parent.gameObject;
 
         // Create the layer Mask for the terrain

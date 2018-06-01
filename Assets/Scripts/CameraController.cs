@@ -56,6 +56,11 @@ public class CameraController : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    public void TurnOffAnimator()
+    {
+        Camera.main.GetComponentInParent<Animator>().enabled = false;
+    }
+
     private void Update()
     {
         // Follow the player position

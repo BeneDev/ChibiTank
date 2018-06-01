@@ -23,6 +23,7 @@ public class PauseMenu : Menu<PauseMenu> {
         base.OnEnable();
         if (MenuManager.Instance.MenuStack.Count < 1)
         {
+            camAnim.enabled = true;
             camAnim.SetTrigger("ZoomIn");
         }
     }

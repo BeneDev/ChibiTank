@@ -12,7 +12,6 @@ public class EnemyTank : BaseTank {
     [SerializeField] float patrolRadius = 10f;
     [Range(0, 1), SerializeField] float patrolSpeedMultiplier = 0.3f;
 
-
     Vector3 initialPos;
 
     Vector3 targetPosition;

@@ -11,6 +11,11 @@ public class BaseTank : BaseCharacter {
 
     protected bool isDead = false;
 
+    protected CameraShake camShake;
+
+    [Header("Camera Shake"), SerializeField] protected float deathCamShakeAmount = 0.2f;
+    [SerializeField] protected float deathCamShakeDuration = 0.1f;
+
     protected Vector3 aimDirection;
     [SerializeField] protected float cockPitRotationSpeed;
     protected float rotationSpeed;
@@ -48,6 +53,7 @@ public class BaseTank : BaseCharacter {
     {
         shootTime = Time.realtimeSinceStartup;
         anim = GetComponent<Animator>();
+        camShake = Camera.main.GetComponent<CameraShake>();
     }
 
     // This should be called at the end of each fixed update 
@@ -71,6 +77,8 @@ public class BaseTank : BaseCharacter {
 
     protected virtual void Die()
     {
+        camShake.shakeAmount = deathCamShakeAmount;
+        camShake.shakeDuration = deathCamShakeDuration;
         if(deathParticle && !deathParticle.isPlaying)
         {
             deathParticle.Play();
