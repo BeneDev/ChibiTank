@@ -22,12 +22,12 @@ public class BaseTank : BaseCharacter {
     protected Vector3 moveDirection;
     protected Vector3 velocity;
 
-    [SerializeField] protected float drag = 1f;
+    [Header("Physics"), SerializeField] protected float drag = 1f;
     [SerializeField] float gravityCap = 3f;
 
     protected float shootTime;
 
-    [SerializeField] protected GameObject cockPit;
+    [Header("Parts"), SerializeField] protected GameObject cockPit;
     [SerializeField] protected GameObject shootOrigin;
 
     [Header("Particles"), SerializeField] ParticleSystem shotSparks;
@@ -36,6 +36,8 @@ public class BaseTank : BaseCharacter {
     [SerializeField] ParticleSystem deathSmoke;
 
     [Header("SoundS"), SerializeField] protected AudioSource shotSound;
+    [SerializeField] AudioClip[] explosionSounds;
+    [SerializeField] AudioSource explosionAudioSource;
 
     protected int level = 1;
     protected int attack;
@@ -93,11 +95,28 @@ public class BaseTank : BaseCharacter {
         isDead = true;
     }
 
+    protected virtual void PlaySoundAtSource(AudioClip clip, AudioSource source)
+    {
+        source.clip = clip;
+        if(!source.isPlaying)
+        {
+            source.Play();
+        }
+    }
+
     protected virtual IEnumerator ExplosionCameraShake()
     {
+        if (explosionSounds[0] && explosionAudioSource)
+        {
+            PlaySoundAtSource(explosionSounds[0], explosionAudioSource);
+        }
         camShake.shakeAmount = deathCamShakeAmount;
         camShake.shakeDuration = deathCamShakeDuration;
         yield return new WaitForSeconds(1f);
+        if (explosionSounds[1] && explosionAudioSource)
+        {
+            PlaySoundAtSource(explosionSounds[1], explosionAudioSource);
+        }
         camShake.shakeAmount = deathCamShakeAmount * 2f;
         camShake.shakeDuration = deathCamShakeDuration * 2f;
     }
