@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4773997960341630}
   - component: {fileID: 65460251777818366}
+  - component: {fileID: 114385060238693232}
   m_Layer: 9
   m_Name: LittleTree
   m_TagString: Untagged
@@ -123,8 +124,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396386403472464}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.72049236, y: 0, z: 5.366955}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -242.51065, y: 0, z: -44.78058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4404364452090924}
@@ -271,3 +272,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5393088, y: 1, z: 0.48172188}
   m_Center: {x: -0.033258863, y: 0.5, z: 0.25913906}
+--- !u!114 &114385060238693232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1396386403472464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35600c911a840ff48a6f68b08f12a54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 3
+  destructionDust: {fileID: 0}

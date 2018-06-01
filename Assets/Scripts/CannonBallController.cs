@@ -119,6 +119,11 @@ public class CannonBallController : MonoBehaviour {
         {
             PlaySound(impactSounds[sounds.organic]);
         }
+        if(collision.gameObject.GetComponent<BaseCover>())
+        {
+            collision.gameObject.GetComponent<BaseCover>().TakeDamage(damage);
+            isStillDamaging = false;
+        }
         if(collision.gameObject.GetComponent<BaseCharacter>())
         {
             collision.gameObject.GetComponent<BaseCharacter>().TakeDamage(damage);

@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4158922693827648}
   - component: {fileID: 33512533811694964}
   - component: {fileID: 23144355347292184}
-  - component: {fileID: 65731284265105838}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
@@ -71,6 +70,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4059403799378714}
+  - component: {fileID: 65563750973231392}
+  - component: {fileID: 114868291621993126}
   m_Layer: 9
   m_Name: MediumTree
   m_TagString: Untagged
@@ -84,8 +85,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964271944072530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.6142745, y: 0.5, z: 2.4795341}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -237.33376, y: 0, z: -16.403076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4158922693827648}
@@ -259,15 +260,28 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1581701611428600}
   m_Mesh: {fileID: 4300004, guid: 4f9fc718500ae70428a7b8e8dae8faf0, type: 3}
---- !u!65 &65731284265105838
+--- !u!65 &65563750973231392
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1581701611428600}
+  m_GameObject: {fileID: 1964271944072530}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.005434837, y: 0.008498073, z: 0.043098085}
-  m_Center: {x: 0.00037620068, y: 0.0009055612, z: 0.0115490435}
+  m_Size: {x: 0.5677414, y: 4.2874155, z: 0.8149471}
+  m_Center: {x: 0.07278824, y: 2.1403642, z: -0.0742712}
+--- !u!114 &114868291621993126
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964271944072530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35600c911a840ff48a6f68b08f12a54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 5
+  destructionDust: {fileID: 0}
