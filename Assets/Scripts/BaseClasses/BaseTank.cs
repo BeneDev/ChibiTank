@@ -124,11 +124,15 @@ public class BaseTank : BaseCharacter {
     protected virtual void CalculateVelocity()
     {
         // TODO make tank movement smoother
-        if (velocity.magnitude < topSpeed)
+        if (velocity.magnitude + (moveDirection.magnitude * acceleration) < topSpeed)
         {
             velocity += moveDirection * acceleration;
         }
-        velocity = velocity * (1 - Time.fixedDeltaTime * drag);
+        else
+        {
+            velocity += moveDirection.normalized * (topSpeed - velocity.magnitude + (moveDirection.magnitude * acceleration));
+        }
+        velocity = velocity * (1 - Time.fixedDeltaTime * drag * mass);
     }
 
     protected void RotateTurret()
