@@ -33,7 +33,10 @@ public class MenuManager : Singleton<MenuManager> {
     private Stack<Menu> menuStack = new Stack<Menu>();
     [SerializeField] private Menu[] menuPrefabs;
 
+    Animator camAnim;
     PlayerInput input;
+
+    bool cameraIsInZoom = false;
 
     Sprite spriteUnderMouse;
 
@@ -44,6 +47,7 @@ public class MenuManager : Singleton<MenuManager> {
     private void Start()
     {
         input = GetComponent<PlayerInput>();
+        camAnim = Camera.main.GetComponentInParent<Animator>();
     }
 
     private void Update()
@@ -64,6 +68,23 @@ public class MenuManager : Singleton<MenuManager> {
                 {
                     PauseMenu.Show();
                 }
+            }
+        }
+        if(menuStack.Count > 0)
+        {
+            camAnim.enabled = true;
+            if (!cameraIsInZoom)
+            {
+                camAnim.SetTrigger("ZoomIn");
+                cameraIsInZoom = true;
+            }
+        }
+        else
+        {
+            if(cameraIsInZoom)
+            {
+                camAnim.SetTrigger("ZoomOut");
+                cameraIsInZoom = false;
             }
         }
     }

@@ -18,24 +18,6 @@ public class PauseMenu : Menu<PauseMenu> {
         Open();
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        if (MenuManager.Instance.MenuStack.Count < 1)
-        {
-            camAnim.enabled = true;
-            camAnim.SetTrigger("ZoomIn");
-        }
-    }
-
-    void OnDisable()
-    {
-        if (MenuManager.Instance.MenuStack.Count < 1)
-        {
-            camAnim.SetTrigger("ZoomOut");
-        }
-    }
-
     public static void Hide()
     {
         Close();
