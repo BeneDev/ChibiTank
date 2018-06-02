@@ -1467,7 +1467,9 @@ MonoBehaviour:
   explosionAudioSource: {fileID: 82097492120072822}
   attentionDistance: 15
   sentencesToTalk:
-  - Hey, how are you? Wanna Save?
+  - Hey, how are you?
+  - Wanna Save?
+  - SAVE
   baseAttack: 1
   basefireRate: 1
   baseReloadSpeed: 1

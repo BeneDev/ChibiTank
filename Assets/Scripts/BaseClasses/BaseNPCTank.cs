@@ -9,7 +9,7 @@ public class BaseNPCTank : BaseTank {
     [SerializeField] float attentionDistance;
 
     // TODO make an array of sentences only for greetings and then pick one out of that array randomly everytime for greeting the player
-    [Header("Dialogue"), SerializeField] string[] sentencesToTalk;
+    [Header("Dialogue"), SerializeField] protected string[] sentencesToTalk;
 
     // Attributes
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
@@ -65,13 +65,9 @@ public class BaseNPCTank : BaseTank {
         base.FixedUpdate();
     }
 
-    protected void OpenSaveMenu()
+    protected void OpenDialogue(string[] text)
     {
-        SaveMenu.Show();
-    }
-
-    protected void OpenDialogue(string text)
-    {
-        // TODO open dialogue window with the text param shown
+        DialogueMenu dialogueMenu = DialogueMenu.Show();
+        dialogueMenu.SetDialogueActions(text);
     }
 }
