@@ -104,6 +104,7 @@ public class BaseTank : BaseCharacter {
         }
     }
 
+    // Controls several aspects of the game whilst a tank is exploding, like screenshake, sound and slow motion
     protected virtual IEnumerator ExplosionCameraShake()
     {
         Time.timeScale = 0.8f;

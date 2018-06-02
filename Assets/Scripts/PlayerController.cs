@@ -131,6 +131,7 @@ public class PlayerController : BaseTank {
     bool bIsGrounded = false;
     
     [SerializeField] float rayToGroundLength = 1f;
+    [SerializeField] float talkDistance = 5f;
     
     [SerializeField] AudioSource engineSound;
     [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f;
@@ -211,7 +212,15 @@ public class PlayerController : BaseTank {
                 }
                 else if (npcToTalkTo != null && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    npcToTalkTo.GetComponent<NPCTank>().Interact();
+                    Vector3 toNPC = npcToTalkTo.transform.position - transform.position;
+                    if (toNPC.magnitude < talkDistance)
+                    {
+                        npcToTalkTo.GetComponent<NPCTank>().Interact();
+                    }
+                    else
+                    {
+                        Shoot();
+                    }
                 }
             }
         }
@@ -225,7 +234,15 @@ public class PlayerController : BaseTank {
                 }
                 else if (npcToTalkTo != null)
                 {
-                    npcToTalkTo.GetComponent<NPCTank>().Interact();
+                    Vector3 toNPC = npcToTalkTo.transform.position - transform.position;
+                    if (toNPC.magnitude < talkDistance)
+                    {
+                        npcToTalkTo.GetComponent<NPCTank>().Interact();
+                    }
+                    else
+                    {
+                        Shoot();
+                    }
                 }
             }
         }

@@ -48,7 +48,7 @@ public class BaseNPCTank : BaseTank {
 
     public override void TakeDamage(int damage)
     {
-        // NPCs should not take damage
+        // NPCs should not take damage, as they should not be able to die
     }
 
     protected override void FixedUpdate()

@@ -1715,6 +1715,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0bc8dcfee9ab54044853cae832fc3991, type: 3}
   explosionAudioSource: {fileID: 82966988425248558}
   rayToGroundLength: 1
+  talkDistance: 10
   engineSound: {fileID: 82154836985891580}
   engineSoundGain: 0.0116
   idleEngineVolume: 0.04
