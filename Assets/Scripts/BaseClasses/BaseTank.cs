@@ -31,7 +31,7 @@ public class BaseTank : BaseCharacter {
     [SerializeField] protected GameObject shootOrigin;
 
     [Header("Particles"), SerializeField] ParticleSystem shotSparks;
-    [SerializeField] ParticleSystem deathParticle;
+    [SerializeField] ParticleSystem deathExplosion;
     [SerializeField] ParticleSystem engineSmoke;
     [SerializeField] ParticleSystem deathSmoke;
 
@@ -80,9 +80,9 @@ public class BaseTank : BaseCharacter {
     protected virtual void Die()
     {
         StartCoroutine(ExplosionCameraShake());
-        if(deathParticle && !deathParticle.isPlaying)
+        if(deathExplosion && !deathExplosion.isPlaying)
         {
-            deathParticle.Play();
+            deathExplosion.Play();
         }
         if(engineSmoke && engineSmoke.isPlaying)
         {

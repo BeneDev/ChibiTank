@@ -46,6 +46,11 @@ public class BaseNPCTank : BaseTank {
         moveDirection = Vector3.zero;
     }
 
+    public override void TakeDamage(int damage)
+    {
+        // NPCs should not take damage
+    }
+
     protected override void FixedUpdate()
     {
         toPlayer = player.transform.position - transform.position;

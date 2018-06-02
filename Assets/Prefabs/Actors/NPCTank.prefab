@@ -1457,7 +1457,7 @@ MonoBehaviour:
   cockPit: {fileID: 1024311928687226}
   shootOrigin: {fileID: 1303040474342812}
   shotSparks: {fileID: 198059529887133312}
-  deathParticle: {fileID: 198561401580376866}
+  deathExplosion: {fileID: 198561401580376866}
   engineSmoke: {fileID: 198091387271579460}
   deathSmoke: {fileID: 198700425323087486}
   shotSound: {fileID: 0}
