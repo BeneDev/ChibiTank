@@ -106,6 +106,7 @@ public class BaseTank : BaseCharacter {
 
     protected virtual IEnumerator ExplosionCameraShake()
     {
+        Time.timeScale = 0.8f;
         if (explosionSounds[0] && explosionAudioSource)
         {
             PlaySoundAtSource(explosionSounds[0], explosionAudioSource);
@@ -113,12 +114,23 @@ public class BaseTank : BaseCharacter {
         camShake.shakeAmount = deathCamShakeAmount;
         camShake.shakeDuration = deathCamShakeDuration;
         yield return new WaitForSeconds(1f);
+        Time.timeScale = 0.6f;
         if (explosionSounds[1] && explosionAudioSource)
         {
             PlaySoundAtSource(explosionSounds[1], explosionAudioSource);
         }
         camShake.shakeAmount = deathCamShakeAmount * 2f;
         camShake.shakeDuration = deathCamShakeDuration * 2f;
+        yield return new WaitForSeconds(1f);
+        for(float t = 0f; t < 0.5f; t += Time.fixedDeltaTime)
+        {
+            if(Time.timeScale < 1f)
+            {
+                Time.timeScale += 0.4f * 0.5f;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        Time.timeScale = 1f;
     }
 
     protected virtual void CalculateVelocity()
