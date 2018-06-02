@@ -1466,6 +1466,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0bc8dcfee9ab54044853cae832fc3991, type: 3}
   explosionAudioSource: {fileID: 82097492120072822}
   attentionDistance: 15
+  sentencesToTalk:
+  - Hey, how are you? Wanna Save?
   baseAttack: 1
   basefireRate: 1
   baseReloadSpeed: 1

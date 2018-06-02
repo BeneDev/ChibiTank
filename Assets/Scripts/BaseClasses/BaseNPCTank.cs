@@ -8,6 +8,9 @@ public class BaseNPCTank : BaseTank {
     Vector3 toPlayer;
     [SerializeField] float attentionDistance;
 
+    // TODO make an array of sentences only for greetings and then pick one out of that array randomly everytime for greeting the player
+    [Header("Dialogue"), SerializeField] string[] sentencesToTalk;
+
     // Attributes
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
     [SerializeField] float basefireRate = 1f;
