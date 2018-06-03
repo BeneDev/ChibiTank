@@ -31,6 +31,10 @@ public class DialogueMenu : Menu<DialogueMenu>, IPointerEnterHandler, IPointerEx
     {
         base.Awake();
         input = GetComponent<PlayerInput>();
+    }
+
+    protected override void OnEnable()
+    {
         dialogueIndex = 0;
     }
 
@@ -47,6 +51,7 @@ public class DialogueMenu : Menu<DialogueMenu>, IPointerEnterHandler, IPointerEx
                 }
                 else
                 {
+                    Hide();
                     SaveMenu.Show();
                 }
             }

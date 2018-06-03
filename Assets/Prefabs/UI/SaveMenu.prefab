@@ -479,6 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyWhenClosed: 1
   disableMenusUnderneath: 0
+  buttonArray: []
 --- !u!114 &114441134332728834
 MonoBehaviour:
   m_ObjectHideFlags: 1
