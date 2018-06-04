@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The script which controls the Load Menu. Here the player can load specific savestates.
+/// </summary>
 public class LoadMenu : Menu<LoadMenu> {
+
+    #region Helper Methods
 
     public static void Show()
     {
@@ -18,6 +23,7 @@ public class LoadMenu : Menu<LoadMenu> {
         Close();
     }
 
+    // Loads the currently chosen savestate, which there is currently only one at a time
     public void OnLoadButtonClicked()
     {
         SaveFileManager.LoadGame();
@@ -29,4 +35,7 @@ public class LoadMenu : Menu<LoadMenu> {
     {
         Hide();
     }
+
+    #endregion
+
 }

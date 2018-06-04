@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script controls the menu which lets the player save his current progress in the game
+/// </summary>
 public class SaveMenu : Menu<SaveMenu> {
+
+    #region Helper Methods
 
     public static void Show()
     {
@@ -18,8 +23,10 @@ public class SaveMenu : Menu<SaveMenu> {
         Close();
     }
 
+    // Save the game and set the respawn point(obsolete) for the player. This is called when the save button is pressed
     public void OnSaveButtonClicked()
     {
+        // TODO remove the respawn point system
         SaveFileManager.SaveGame();
         GameManager.Instance.RespawnPoint = GameObject.FindGameObjectWithTag("Player").transform.position;
         Hide();
@@ -29,5 +36,7 @@ public class SaveMenu : Menu<SaveMenu> {
     {
         Hide();
     }
+
+    #endregion
 
 }

@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script controls the menu which shows the current loadout of the player, meaning currently equipped Upgrades and Items
+/// </summary>
 public class LoadoutMenu : Menu<LoadoutMenu> {
+
+    #region Helper Methods
 
     public static void Show()
     {
@@ -18,4 +23,7 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
     {
         Hide();
     }
+
+    #endregion
+
 }

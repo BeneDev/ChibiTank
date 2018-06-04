@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The script which controls the gameover menu, providing the methods for the buttons shown to the player.
+/// </summary>
 public class GameoverMenu : Menu<GameoverMenu> {
+
+    #region Helper Methods
 
     public static void Show()
     {
@@ -23,5 +28,7 @@ public class GameoverMenu : Menu<GameoverMenu> {
     {
         LoadMenu.Show();
     }
+
+    #endregion
 
 }

@@ -2,21 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The base menu container, which makes sure there is always only one instance of any kind of menu and provides methods, which all menus need
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public abstract class Menu<T> : Menu where T : Menu<T>{
 
-	public static T Instance
+    #region Properties
+
+    public static T Instance
     {
         get;
         private set;
     }
 
-    AudioSource aS;
-    Animator anim;
+    #endregion
 
-    [SerializeField] GameObject[] buttonArray;
+    #region Fields
+
+    AudioSource aS; // The audio source to play the swoosh sound for showing and hiding the menu
+    Animator anim; // The animator to play the opening and closing animations
+
+    // TODO make controller menu support
+    [SerializeField] GameObject[] buttonArray; // All the buttons the menu has. Currently unused. Planned usage is for controller Menu Support
+
+    #endregion
 
     #region Unity Messages
 
+    // Get the necessary references
     protected virtual void Awake()
     {
         Instance = (T)this;
@@ -24,11 +38,13 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
         anim = GetComponent<Animator>();
     }
 
+    // Play the swoosh Animation everytime the menu gets opened
     protected virtual void OnEnable()
     {
         PlaySwoosh();
     }
 
+    // Set the instance to null again to make space for the next instance of this kind of menu
     protected virtual void OnDestroy()
     {
         Instance = null;
@@ -38,6 +54,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
 
     #region Menu Controls
 
+    // Open the menu, creating a new instance if there is no currently open menu, and setting the currently open, but disabled menu to being enabled if there is one
     protected static void Open()
     {
         if(Instance == null)
@@ -52,11 +69,13 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
         MenuManager.Instance.OpenMenu(Instance);
     }
 
+    // Closes the Menu, calling the OnBackPressed Method, which makes sure, that the close trigger of the animator gets called no matter how the menu was closed
     protected static void Close()
     {
         Instance.OnBackPressed();
     }
 
+    // This method ultimately closes the menu, getting called as the close animation is completed by OnAnimationClose
     void CloseMenu()
     {
         if (Instance == null)
@@ -67,6 +86,7 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
         MenuManager.Instance.CloseMenu(Instance);
     }
 
+    // This gets called when the button is pressed, which closes the top menu
     public override void OnBackPressed()
     {
         // Make the swoosh away animation trigger, which then closes the menu
@@ -79,6 +99,9 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
 
     #endregion
 
+    #region Helper Methods
+
+    // Play the swoosh sound for the open animation of a menu
     void PlaySwoosh()
     {
         if (aS)
@@ -87,13 +110,19 @@ public abstract class Menu<T> : Menu where T : Menu<T>{
         }
     }
 
+    // This method gets called on the end of every closing animation to ultimately close the menu
     public void OnCloseAnimation()
     {
         CloseMenu();
     }
 
+    #endregion
+
 }
 
+/// <summary>
+/// The class which forward declares the basic members of the menu container class
+/// </summary>
 public abstract class Menu : MonoBehaviour
 {
     public bool destroyWhenClosed = true;

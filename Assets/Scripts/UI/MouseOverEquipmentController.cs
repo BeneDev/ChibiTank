@@ -4,10 +4,28 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// The script which controls the images which can be hovered over and show a mouse overlay menu
+/// </summary>
 public class MouseOverEquipmentController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     
     bool isOver = false;
 
+    #region Unity Messages
+
+    private void Update()
+    {
+        if (isOver && HoverOverMenu.Instance == null)
+        {
+            HoverOverMenu.Show();
+        }
+    }
+
+    #endregion
+
+    #region Helper Methods
+
+    // Shows the mouse overlay when the mouse is over the image
     public void OnPointerEnter(PointerEventData eventData)
     {
         MenuManager.Instance.SpriteUnderMouse = GetComponent<Image>().sprite;
@@ -18,6 +36,7 @@ public class MouseOverEquipmentController : MonoBehaviour, IPointerEnterHandler,
         }
     }
 
+    // Hides the mouse overlay when the mouse leaves the image
     public void OnPointerExit(PointerEventData eventData)
     {
         MenuManager.Instance.SpriteUnderMouse = null;
@@ -28,11 +47,6 @@ public class MouseOverEquipmentController : MonoBehaviour, IPointerEnterHandler,
         }
     }
 
-    private void Update()
-    {
-        if(isOver && HoverOverMenu.Instance == null)
-        {
-            HoverOverMenu.Show();
-        }
-    }
+    #endregion
+
 }

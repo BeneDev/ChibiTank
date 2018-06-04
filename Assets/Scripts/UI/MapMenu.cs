@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script controls the menu, which shows the map and the currently active quest
+/// </summary>
 public class MapMenu : Menu<MapMenu> {
+
+    #region Helper Methods
 
     public static void Show()
     {
@@ -22,5 +27,7 @@ public class MapMenu : Menu<MapMenu> {
     {
         Hide();
     }
+
+    #endregion
 
 }

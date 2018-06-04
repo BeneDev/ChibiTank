@@ -3,42 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// The script from which everything, controlling a tank inherits, to gain access to methods and variables, making it easy to controll and configure the tank
+/// The script from which everything, which controls a tank, inherits to gain access to methods and variables, making it easy to control and configure the tank
 /// </summary>
 public class BaseTank : BaseCharacter {
 
-    protected Animator anim;
+    #region Fields
 
-    protected bool isDead = false;
+    protected Animator anim; // The animator, to trigger the shooting animation
 
-    protected CameraShake camShake;
+    protected bool isDead = false; // Stores wether the player is dead or not
 
+    protected CameraShake camShake; // The camera shake component on the camera, to make the camera shake when shooting
+
+    // The fields, defining how strong and long the Camera will shake when the Tank dies
     [Header("Camera Shake"), SerializeField] protected float deathCamShakeAmount = 0.2f;
     [SerializeField] protected float deathCamShakeDuration = 0.1f;
 
-    protected Vector3 aimDirection;
-    [SerializeField] protected float cockPitRotationSpeed;
-    protected float rotationSpeed;
-    protected Vector3 moveDirection;
-    protected Vector3 velocity;
+    protected Vector3 aimDirection; // This value is used to make the tanks turret aim at certain positions in the world
+    [SerializeField] protected float cockPitRotationSpeed; // How fast the cockpit rotates
+    protected float rotationSpeed; // How fast the tank body rotates
+    protected Vector3 moveDirection; // Where the tank moves
+    protected Vector3 velocity; // How fast the tank moves
 
-    [Header("Physics"), SerializeField] protected float drag = 1f;
-    [SerializeField] float gravityCap = 3f;
+    [Header("Physics"), SerializeField] protected float drag = 1f; // How fast the Tank loses velocity (friction with ground can be simulated here)
+    [SerializeField] float gravityCap = 3f; // The gravity velocity wont go higher than this value in the negative
 
-    protected float shootTime;
+    protected float shootTime; // This stores the time when the player last shot, to assure the cooldown time between shots
 
-    [Header("Parts"), SerializeField] protected GameObject cockPit;
-    [SerializeField] protected GameObject shootOrigin;
+    [Header("Parts"), SerializeField] protected GameObject cockPit; // The cockpit gameobject, to rotate it
+    [SerializeField] protected GameObject shootOrigin; // The point, where projectiles will be instantiated
 
-    [Header("Particles"), SerializeField] ParticleSystem shotSparks;
-    [SerializeField] ParticleSystem deathExplosion;
-    [SerializeField] ParticleSystem engineSmoke;
-    [SerializeField] ParticleSystem deathSmoke;
+    [Header("Particles"), SerializeField] ParticleSystem shotSparks; // The particle system for shots
+    [SerializeField] ParticleSystem deathExplosion; // The particle system for dying
+    [SerializeField] ParticleSystem engineSmoke; // The particle system for driving and standing with the engine running
+    [SerializeField] ParticleSystem deathSmoke; // The particle system for when the tank is already destroyed
 
-    [Header("SoundS"), SerializeField] protected AudioSource shotSound;
-    [SerializeField] AudioClip[] explosionSounds;
-    [SerializeField] AudioSource explosionAudioSource;
+    [Header("SoundS"), SerializeField] protected AudioSource shotSound; // Sound which gets played when the tank shoots
+    [SerializeField] AudioClip[] explosionSounds; // Sounds for the explosion when the tank is being destroyed
+    [SerializeField] AudioSource explosionAudioSource; // The Audio source which plays the explosion sounds
 
+    // Attributes necessary for every Tank
     protected int level = 1;
     protected int attack;
     protected float reloadSpeed;
@@ -51,14 +55,21 @@ public class BaseTank : BaseCharacter {
 
     protected float mass;
 
+    #endregion
+
+    #region Unity Messages
+
+    // Get necessary References to Components and set the inital shootTime
     protected virtual void Awake()
     {
-        shootTime = Time.realtimeSinceStartup;
         anim = GetComponent<Animator>();
         camShake = Camera.main.GetComponent<CameraShake>();
+
+        shootTime = Time.realtimeSinceStartup;
     }
 
-    // This should be called at the end of each fixed update 
+    // This should be called at the end of each fixed update of all Tanks who inherit from this baseTank script, as it Calculates the velocity based on the current MoveDirection and the gravity. 
+    // Also checks if the Tank is dead and plays deathsmoke then.
     protected virtual void FixedUpdate()
     {
         // Apply the gravity
@@ -77,6 +88,11 @@ public class BaseTank : BaseCharacter {
         }
     }
 
+    #endregion
+
+    #region Helper Methods
+
+    // This makes the Tank Explode, stop the engine smoke and start the death smoke. Also sets the isDead field.
     protected virtual void Die()
     {
         StartCoroutine(ExplosionCameraShake());
@@ -95,6 +111,7 @@ public class BaseTank : BaseCharacter {
         isDead = true;
     }
 
+    // Plays a given clip from a given audio source
     protected virtual void PlaySoundAtSource(AudioClip clip, AudioSource source)
     {
         source.clip = clip;
@@ -134,6 +151,7 @@ public class BaseTank : BaseCharacter {
         Time.timeScale = 1f;
     }
 
+    // Calculates the velocity, taking into account the tank specific attributes and the gravity
     protected virtual void CalculateVelocity()
     {
         // TODO make tank movement smoother
@@ -148,6 +166,7 @@ public class BaseTank : BaseCharacter {
         velocity = velocity * (1 - Time.fixedDeltaTime * drag * mass);
     }
 
+    // Call this to rotate the turret of the tank
     protected void RotateTurret()
     {
         // Rotate the guns on the ship depending on the input of the right stick
@@ -161,6 +180,7 @@ public class BaseTank : BaseCharacter {
         }
     }
 
+    // Call this to Rotate the body of the tank
     protected void RotateBody()
     {
         // Rotate the player smoothly, depending on the velocity
@@ -173,6 +193,7 @@ public class BaseTank : BaseCharacter {
         }
     }
 
+    // Call this to make the tank shoot. Handles the shoot time for cooldown, sound, knockback and instantiation of the projectile
     protected virtual void Shoot()
     {
         if (shotSound)
@@ -191,6 +212,7 @@ public class BaseTank : BaseCharacter {
         StartCoroutine(ShotKnockBack(shootKnockbackDuration));
     }
 
+    // Apply the knockback after a shot is fired from the tank
     protected IEnumerator ShotKnockBack(float duration)
     {
         for (float t = 0; t < duration; t += Time.fixedDeltaTime)
@@ -200,5 +222,7 @@ public class BaseTank : BaseCharacter {
             yield return new WaitForEndOfFrame();
         }
     }
+
+    #endregion
 
 }
