@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CannonBallController : MonoBehaviour {
 
+    #region Properties
+
     public int Damage
     {
         get
@@ -27,6 +29,10 @@ public class CannonBallController : MonoBehaviour {
             owner = value;
         }
     }
+
+    #endregion
+
+    #region Fields
 
     Rigidbody rb;
     AudioSource audioSource;
@@ -53,19 +59,15 @@ public class CannonBallController : MonoBehaviour {
     }
     Sounds sounds;
 
+    #endregion
+
+    #region Unity Messages
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         BindSounds();
-    }
-
-    void BindSounds()
-    {
-        sounds.terrain = 0;
-        sounds.mechanical = 1;
-        sounds.metal = 2;
-        sounds.organic = 3;
     }
 
     private void OnEnable()
@@ -88,12 +90,6 @@ public class CannonBallController : MonoBehaviour {
             gameObject.transform.SetParent(GameManager.Instance.cannonBallParent.transform);
             GameManager.Instance.freeCannonBalls.Push(gameObject);
         }
-    }
-
-    void PlaySound(AudioClip clip)
-    {
-        audioSource.clip = clip;
-        audioSource.Play();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -130,4 +126,26 @@ public class CannonBallController : MonoBehaviour {
             isStillDamaging = false;
         }
     }
+
+    #endregion
+
+    #region Helper Methods
+
+    // Play the audio clip in the given audio source
+    void PlaySound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    // Write the right sounds for different materials in the world into the struct
+    void BindSounds()
+    {
+        sounds.terrain = 0;
+        sounds.mechanical = 1;
+        sounds.metal = 2;
+        sounds.organic = 3;
+    }
+
+    #endregion
 }
