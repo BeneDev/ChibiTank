@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class EnemyTank : BaseTank {
 
+    #region Fields
+
     GameObject player;
     Vector3 toPlayer;
-    bool bAimingAtPlayer = false;
-    float timeWhenPlayerLeftSight;
+    bool bAimingAtPlayer = false; // Used to check if the enemy aims rightfully at the player, to check if shooting would make sense
+    float timeWhenPlayerLeftSight; // The time, the player left the enemy sight
 
-    [SerializeField] float patrolRadius = 10f;
-    [Range(0, 1), SerializeField] float patrolSpeedMultiplier = 0.3f;
+    [SerializeField] float patrolRadius = 10f; // The radius, the enemy will search a new position to walk towards in
+    [Range(0, 1), SerializeField] float patrolSpeedMultiplier = 0.3f; // The speed the enemy walks when only patroling
 
-    Vector3 initialPos;
+    Vector3 targetPosition; // The position the enemy will walk towards
+    bool hasTarget = false; // stores if the enemy has to find a new target position
 
-    Vector3 targetPosition;
-    bool hasTarget = false;
+    Vector3 pointWherePlayerLastSpotted; // The position the player was last spotted to be in the sight of the enemy
 
-    Vector3 pointWherePlayerLastSpotted;
+    [SerializeField] float searchPlayerDuration = 3f; // How long the enemy will search for the player after he lost sight
 
-    [SerializeField] float searchPlayerDuration = 3f;
+    [SerializeField] float sightReach; // How far the enemy can see the player
+    [SerializeField] float aimingTolerance = 0.1f; // The difference between the actual aiming rotation and where the player is, to check if shooting makes sense
 
-    [SerializeField] float sightReach;
-    [SerializeField] float aimingTolerance = 0.1f;
-
-    // Attributes
+    // Attributes for any enemy tank
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
     [SerializeField] float basefireRate = 1f;
     [SerializeField] float baseReloadSpeed = 1f;
@@ -40,6 +40,7 @@ public class EnemyTank : BaseTank {
 
     [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
 
+    // The possible states and the field to store the current state for the enemy AI State Machine
     enum EnemyState
     {
         patroling,
@@ -47,6 +48,10 @@ public class EnemyTank : BaseTank {
         searchingForPlayer
     };
     EnemyState state = EnemyState.patroling;
+
+    #endregion
+
+    #region Unity Messages
 
     protected override void Awake()
     {
@@ -67,8 +72,6 @@ public class EnemyTank : BaseTank {
         rotationSpeed = baseRotationSpeed;
 
         mass = baseMass;
-
-        initialPos = transform.position;
     }
 
     protected override void FixedUpdate()
@@ -139,6 +142,8 @@ public class EnemyTank : BaseTank {
         }
         base.FixedUpdate();
     }
+
+    #endregion
 
     public override void TakeDamage(int damage)
     {
