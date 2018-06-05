@@ -2,29 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Generate a plane to use as a water mesh
+/// </summary>
 public class WaterNoiseGenerator : MonoBehaviour {
 
-    [SerializeField] float power = 3f;
-    [SerializeField] float scale = 1f;
-    [SerializeField] float timeScale = 1f;
+    #region Fields
+
+    [SerializeField] float power = 3f; // How high the waves will get
+    [SerializeField] float scale = 1f; // How big the waves get
+    [SerializeField] float timeScale = 1f; // How fast the waves go over the plane
 
     float offsetX;
     float offsetY;
     MeshFilter meshFilter;
 
-	// Use this for initialization
-	void Start () {
+    #endregion
+
+    #region Unity Messages
+
+    // Get Components and generate the noise plane
+    void Start () {
         meshFilter = GetComponent<MeshFilter>();
         MakeNoise();
 	}
 	
-	// Update is called once per frame
+	// Updates the plane to create the waves
 	void Update () {
         MakeNoise();
         offsetX += Time.deltaTime * timeScale;
         offsetY += Time.deltaTime * timeScale;
 	}
 
+    #endregion
+
+    #region Helper Methods
+
+    // Generate the verticies in different heights to create the plane
     void MakeNoise()
     {
         Vector3[] verts = meshFilter.mesh.vertices;
@@ -36,6 +50,7 @@ public class WaterNoiseGenerator : MonoBehaviour {
         meshFilter.mesh.vertices = verts;
     }
 
+    // Calculate the height of a given verticy
     float CalculateHeight(float x, float y)
     {
         float xCord = x * scale + offsetX;
@@ -43,4 +58,7 @@ public class WaterNoiseGenerator : MonoBehaviour {
 
         return Mathf.PerlinNoise(xCord, yCord);
     }
+
+    #endregion
+
 }

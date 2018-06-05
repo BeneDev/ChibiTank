@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The script which controls the cannonball behavior after intantiated
+/// </summary>
 public class CannonBallController : MonoBehaviour {
 
     #region Properties
 
+    // The damage the cannonball will deal on impact
     public int Damage
     {
         get
@@ -18,6 +22,7 @@ public class CannonBallController : MonoBehaviour {
         }
     }
 
+    // The owner, to prevent hitting the owner
     public GameObject Owner
     {
         get
@@ -63,6 +68,7 @@ public class CannonBallController : MonoBehaviour {
 
     #region Unity Messages
 
+    // Get the necessary Components and bind the sounds to the materials in the struct
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -70,6 +76,7 @@ public class CannonBallController : MonoBehaviour {
         BindSounds();
     }
 
+    // Add the force forward to make the cannonball go flying
     private void OnEnable()
     {
         rb.velocity = Vector3.zero;
@@ -78,6 +85,7 @@ public class CannonBallController : MonoBehaviour {
         isStillDamaging = true;
     }
 
+    // Check if the cannonball is still damaging and put the cannonball back into the stack of free cannonballs after 3 seconds
     private void Update()
     {
         if (rb.velocity.magnitude < 10f)
@@ -92,6 +100,7 @@ public class CannonBallController : MonoBehaviour {
         }
     }
 
+    // Handle the actions, the cannonball will do when hitting a material
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject == owner || !isStillDamaging) { return; }

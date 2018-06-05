@@ -7,13 +7,7 @@ using UnityEngine;
 /// </summary>
 public class SaveFileManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-
-        //SaveGame();
-
-        //LoadGame();
-    }
+    #region Helper Methods
 
     // Save data this way give in true as second param to make the file save appendingly
     public static void SaveGame()
@@ -34,4 +28,7 @@ public class SaveFileManager : MonoBehaviour {
         }
         //Debug.LogFormat("Load - Pos.x: {0} | Pos.y: {1} | Pos.z: {2}", save.playerPos.x, save.playerPos.y, save.playerPos.z);
     }
+
+    #endregion
+
 }

@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The implementation of all the inputs, the player can give
+/// </summary>
 public class PlayerInput : MonoBehaviour, IInput {
+
+    #region Fields
 
     bool bShootInUse = false;
     bool bCancelInUse = false;
     bool bResetCamInUse = false;
+
+    #endregion
+
+    #region Input Properties
 
     // The input for horizontal movement
     public float Horizontal
@@ -103,4 +112,7 @@ public class PlayerInput : MonoBehaviour, IInput {
             return false;
         }
     }
+
+    #endregion
+
 }

@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The script, which will fade out the roofs of the houses its attached to when the player enters the given trigger volume
+/// </summary>
 [RequireComponent(typeof(BoxCollider))]
 public class RoofHouseManager : MonoBehaviour {
 
-    [SerializeField] GameObject roof;
-    [SerializeField] float fadeInDuration = 1f;
-    [SerializeField] float fadeOutDuration = 1f;
-    [SerializeField] float fadedOutValue = 0.1f;
-    [SerializeField] float distanceUntilMaterialSwitch = 10f;
+    #region Fields
 
+    [SerializeField] GameObject roof; // The roof which will be faded out
+    [SerializeField] float fadeInDuration = 1f; 
+    [SerializeField] float fadeOutDuration = 1f;
+    [SerializeField] float fadedOutValue = 0.1f; // To what alpha value the roof material will fade
+    [SerializeField] float distanceUntilMaterialSwitch = 10f; // The distance the player has to be away from the roof until it gets set to the right material again.
+    // This distance is implemented, because the player would be able to tell the difference in a short ficker in color on the roof. 
+    //To prevent this, this change is done when the player is far enough gone.
+
+    // Fields to calculate the distance to the player for the material switch
     GameObject player;
     Vector3 toPlayer;
 
     bool isMaterialTransparent = false;
+
+    #endregion
 
     #region Unity Messages
 
@@ -23,6 +33,7 @@ public class RoofHouseManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    // Set the material back to normal when the player is far enough gone
     private void Update()
     {
         // Set material to opaque again
@@ -65,6 +76,7 @@ public class RoofHouseManager : MonoBehaviour {
 
     #region Private Methods
 
+    // Set the material to transparent to enable fading
     private void SetMaterialTransparent()
     {
         foreach (Material m in roof.GetComponent<Renderer>().materials)
@@ -81,7 +93,7 @@ public class RoofHouseManager : MonoBehaviour {
         isMaterialTransparent = true;
     }
 
-
+    // Set the material to the standard opaque shader again to make it look normal again
     private void SetMaterialOpaque()
     {
         foreach (Material m in roof.GetComponent<Renderer>().materials)
@@ -97,6 +109,7 @@ public class RoofHouseManager : MonoBehaviour {
         isMaterialTransparent = false;
     }
 
+    // Fadde the alpha to a certain value, making it fade out
     IEnumerator FadeAlphaTo(float value, float duration)
     {
         Color color = roof.GetComponent<MeshRenderer>().material.color;

@@ -5,7 +5,6 @@ using UnityEngine;
 /// <summary>
 /// The Script, shaking the camera if the shake amount is set to anything above 0
 /// </summary>
-
 public class CameraShake : MonoBehaviour
 {
 
@@ -31,9 +30,7 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Get the original position at the time, the camera started shaking
-    /// </summary>
+    // Get the original position at the time, the camera started shaking
     void OnEnable()
     {
         // Get the original position of the camera

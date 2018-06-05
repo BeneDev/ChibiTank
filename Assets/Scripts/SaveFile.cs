@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 using System.IO;
 
 /// <summary>
-/// The save file data type
+/// The save file data type which stores all the information to save
 /// </summary>
 [XmlRoot("SaveFile")]
 public class SaveFile : BaseSaveLoad<SaveFile> {
@@ -26,11 +26,4 @@ public class SaveFile : BaseSaveLoad<SaveFile> {
         level = 1;
         playerPos = player.transform.position;
     }
-
-    //public SaveFile(string name, int level, Vector3 pos)
-    //{
-    //    this.name = name;
-    //    this.level = level;
-    //    this.position = pos;
-    //}
 }

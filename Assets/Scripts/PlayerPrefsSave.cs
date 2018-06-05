@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Not in use at the moment. Planned for saving resolution settings of the player and all that options stuff
+/// </summary>
 public class PlayerPrefsSave : MonoBehaviour {
 
     // Player Prefs are really good for resolution, audio Settings, usw.

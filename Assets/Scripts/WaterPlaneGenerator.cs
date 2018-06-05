@@ -2,24 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script generates a mesh of the given attributes, which can be manipulated to create a wave effect
+/// </summary>
 public class WaterPlaneGenerator : MonoBehaviour {
 
-    [SerializeField] float planeSize = 1f;
-    [SerializeField] int planeGridSize = 16;
+    #region Fields
 
-    private MeshFilter meshFilter;
+    [SerializeField] float planeSize = 1f; // The absolute size of the plane
+    [SerializeField] int planeGridSize = 16; // The size of the single quads, the plane is made of. Effectively manipulates the resolution of the plane
 
-	// Use this for initialization
-	void Start () {
+    private MeshFilter meshFilter; // The mesh filter to generate the mesh in
+
+    #endregion
+
+    // Gets the reference to the mesh filter and creates the mesh for it
+    void Start () {
         meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = GenerateMesh();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+    #region Helper Methods
+
+    // Iterate through all the verticies and connect them to ultimately generate the mesh
     private Mesh GenerateMesh()
     {
         Mesh m = new Mesh();
@@ -66,4 +71,7 @@ public class WaterPlaneGenerator : MonoBehaviour {
 
         return m;
     }
+
+    #endregion
+
 }
