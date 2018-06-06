@@ -154,7 +154,7 @@ public class BaseTank : BaseCharacter {
     // Calculates the velocity, taking into account the tank specific attributes and the gravity
     protected virtual void CalculateVelocity()
     {
-        // TODO make tank movement smoother
+        // This heavily relies on the fixed timestep. If this one is too low, the tank will seem laggy
         if (velocity.magnitude + (moveDirection.magnitude * acceleration) < topSpeed)
         {
             velocity += moveDirection * acceleration;
