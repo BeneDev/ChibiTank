@@ -918,41 +918,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224791270228540836, guid: dfc32035444955146a39c420fbe7573b,
-        type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfc32035444955146a39c420fbe7573b, type: 2}
   m_IsPrefabParent: 0
@@ -1835,29 +1800,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04f34af722f9ff5409df38eed57f316c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2048819766 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1506786801505016, guid: dfc32035444955146a39c420fbe7573b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1276691064}
---- !u!95 &2048819767
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2048819766}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c87c8fb886b55f94881e178b34d1cb7d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2119740216
 Prefab:
   m_ObjectHideFlags: 0
