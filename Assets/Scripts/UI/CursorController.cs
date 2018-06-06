@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [SerializeField] Texture2D cursorTexture;
+    Vector2 hotSpot;
+
+    private void Awake()
+    {
+        if (cursorTexture)
+        {
+            hotSpot = new Vector2(cursorTexture.width / 2f, cursorTexture.height / 2f);
+            Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.Auto);
+        }
+    }
 }
