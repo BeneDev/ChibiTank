@@ -8,6 +8,7 @@ public class PlayerController : BaseTank {
 
     #region Properties
 
+    // Lets the enemies react to a dead player, instead of keeping attacking
     public bool IsDead
     {
         get
@@ -16,6 +17,7 @@ public class PlayerController : BaseTank {
         }
     }
 
+    // Lets the camera reset its own rotation
     public Vector3 CockPitForward
     {
         get
@@ -24,6 +26,7 @@ public class PlayerController : BaseTank {
         }
     }
 
+    // The attributes, so they can be viewed in the status menu.
     public float CockPitRotationSpeed
     {
         get
@@ -130,17 +133,17 @@ public class PlayerController : BaseTank {
 
     bool bIsGrounded = false;
     
-    [SerializeField] float rayToGroundLength = 1f;
-    [SerializeField] float talkDistance = 5f;
+    [SerializeField] float rayToGroundLength = 1f; 
+    [SerializeField] float talkDistance = 5f; // How far the player can be away from an NPC and still talk to him instead of shoot at him
     
     [SerializeField] AudioSource engineSound;
-    [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f;
-    [Range(0f, 1f), SerializeField] float idleEngineVolume = 0.01f;
+    [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f; // How much the engine sound volume gains when the player starts driving
+    [Range(0f, 1f), SerializeField] float idleEngineVolume = 0.01f; // The volume of the engine sound, when the player is not driving
 
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
 
-    LayerMask terrainLayer;
+    LayerMask terrainLayer; // LayerMask with the ground included, to raycast for isGrounded
 
     // Attributes of the player
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
@@ -162,6 +165,7 @@ public class PlayerController : BaseTank {
 
     #region Unity Messages
 
+    // Get necessary components, create ground layer and initialise attributes
     protected override void Awake()
     {
         base.Awake();
@@ -190,6 +194,7 @@ public class PlayerController : BaseTank {
 
     }
 
+    // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
     protected override void FixedUpdate()
     {
         if(isDead) { return; }
@@ -253,6 +258,7 @@ public class PlayerController : BaseTank {
         base.FixedUpdate();
     }
 
+    // Update the enemyInFront and npcToTalkTo Variables with the gameObjects in front of the player
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
@@ -265,6 +271,7 @@ public class PlayerController : BaseTank {
         }
     }
 
+    // Update the enemyInFront and npcToTalkTo Variables to be empty again
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Enemy")
@@ -281,17 +288,21 @@ public class PlayerController : BaseTank {
 
     #region Private Methods
 
+    // When the player levels up, he gains attribute points, which he can use to strengthen specific attributes. 
+    //When the player chose to do so, this method takes in a parameter, to define what attribute to enhance, and enhances that particular attribute then.
     public void SpendPointOnAttribute()
     {
 
     }
 
+    // Make the tank die and explode and show the Gameover menu after that
     protected override void Die()
     {
         base.Die();
         GameoverMenu.Show();
     }
 
+    // Get the player tank into the original form. Called after the tank respawns
     public void ResetPlayerTank()
     {
         health = baseHealth;
@@ -304,6 +315,7 @@ public class PlayerController : BaseTank {
         isDead = false;
     }
 
+    // Reset the camera to the current cockpit rotation or lock it to an enemy if one is in front of the player
     private void SetCamera()
     {
         if (enemyInFront)
@@ -315,6 +327,8 @@ public class PlayerController : BaseTank {
         cameraArm.GetComponent<CameraController>().CamResetRotation = aimDirection;
     }
 
+    // Reads the input and writes the data into the right variables. Also converts to Camera Relative controls. 
+    // Wont let the player aim, when hovering over UI.
     void GetInput()
     {
         // Calculate the offset angle on the y axis from the Camera's forward to the global forward
@@ -364,6 +378,7 @@ public class PlayerController : BaseTank {
         }
     }
 
+    // Shoot a projectile and shake the camera
     protected override void Shoot()
     {
         base.Shoot();
@@ -371,6 +386,7 @@ public class PlayerController : BaseTank {
         camShake.shakeDuration = shootCameraShakeDuration;
     }
 
+    // Play the sound of the tank engine at the right volume
     private void PlayEngineSound()
     {
         if (velocity.magnitude * engineSoundGain > idleEngineVolume)
@@ -383,6 +399,7 @@ public class PlayerController : BaseTank {
         }
     }
 
+    // Check if the player is on the ground or not, to apply more gravity when he is in the air
     void UpdateIsGrounded()
     {
         if(Physics.Raycast(transform.position, Vector3.down, rayToGroundLength, terrainLayer))

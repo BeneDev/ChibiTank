@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The script to control the enemy tank, taking advantage of the baseTank script
+/// </summary>
 public class EnemyTank : BaseTank {
 
     #region Fields
@@ -53,6 +56,7 @@ public class EnemyTank : BaseTank {
 
     #region Unity Messages
 
+    // Reinitialise the Attributes from the baseTank class with the serialized values from this script
     protected override void Awake()
     {
         base.Awake();
@@ -74,6 +78,7 @@ public class EnemyTank : BaseTank {
         mass = baseMass;
     }
 
+    // Change the state of the enemy accordingly and react to the new state 
     protected override void FixedUpdate()
     {
         toPlayer = player.transform.position - transform.position;
@@ -145,6 +150,9 @@ public class EnemyTank : BaseTank {
 
     #endregion
 
+    #region Helper Methods
+
+    // Overrides the takeDamage method, making the enemy rush towards the position, the shot was fired from
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
@@ -153,6 +161,7 @@ public class EnemyTank : BaseTank {
         state = EnemyState.searchingForPlayer;
     }
 
+    // Try to aim at the player and if the barrel finally arrives at roughly the right orientation, the enemy begins to shoot
     private void Attack()
     {
         aimDirection = toPlayer.normalized;
@@ -171,6 +180,7 @@ public class EnemyTank : BaseTank {
         }
     }
 
+    // Make the enemy move towards the given point
     void MoveTo(Vector3 point)
     {
         // Move to the point
@@ -181,8 +191,12 @@ public class EnemyTank : BaseTank {
         CalculateVelocity();
     }
 
+    // Check if two vectors are the same taking into account a small margin, in this case, the aimingtolerance
     bool V3Equal(Vector3 a, Vector3 b)
     {
         return Vector3.SqrMagnitude(a - b) < aimingTolerance;
     }
+
+    #endregion
+
 }
