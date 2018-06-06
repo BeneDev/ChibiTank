@@ -12,7 +12,7 @@ public class CursorController : MonoBehaviour {
         if (cursorTexture)
         {
             hotSpot = new Vector2(cursorTexture.width / 2f, cursorTexture.height / 2f);
-            Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.Auto);
+            Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.ForceSoftware);
         }
     }
 }
