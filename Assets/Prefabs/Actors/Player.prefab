@@ -1702,7 +1702,7 @@ MonoBehaviour:
   deathCamShakeDuration: 0.1
   cockPitRotationSpeed: 8
   drag: 5.1
-  gravityCap: 3
+  gravityCap: 9
   cockPit: {fileID: 1112228992774638}
   shootOrigin: {fileID: 1643878805221960}
   shotSparks: {fileID: 198744447946662034}
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   baseTopSpeed: 14
   baseAcceleration: 2
   baseRotationSpeed: 10
-  baseMass: 1
+  baseMass: 4
 --- !u!114 &114180295969708528
 MonoBehaviour:
   m_ObjectHideFlags: 1
