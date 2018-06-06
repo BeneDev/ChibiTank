@@ -189,6 +189,7 @@ public class PlayerController : BaseTank {
         topSpeed = baseTopSpeed;
         acceleration = baseAcceleration;
         rotationSpeed = baseRotationSpeed;
+        cockPitRotationSpeed = baseRotationSpeed;
 
         mass = baseMass;
 

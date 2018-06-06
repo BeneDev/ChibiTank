@@ -1730,7 +1730,7 @@ MonoBehaviour:
   baseDefense: 1
   baseTopSpeed: 14
   baseAcceleration: 2
-  baseRotationSpeed: 4
+  baseRotationSpeed: 10
   baseMass: 1
 --- !u!114 &114180295969708528
 MonoBehaviour:

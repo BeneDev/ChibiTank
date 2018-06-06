@@ -97,6 +97,14 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         GetControllerCount();
+        if(isControllerInput && Cursor.visible)
+        {
+            Cursor.visible = false;
+        }
+        if(!isControllerInput && !Cursor.visible)
+        {
+            Cursor.visible = true;
+        }
     }
 
     #endregion
