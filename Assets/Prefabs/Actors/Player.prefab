@@ -1724,8 +1724,8 @@ MonoBehaviour:
   baseAttack: 1
   basefireRate: 0.4
   baseReloadSpeed: 1
-  baseShootKnockback: 20
-  baseShootKnockbackDuration: 0.3
+  baseShootKnockback: 60
+  baseShootKnockbackDuration: 0.2
   baseHealth: 5
   baseDefense: 1
   baseTopSpeed: 14

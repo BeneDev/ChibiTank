@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4fc7f287cbadc43bcc35289c986f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2500
+  speed: 5000
   durationUntilDespawn: 3
   onContactExplosion: {fileID: 198821691210556130}
   impactSounds:
