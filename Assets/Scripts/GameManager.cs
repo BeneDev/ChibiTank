@@ -45,6 +45,14 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public bool IsCursorVisible
+    {
+        get
+        {
+            return isCursorVisible;
+        }
+    }
+
     #endregion
 
     #region Fields
@@ -61,6 +69,8 @@ public class GameManager : MonoBehaviour {
     CursorLockMode lockedToWindow; // The cursorLockMode which lets the mouse only move inside of the window
 
     [SerializeField] bool isControllerInput = false; // Stores if the player actually plays with controller
+
+    bool isCursorVisible = true;
 
     #endregion
 
@@ -97,13 +107,13 @@ public class GameManager : MonoBehaviour {
     private void Update()
     {
         GetControllerCount();
-        if(isControllerInput && Cursor.visible)
+        if(isControllerInput && isCursorVisible)
         {
-            Cursor.visible = false;
+            isCursorVisible = false;
         }
-        if(!isControllerInput && !Cursor.visible)
+        if(!isControllerInput && !isCursorVisible)
         {
-            Cursor.visible = true;
+            isCursorVisible = true;
         }
     }
 

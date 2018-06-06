@@ -1,18 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CursorController : MonoBehaviour {
 
-    [SerializeField] Texture2D cursorTexture;
-    Vector2 hotSpot;
+    [SerializeField] Vector2 hotSpotOffset;
+    CanvasGroup ownCanvasGroup;
+    [SerializeField] GameObject panel;
 
     private void Awake()
     {
-        if (cursorTexture)
+        Cursor.visible = false;
+        ownCanvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    private void Update()
+    {
+        if(!GameManager.Instance.IsCursorVisible)
         {
-            hotSpot = new Vector2(cursorTexture.width / 2f, cursorTexture.height / 2f);
-            Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.ForceSoftware);
+            ownCanvasGroup.alpha = 0f;
+            return;
+        }
+        else
+        {
+            ownCanvasGroup.alpha = 1f;
+        }
+        if(panel)
+        {
+            panel.transform.position = Input.mousePosition;
+        }
+        else
+        {
+            Debug.LogError("There is no panel serialized for the Cursor Controller in the Inspector!");
         }
     }
 }
