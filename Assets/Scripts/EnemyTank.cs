@@ -31,6 +31,7 @@ public class EnemyTank : BaseTank {
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
     [SerializeField] float basefireRate = 1f;
     [SerializeField] float baseReloadSpeed = 1f;
+    [SerializeField] int baseMagazineSize = 3;
     [SerializeField] float baseShootKnockback = 1f;
     [SerializeField] float baseShootKnockbackDuration = 1f;
 
@@ -65,6 +66,7 @@ public class EnemyTank : BaseTank {
         attack = baseAttack;
         fireRate = basefireRate;
         reloadSpeed = baseReloadSpeed;
+        magazineSize = baseMagazineSize;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
 

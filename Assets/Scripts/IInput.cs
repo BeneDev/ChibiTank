@@ -18,6 +18,9 @@ public interface IInput
     // Shooting buttons
     bool Shoot { get; }
 
+    // The reload axis
+    bool Reload { get; }
+
     // Reset cam to look forward with those buttons
     bool ResetCam { get; }
 

@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour, IInput {
     #region Fields
 
     bool bShootInUse = false;
+    bool bReloadInUse = false;
     bool bCancelInUse = false;
     bool bResetCamInUse = false;
 
@@ -68,6 +69,26 @@ public class PlayerInput : MonoBehaviour, IInput {
             if (Input.GetAxisRaw("Shoot") == 0)
             {
                 bShootInUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool Reload
+    {
+        get
+        {
+            if (Input.GetAxisRaw("Reload") != 0)
+            {
+                if (bReloadInUse == false)
+                {
+                    bReloadInUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("Reload") == 0)
+            {
+                bReloadInUse = false;
             }
             return false;
         }

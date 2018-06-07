@@ -23,6 +23,7 @@ public class BaseNPCTank : BaseTank {
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
     [SerializeField] float basefireRate = 1f;
     [SerializeField] float baseReloadSpeed = 1f;
+    [SerializeField] int baseMagazineSize = 5;
     [SerializeField] float baseShootKnockback = 1f;
     [SerializeField] float baseShootKnockbackDuration = 1f;
 
@@ -47,6 +48,7 @@ public class BaseNPCTank : BaseTank {
         attack = baseAttack;
         fireRate = basefireRate;
         reloadSpeed = baseReloadSpeed;
+        magazineSize = baseMagazineSize;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
 

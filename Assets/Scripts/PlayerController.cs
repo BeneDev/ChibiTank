@@ -149,6 +149,7 @@ public class PlayerController : BaseTank {
     [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
     [SerializeField] float basefireRate = 1f;
     [SerializeField] float baseReloadSpeed = 1f;
+    [SerializeField] int baseMagazineSize = 5;
     [SerializeField] float baseShootKnockback = 1f;
     [SerializeField] float baseShootKnockbackDuration = 1f;
 
@@ -180,6 +181,7 @@ public class PlayerController : BaseTank {
         attack = baseAttack;
         fireRate = basefireRate;
         reloadSpeed = baseReloadSpeed;
+        magazineSize = baseMagazineSize;
         shootKnockback = baseShootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration;
 
@@ -210,7 +212,7 @@ public class PlayerController : BaseTank {
         }
         if (EventSystem.current)
         {
-            if (input.Shoot)
+            if (input.Shoot && shotsInMagazine > 0)
             {
                 if (Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject() && npcToTalkTo == null)
                 {
@@ -229,10 +231,14 @@ public class PlayerController : BaseTank {
                     }
                 }
             }
+            if(input.Reload)
+            {
+                Reload();
+            }
         }
         else
         {
-            if (input.Shoot)
+            if (input.Shoot && shotsInMagazine > 0)
             {
                 if (Time.realtimeSinceStartup > shootTime + fireRate && npcToTalkTo == null)
                 {
@@ -250,6 +256,10 @@ public class PlayerController : BaseTank {
                         Shoot();
                     }
                 }
+            }
+            if(input.Reload)
+            {
+                Reload();
             }
         }
         if (engineSound)

@@ -46,6 +46,7 @@ public class BaseTank : BaseCharacter {
     protected int level = 1;
     protected int attack;
     protected float reloadSpeed;
+    protected int magazineSize;
     protected float fireRate;
     protected float shootKnockback;
     protected float shootKnockbackDuration;
@@ -54,6 +55,8 @@ public class BaseTank : BaseCharacter {
     protected float acceleration;
 
     protected float mass;
+
+    protected int shotsInMagazine = 5;
 
     #endregion
 
@@ -200,6 +203,13 @@ public class BaseTank : BaseCharacter {
         currentBall.GetComponent<CannonBallController>().Owner = gameObject;
         anim.SetTrigger("Shoot");
         StartCoroutine(ShotKnockBack(shootKnockbackDuration));
+        shotsInMagazine--;
+    }
+
+    protected virtual void Reload()
+    {
+        CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
+        shotsInMagazine = magazineSize;
     }
 
     // Apply the knockback after a shot is fired from the tank
