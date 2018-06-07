@@ -5,10 +5,11 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ScriptableTracksUpgrade : ScriptableObject
 {
-    [SerializeField] string upgradeName;
-    [SerializeField] Sprite upgradeSprite;
+    public string upgradeName;
+    public Sprite upgradeSprite;
 
-    [Header("Attributes"), SerializeField] float topSpeed = 1f;
-    [SerializeField] float acceleration = 1f;
-    [SerializeField] float rotationSpeed = 1f;
+    [Header("Attributes")] public float topSpeed = 1f;
+    public float acceleration = 1f;
+    public float rotationSpeed = 1f;
+    public float mass = 1f;
 }

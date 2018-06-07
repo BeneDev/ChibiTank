@@ -5,9 +5,10 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ScriptableBodyUpgrade : ScriptableObject
 {
-    [SerializeField] string upgradeName;
-    [SerializeField] Sprite upgradeSprite;
+    public string upgradeName;
+    public Sprite upgradeSprite;
 
-    [Header("Attributes"), SerializeField] int health = 1;
-    [SerializeField] int defense = 1;
+    [Header("Attributes")] public int health = 1;
+    public int defense = 1;
+    public float mass = 1f;
 }

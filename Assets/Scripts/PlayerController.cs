@@ -162,6 +162,11 @@ public class PlayerController : BaseTank {
 
     [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
 
+    // The equipped upgrades, whose values get added to the base attribute values
+    ScriptableAttackCockPitUpgrade equippedAttackUpgrade;
+    ScriptableBodyUpgrade equippedBodyUpgrade;
+    ScriptableTracksUpgrade equippedTracksUpgrade;
+
     #endregion
 
     #region Unity Messages
@@ -305,6 +310,38 @@ public class PlayerController : BaseTank {
     public void SpendPointOnAttribute()
     {
 
+    }
+
+    // Changes the equipped attack upgrade
+    void ChangeEquippedUpgrade(ScriptableAttackCockPitUpgrade upgrade)
+    {
+        equippedAttackUpgrade = upgrade;
+        attack = baseAttack + upgrade.attack;
+        fireRate = basefireRate + upgrade.fireRate;
+        reloadSpeed = baseReloadSpeed + upgrade.reloadSpeed;
+        magazineSize = baseMagazineSize + upgrade.magazineSize;
+        shootKnockback = baseShootKnockback + upgrade.shootKnockback;
+        shootKnockbackDuration = baseShootKnockbackDuration + upgrade.shootKnockbackDuration;
+        mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+    }
+
+    // Changes the equipped body upgrade
+    void ChangeEquippedUpgrade(ScriptableBodyUpgrade upgrade)
+    {
+        equippedBodyUpgrade = upgrade;
+        health = baseHealth + upgrade.health;
+        defense = baseDefense + upgrade.defense;
+        mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+    }
+
+    // Changes the equipped tracks upgrade
+    void ChangeEquippedUpgrade(ScriptableTracksUpgrade upgrade)
+    {
+        equippedTracksUpgrade = upgrade;
+        topSpeed = baseTopSpeed + upgrade.topSpeed;
+        acceleration = baseAcceleration + upgrade.acceleration;
+        rotationSpeed = baseRotationSpeed + upgrade.rotationSpeed;
+        mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
     }
 
     // Make the tank die and explode and show the Gameover menu after that

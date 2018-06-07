@@ -5,13 +5,14 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ScriptableAttackCockPitUpgrade : ScriptableObject
 {
-    [SerializeField] string upgradeName;
-    [SerializeField] Sprite upgradeSprite;
+    public string upgradeName;
+    public Sprite upgradeSprite;
 
-    [Header("Attributes"), SerializeField] int attack = 1;
-    [SerializeField] float fireRate = 1f;
-    [SerializeField] float reloadSpeed = 1f;
-    [SerializeField] int magazineSize = 5;
-    [SerializeField] float shootKnockback = 1f;
-    [SerializeField] float shootKnockbackDuration = 1f;
+    [Header("Attributes")] public int attack = 1;
+    public float fireRate = 1f;
+    public float reloadSpeed = 1f;
+    public int magazineSize = 5;
+    public float shootKnockback = 1f;
+    public float shootKnockbackDuration = 1f;
+    public float mass = 1f;
 }
