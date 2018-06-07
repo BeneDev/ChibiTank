@@ -171,6 +171,7 @@ public class BaseTank : BaseCharacter {
             //gunObject.transform.forward = shootDirection;
             Quaternion targetRotation = new Quaternion();
             targetRotation.SetLookRotation(aimDirection);
+            targetRotation.z = 0f;
 
             cockPit.transform.rotation = Quaternion.Lerp(cockPit.transform.rotation, targetRotation, cockPitRotationSpeed * Time.fixedDeltaTime);
         }

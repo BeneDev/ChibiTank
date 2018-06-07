@@ -22,7 +22,8 @@ public class CursorController : Singleton<CursorController> {
 
     private void Update()
     {
-        if(!GameManager.Instance.IsCursorVisible)
+        Cursor.visible = false;
+        if (!GameManager.Instance.IsCursorVisible)
         {
             ownCanvasGroup.alpha = 0f;
             return;
