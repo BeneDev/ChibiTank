@@ -210,11 +210,12 @@ public class PlayerController : BaseTank {
         {
             SetCamera();
         }
+        // TODO this code block, having two times almost the same for no EventSystem and one EventSystem HAS TO BE CHANGED.
         if (EventSystem.current)
         {
-            if (input.Shoot && shotsInMagazine > 0)
+            if (input.Shoot)
             {
-                if (Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject() && npcToTalkTo == null)
+                if (Time.realtimeSinceStartup > shootTime + fireRate && !EventSystem.current.IsPointerOverGameObject() && npcToTalkTo == null && shotsInMagazine > 0 && !isReloading)
                 {
                     Shoot();
                 }
@@ -225,13 +226,13 @@ public class PlayerController : BaseTank {
                     {
                         npcToTalkTo.GetComponent<NPCTank>().Interact();
                     }
-                    else
+                    else if(shotsInMagazine > 0 && !isReloading)
                     {
                         Shoot();
                     }
                 }
             }
-            if(input.Reload)
+            if(input.Reload && magazineSize != shotsInMagazine)
             {
                 StartReloading();
             }
@@ -240,7 +241,7 @@ public class PlayerController : BaseTank {
         {
             if (input.Shoot && shotsInMagazine > 0)
             {
-                if (Time.realtimeSinceStartup > shootTime + fireRate && npcToTalkTo == null)
+                if (Time.realtimeSinceStartup > shootTime + fireRate && npcToTalkTo == null && shotsInMagazine > 0 && !isReloading)
                 {
                     Shoot();
                 }
@@ -251,13 +252,13 @@ public class PlayerController : BaseTank {
                     {
                         npcToTalkTo.GetComponent<NPCTank>().Interact();
                     }
-                    else
+                    else if (shotsInMagazine > 0 && !isReloading)
                     {
                         Shoot();
                     }
                 }
             }
-            if(input.Reload)
+            if (input.Reload && magazineSize != shotsInMagazine)
             {
                 StartReloading();
             }

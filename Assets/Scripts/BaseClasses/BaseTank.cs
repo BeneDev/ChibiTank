@@ -58,6 +58,8 @@ public class BaseTank : BaseCharacter {
 
     protected int shotsInMagazine = 5;
 
+    protected bool isReloading = false;
+
     #endregion
 
     #region Unity Messages
@@ -211,11 +213,13 @@ public class BaseTank : BaseCharacter {
     // Make the cursor rotate to show player is reloading and make magazine full again
     protected virtual void StartReloading()
     {
+        isReloading = true;
         CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
     }
 
     protected virtual void WhenReloadFinished()
     {
+        isReloading = false;
         shotsInMagazine = magazineSize;
         // TODO play sound to show the player that the reloading is finished
     }
