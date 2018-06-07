@@ -194,6 +194,7 @@ public class BaseTank : BaseCharacter {
             shotSparks.Play();
         }
         shootTime = Time.realtimeSinceStartup;
+        CursorController.Instance.FlashupAnimation();
         GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
         currentBall.GetComponent<CannonBallController>().Damage = attack;
         currentBall.GetComponent<CannonBallController>().Owner = gameObject;
