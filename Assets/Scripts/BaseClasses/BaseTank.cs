@@ -69,6 +69,8 @@ public class BaseTank : BaseCharacter {
         camShake = Camera.main.GetComponent<CameraShake>();
 
         shootTime = Time.realtimeSinceStartup;
+
+        CursorController.Instance.OnReloadFinished += WhenReloadFinished;
     }
 
     // This should be called at the end of each fixed update of all Tanks who inherit from this baseTank script, as it Calculates the velocity based on the current MoveDirection and the gravity. 
@@ -206,10 +208,16 @@ public class BaseTank : BaseCharacter {
         shotsInMagazine--;
     }
 
-    protected virtual void Reload()
+    // Make the cursor rotate to show player is reloading and make magazine full again
+    protected virtual void StartReloading()
     {
         CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
+    }
+
+    protected virtual void WhenReloadFinished()
+    {
         shotsInMagazine = magazineSize;
+        // TODO play sound to show the player that the reloading is finished
     }
 
     // Apply the knockback after a shot is fired from the tank

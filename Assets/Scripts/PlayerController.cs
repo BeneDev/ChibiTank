@@ -233,7 +233,7 @@ public class PlayerController : BaseTank {
             }
             if(input.Reload)
             {
-                Reload();
+                StartReloading();
             }
         }
         else
@@ -259,7 +259,7 @@ public class PlayerController : BaseTank {
             }
             if(input.Reload)
             {
-                Reload();
+                StartReloading();
             }
         }
         if (engineSound)

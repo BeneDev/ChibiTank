@@ -8,6 +8,8 @@ public class CursorController : Singleton<CursorController> {
     [SerializeField] Vector2 hotSpotOffset;
     CanvasGroup ownCanvasGroup;
     [SerializeField] GameObject image;
+    
+    public event System.Action OnReloadFinished;
 
     Animator anim;
 
@@ -61,5 +63,9 @@ public class CursorController : Singleton<CursorController> {
         }
         imageTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
         FlashupAnimation();
+        if(OnReloadFinished != null)
+        {
+            OnReloadFinished();
+        }
     }
 }
