@@ -21,7 +21,10 @@ public class BaseSaveLoad<T> where T : class
         Save(filename);
     }
 
-    // Open a datastream to write into an xml file the player relevant data
+    /// <summary>
+    /// Open a datastream to write into an xml file the player relevant data. 
+    /// </summary>
+    /// <param name="filename"></param> Filename parameter has to be only the name without the path and file ending
     public void Save(string filename)
     {
         if (!Directory.Exists(Application.dataPath + "/Data/"))
@@ -40,7 +43,11 @@ public class BaseSaveLoad<T> where T : class
         }
     }
 
-    // Open a datastream to get input from the savestate file
+    /// <summary>
+    /// Open a datastream to get input from the savestate file
+    /// </summary>
+    /// <param name="filename"></param> Filename parameter has to be only the name without the path and file ending
+    /// <returns></returns>
     public static T Load(string filename)
     {
         string name = Application.dataPath + "/Data/" + filename + ".xml";
