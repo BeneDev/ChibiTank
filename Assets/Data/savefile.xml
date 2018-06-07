@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SaveFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <name>Player</name>
-  <age>1</age>
+  <level>1</level>
   <position>
-    <x>22.756834</x>
-    <y>0.0003248453</y>
-    <z>-12.5188351</z>
+    <x>22.75693</x>
+    <y>0.0002708435</y>
+    <z>-13.6971693</z>
   </position>
 </SaveFile>

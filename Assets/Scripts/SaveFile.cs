@@ -13,7 +13,7 @@ public class SaveFile : BaseSaveLoad<SaveFile> {
 
     [XmlElement("name")]
     public string name;
-    [XmlElement("age")]
+    [XmlElement("level")]
     public int level;
     [XmlElement("position")]
     public Vector3 playerPos;
