@@ -316,12 +316,14 @@ public class PlayerController : BaseTank {
     void ChangeEquippedUpgrade(ScriptableAttackCockPitUpgrade upgrade)
     {
         equippedAttackUpgrade = upgrade;
+
         attack = baseAttack + upgrade.attack;
         fireRate = basefireRate + upgrade.fireRate;
         reloadSpeed = baseReloadSpeed + upgrade.reloadSpeed;
         magazineSize = baseMagazineSize + upgrade.magazineSize;
         shootKnockback = baseShootKnockback + upgrade.shootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration + upgrade.shootKnockbackDuration;
+
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
     }
 
@@ -329,8 +331,10 @@ public class PlayerController : BaseTank {
     void ChangeEquippedUpgrade(ScriptableBodyUpgrade upgrade)
     {
         equippedBodyUpgrade = upgrade;
+
         health = baseHealth + upgrade.health;
         defense = baseDefense + upgrade.defense;
+
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
     }
 
@@ -338,9 +342,11 @@ public class PlayerController : BaseTank {
     void ChangeEquippedUpgrade(ScriptableTracksUpgrade upgrade)
     {
         equippedTracksUpgrade = upgrade;
+
         topSpeed = baseTopSpeed + upgrade.topSpeed;
         acceleration = baseAcceleration + upgrade.acceleration;
         rotationSpeed = baseRotationSpeed + upgrade.rotationSpeed;
+
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
     }
 

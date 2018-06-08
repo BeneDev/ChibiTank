@@ -7,8 +7,9 @@ public class BaseScriptableUpgrade : ScriptableObject {
 
     public string upgradeName;
     public Sprite upgradeSprite;
+    public Mesh upgradeMesh;
 
-    public int level = 1;
+    protected int level = 1;
     public bool isUnlocked = false;
 
     public float mass = 1f;
