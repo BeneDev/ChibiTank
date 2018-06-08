@@ -143,6 +143,30 @@ public class PlayerController : BaseTank {
         }
     }
 
+    public BasePlayerItem EquippedItem1
+    {
+        get
+        {
+            return equippedItem1;
+        }
+    }
+
+    public BasePlayerItem EquippedItem2
+    {
+        get
+        {
+            return equippedItem2;
+        }
+    }
+
+    public BasePlayerItem EquippedItem3
+    {
+        get
+        {
+            return equippedItem3;
+        }
+    }
+
     #endregion
 
     #region Private Fields
@@ -190,6 +214,10 @@ public class PlayerController : BaseTank {
     ScriptableAttackCockPitUpgrade equippedAttackUpgrade;
     ScriptableBodyUpgrade equippedBodyUpgrade;
     ScriptableTracksUpgrade equippedTracksUpgrade;
+
+    BasePlayerItem equippedItem1;
+    BasePlayerItem equippedItem2;
+    BasePlayerItem equippedItem3;
 
     [Header("Meshes For Upgrades"), SerializeField] MeshFilter[] cockpitMeshes; // 0 = cockpit | 1 = barrel
     [SerializeField] MeshFilter bodyMesh;

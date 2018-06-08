@@ -563,12 +563,16 @@ MonoBehaviour:
   destroyWhenClosed: 1
   disableMenusUnderneath: 1
   buttonArray: []
+  noItemSprite: {fileID: 21300000, guid: 36b733eb8005acb4f8665222e83c2fe3, type: 3}
   attackName: {fileID: 114914055084704330}
   bodyName: {fileID: 114944590734779086}
   tracksName: {fileID: 114011787263490708}
   attackImage: {fileID: 114647477180175848}
   bodyImage: {fileID: 114724270839185252}
   tracksImage: {fileID: 114719561432186462}
+  item1Image: {fileID: 114469506177964830}
+  item2Image: {fileID: 114825569046975154}
+  item3Image: {fileID: 114584029957972528}
 --- !u!114 &114186520405564088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -759,7 +763,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8ae7ec54d2a7d684791ebc82d6507271, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36b733eb8005acb4f8665222e83c2fe3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -905,7 +909,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8ae7ec54d2a7d684791ebc82d6507271, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36b733eb8005acb4f8665222e83c2fe3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -10,12 +10,17 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
 
     PlayerController player;
 
-    [SerializeField] Text attackName;
+    [SerializeField] Sprite noItemSprite;
+
+    [Header("Display Fields"), SerializeField] Text attackName;
     [SerializeField] Text bodyName;
     [SerializeField] Text tracksName;
     [SerializeField] Image attackImage;
     [SerializeField] Image bodyImage;
     [SerializeField] Image tracksImage;
+    [SerializeField] Image item1Image;
+    [SerializeField] Image item2Image;
+    [SerializeField] Image item3Image;
 
 
     #region Unity Messages
@@ -43,6 +48,30 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
         {
             tracksName.text = player.TracksUpgrade.upgradeName;
             tracksImage.sprite = player.TracksUpgrade.upgradeSprite;
+        }
+        if(item1Image && player.EquippedItem1)
+        {
+            item1Image.sprite = player.EquippedItem1.Sprite;
+        }
+        else
+        {
+            item1Image.sprite = noItemSprite;
+        }
+        if (item2Image && player.EquippedItem2)
+        {
+            item1Image.sprite = player.EquippedItem2.Sprite;
+        }
+        else
+        {
+            item1Image.sprite = noItemSprite;
+        }
+        if (item3Image && player.EquippedItem3)
+        {
+            item1Image.sprite = player.EquippedItem3.Sprite;
+        }
+        else
+        {
+            item1Image.sprite = noItemSprite;
         }
     }
 
