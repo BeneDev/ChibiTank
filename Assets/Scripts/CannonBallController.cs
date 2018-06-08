@@ -54,6 +54,7 @@ public class CannonBallController : MonoBehaviour {
     GameObject owner;
 
     [SerializeField] AudioClip[] impactSounds;
+    [SerializeField] AudioSource enemyHitSound;
 
     struct Sounds
     {
@@ -131,6 +132,10 @@ public class CannonBallController : MonoBehaviour {
         }
         if(collision.gameObject.GetComponent<BaseCharacter>())
         {
+            if(enemyHitSound && !enemyHitSound.isPlaying && collision.gameObject.tag != "Player")
+            {
+                enemyHitSound.Play();
+            }
             collision.gameObject.GetComponent<BaseCharacter>().TakeDamage(damage);
             isStillDamaging = false;
         }
