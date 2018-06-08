@@ -9,8 +9,11 @@ public class UpgradeManager : Singleton<UpgradeManager> {
 
     [SerializeField] ScriptableObject[] baseUpgrades;
 
-    // kind 0 = attack | 1 = body | 2 = tracks
-
+    /// <summary>
+    /// Returns a certain upgrade from the base set of upgrades
+    /// </summary>
+    /// <param name="kind"></param> kind 0 = attack | 1 = body | 2 = tracks
+    /// <returns></returns>
     public ScriptableObject GetBaseUpgrade(int kind)
     {
         return baseUpgrades[kind];
