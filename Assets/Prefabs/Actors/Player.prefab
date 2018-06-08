@@ -1733,6 +1733,17 @@ MonoBehaviour:
   baseAcceleration: 2
   baseRotationSpeed: 10
   baseMass: 4
+  cockpitMeshes:
+  - {fileID: 33083206834476124}
+  - {fileID: 33896363844268288}
+  bodyMesh: {fileID: 33178495858400164}
+  tracksMeshes:
+  - {fileID: 33782793458068754}
+  - {fileID: 33649384188991678}
+  - {fileID: 33628963375458552}
+  - {fileID: 33262240748414430}
+  - {fileID: 33014002615241148}
+  - {fileID: 33026187293871942}
 --- !u!114 &114180295969708528
 MonoBehaviour:
   m_ObjectHideFlags: 1

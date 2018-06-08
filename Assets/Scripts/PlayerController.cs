@@ -167,9 +167,9 @@ public class PlayerController : BaseTank {
     ScriptableBodyUpgrade equippedBodyUpgrade;
     ScriptableTracksUpgrade equippedTracksUpgrade;
 
-    [SerializeField] MeshFilter[] cockpitMeshes;
+    [Header("Meshes For Upgrades"), SerializeField] MeshFilter[] cockpitMeshes; // 0 = cockpit | 1 = barrel
     [SerializeField] MeshFilter bodyMesh;
-    [SerializeField] MeshFilter[] tracksMeshes;
+    [SerializeField] MeshFilter[] tracksMeshes; // 0, 1 = tracks | 2 - 5 = wheels
 
     #endregion
 
@@ -330,7 +330,12 @@ public class PlayerController : BaseTank {
 
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
 
-        // TODO Change the mesh for the cockpit to give the player visual feedback about what upgrade he has equipped
+        // Change the mesh for the cockpit to give the player visual feedback about what upgrade he has equipped
+        if(cockpitMeshes.Length > 1) // Bigger than 1, because there has to be one cockpit and one barrel mesh Filter inside of it
+        {
+            cockpitMeshes[0].mesh = upgrade.upgradeMesh;
+            cockpitMeshes[1].mesh = upgrade.secondaryUpgradeMesh;
+        }
     }
 
     // Changes the equipped body upgrade
@@ -361,7 +366,16 @@ public class PlayerController : BaseTank {
 
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
 
-        // TODO Change the mesh for the tracks to give the player visual feedback about what upgrade he has equipped
+        // Change the mesh for the tracks to give the player visual feedback about what upgrade he has equipped
+        if(tracksMeshes.Length > 5) // Bigger than five, because there has to be two track mesh Filter and 4 wheel filter inside of it
+        {
+            tracksMeshes[0].mesh = upgrade.upgradeMesh;
+            tracksMeshes[1].mesh = upgrade.upgradeMesh;
+            tracksMeshes[2].mesh = upgrade.secondaryUpgradeMesh;
+            tracksMeshes[3].mesh = upgrade.secondaryUpgradeMesh;
+            tracksMeshes[4].mesh = upgrade.secondaryUpgradeMesh;
+            tracksMeshes[5].mesh = upgrade.secondaryUpgradeMesh;
+        }
     }
 
     // Make the tank die and explode and show the Gameover menu after that
