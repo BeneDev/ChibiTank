@@ -119,6 +119,30 @@ public class PlayerController : BaseTank {
         }
     }
 
+    public Sprite AttackUpgradeSprite
+    {
+        get
+        {
+            return equippedAttackUpgrade.upgradeSprite;
+        }
+    }
+
+    public Sprite BodyUpgradeSprite
+    {
+        get
+        {
+            return equippedBodyUpgrade.upgradeSprite;
+        }
+    }
+
+    public Sprite TracksUpgradeSprite
+    {
+        get
+        {
+            return equippedTracksUpgrade.upgradeSprite;
+        }
+    }
+
     #endregion
 
     #region Private Fields
