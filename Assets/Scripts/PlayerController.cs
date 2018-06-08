@@ -494,6 +494,7 @@ public class PlayerController : BaseTank {
     protected override void Shoot()
     {
         base.Shoot();
+        CursorController.Instance.FlashupAnimation();
         camShake.shakeAmount = shootCameraShakeAmount;
         camShake.shakeDuration = shootCameraShakeDuration;
     }

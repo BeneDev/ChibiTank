@@ -15,12 +15,12 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   upgradeMesh: {fileID: 4300016, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   isUnlocked: 0
-  mass: 1
+  mass: 0
   secondaryUpgradeMesh: {fileID: 4300014, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95,
     type: 3}
-  attack: 1
-  fireRate: 1
-  reloadSpeed: 1
-  magazineSize: 5
-  shootKnockback: 1
-  shootKnockbackDuration: 1
+  attack: 0
+  fireRate: 0
+  reloadSpeed: 0
+  magazineSize: 0
+  shootKnockback: 0
+  shootKnockbackDuration: 0

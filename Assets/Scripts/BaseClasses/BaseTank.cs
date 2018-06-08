@@ -19,6 +19,8 @@ public class BaseTank : BaseCharacter {
     [Header("Camera Shake"), SerializeField] protected float deathCamShakeAmount = 0.2f;
     [SerializeField] protected float deathCamShakeDuration = 0.1f;
 
+    [Header("Timer"), SerializeField] float autoReloadDelay = 0.3f; // The delay after the last shot in the magazine was fired and the automatic reload start
+
     protected Vector3 aimDirection; // This value is used to make the tanks turret aim at certain positions in the world
     [SerializeField] protected float cockPitRotationSpeed; // How fast the cockpit rotates
     protected float rotationSpeed; // How fast the tank body rotates
@@ -38,7 +40,7 @@ public class BaseTank : BaseCharacter {
     [SerializeField] ParticleSystem engineSmoke; // The particle system for driving and standing with the engine running
     [SerializeField] ParticleSystem deathSmoke; // The particle system for when the tank is already destroyed
 
-    [Header("SoundS"), SerializeField] protected AudioSource shotSound; // Sound which gets played when the tank shoots
+    [Header("Sounds"), SerializeField] protected AudioSource shotSound; // Sound which gets played when the tank shoots
     [SerializeField] AudioClip[] explosionSounds; // Sounds for the explosion when the tank is being destroyed
     [SerializeField] AudioSource explosionAudioSource; // The Audio source which plays the explosion sounds
 
@@ -85,6 +87,10 @@ public class BaseTank : BaseCharacter {
             velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         }
         transform.position += velocity * Time.fixedDeltaTime;
+        if(shotsInMagazine <= 0 && !isReloading)
+        {
+            StartCoroutine(AutoStartReloading(autoReloadDelay));
+        }
         if(!isDead && deathSmoke.isPlaying)
         {
             deathSmoke.Stop();
@@ -98,6 +104,13 @@ public class BaseTank : BaseCharacter {
     #endregion
 
     #region Helper Methods
+
+    IEnumerator AutoStartReloading(float seconds)
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(seconds);
+        StartReloading();
+    }
 
     // This makes the Tank Explode, stop the engine smoke and start the death smoke. Also sets the isDead field.
     protected virtual void Die()
@@ -202,7 +215,6 @@ public class BaseTank : BaseCharacter {
             shotSparks.Play();
         }
         shootTime = Time.realtimeSinceStartup;
-        CursorController.Instance.FlashupAnimation();
         GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
         currentBall.GetComponent<CannonBallController>().Damage = attack;
         currentBall.GetComponent<CannonBallController>().Owner = gameObject;

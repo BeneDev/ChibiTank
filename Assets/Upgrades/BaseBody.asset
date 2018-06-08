@@ -15,6 +15,6 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   upgradeMesh: {fileID: 4300012, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   isUnlocked: 0
-  mass: 1
-  health: 1
-  defense: 1
+  mass: 0
+  health: 0
+  defense: 0

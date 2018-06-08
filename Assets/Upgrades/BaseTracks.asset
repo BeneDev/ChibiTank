@@ -15,10 +15,10 @@ MonoBehaviour:
   upgradeSprite: {fileID: 0}
   upgradeMesh: {fileID: 4300006, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   isUnlocked: 0
-  mass: 1
+  mass: 0
   secondaryUpgradeMesh: {fileID: 4300000, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95,
     type: 3}
   wheelsMesh: {fileID: 4300010, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
-  topSpeed: 1
-  acceleration: 1
-  rotationSpeed: 1
+  topSpeed: 0
+  acceleration: 0
+  rotationSpeed: 0

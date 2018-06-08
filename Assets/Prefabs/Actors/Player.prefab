@@ -1290,7 +1290,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864575995062854}
-  m_Mesh: {fileID: 4300012, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33262240748414430
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1304,7 +1304,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1197545354505608}
-  m_Mesh: {fileID: 4300010, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33649384188991678
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1318,14 +1318,14 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314336678191876}
-  m_Mesh: {fileID: 4300006, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 6cf1c5b86a736304ab4388a74234016e, type: 3}
 --- !u!33 &33896363844268288
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682797823882034}
-  m_Mesh: {fileID: 4300014, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!54 &54628357737214426
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -1700,6 +1700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathCamShakeAmount: 0.2
   deathCamShakeDuration: 0.1
+  autoReloadDelay: 0.5
   cockPitRotationSpeed: 8
   drag: 5.1
   gravityCap: 9
