@@ -10,6 +10,9 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
 
     PlayerController player;
 
+    [SerializeField] Text attackName;
+    [SerializeField] Text bodyName;
+    [SerializeField] Text tracksName;
     [SerializeField] Image attackImage;
     [SerializeField] Image bodyImage;
     [SerializeField] Image tracksImage;
@@ -26,17 +29,20 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
     protected override void OnEnable()
     {
         base.OnEnable();
-        if(attackImage)
+        if(attackImage && attackName)
         {
-            attackImage.sprite = player.AttackUpgradeSprite;
+            attackName.text = player.AttackUpgrade.upgradeName;
+            attackImage.sprite = player.AttackUpgrade.upgradeSprite;
         }
-        if(bodyImage)
+        if(bodyImage && bodyName)
         {
-            bodyImage.sprite = player.BodyUpgradeSprite;
+            bodyName.text = player.BodyUpgrade.upgradeName;
+            bodyImage.sprite = player.BodyUpgrade.upgradeSprite;
         }
-        if(tracksImage)
+        if(tracksImage && tracksName)
         {
-            tracksImage.sprite = player.TracksUpgradeSprite;
+            tracksName.text = player.TracksUpgrade.upgradeName;
+            tracksImage.sprite = player.TracksUpgrade.upgradeSprite;
         }
     }
 

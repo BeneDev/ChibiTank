@@ -119,27 +119,27 @@ public class PlayerController : BaseTank {
         }
     }
 
-    public Sprite AttackUpgradeSprite
+    public ScriptableAttackCockPitUpgrade AttackUpgrade
     {
         get
         {
-            return equippedAttackUpgrade.upgradeSprite;
+            return equippedAttackUpgrade;
         }
     }
 
-    public Sprite BodyUpgradeSprite
+    public ScriptableBodyUpgrade BodyUpgrade
     {
         get
         {
-            return equippedBodyUpgrade.upgradeSprite;
+            return equippedBodyUpgrade;
         }
     }
 
-    public Sprite TracksUpgradeSprite
+    public ScriptableTracksUpgrade TracksUpgrade
     {
         get
         {
-            return equippedTracksUpgrade.upgradeSprite;
+            return equippedTracksUpgrade;
         }
     }
 
