@@ -43,6 +43,7 @@ public class BaseTank : BaseCharacter {
     [Header("Sounds"), SerializeField] protected AudioSource shotSound; // Sound which gets played when the tank shoots
     [SerializeField] AudioClip[] explosionSounds; // Sounds for the explosion when the tank is being destroyed
     [SerializeField] AudioSource explosionAudioSource; // The Audio source which plays the explosion sounds
+    [SerializeField] AudioSource reloadSource; // The audio Source with the reload clip inside of it. Played when the reload cursor animation is finished
 
     // Attributes necessary for every Tank
     protected int level = 1;
@@ -234,7 +235,11 @@ public class BaseTank : BaseCharacter {
     {
         isReloading = false;
         shotsInMagazine = magazineSize;
-        // TODO play sound to show the player that the reloading is finished
+        // Play sound to show the player that the reloading is finished
+        if(reloadSource && !reloadSource.isPlaying)
+        {
+            reloadSource.Play();
+        }
     }
 
     // Apply the knockback after a shot is fired from the tank
