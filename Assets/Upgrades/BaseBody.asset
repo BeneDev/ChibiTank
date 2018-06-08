@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: BaseBody
   upgradeSprite: {fileID: 0}
-  upgradeMesh: {fileID: 4300004, guid: 331d81aa682f91d4ca650087976d222b, type: 3}
+  upgradeMesh: {fileID: 4300012, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   isUnlocked: 0
   mass: 1
   health: 1

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4620428991158764}
   - component: {fileID: 114820951599942674}
-  - component: {fileID: 114476988234993576}
+  - component: {fileID: 114534530612495918}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114476988234993576
+--- !u!114 &114534530612495918
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,10 +49,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027826352335856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dad2a446eaa9b34c8810f6cf228665e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f486efb4ae34234489f9e9aca69bfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: 63cec2d3905f315498548844dbaf64ca, type: 3}
+  upgrades:
+  - {fileID: 11400000, guid: 109199d20954e024ab5fa82df194b556, type: 2}
+  - {fileID: 11400000, guid: 471d67f9b12ec8f418be2c4b4e36b2c0, type: 2}
+  - {fileID: 11400000, guid: ac4bb1c1676dc9447954efc4998f26aa, type: 2}
 --- !u!114 &114820951599942674
 MonoBehaviour:
   m_ObjectHideFlags: 1

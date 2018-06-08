@@ -204,6 +204,11 @@ public class PlayerController : BaseTank {
 
         mass = baseMass;
 
+        // Equip the base Upgrades for the tank
+        ChangeEquippedUpgrade((ScriptableAttackCockPitUpgrade)UpgradeManager.Instance.GetBaseUpgrade(0));
+        ChangeEquippedUpgrade((ScriptableBodyUpgrade)UpgradeManager.Instance.GetBaseUpgrade(1));
+        ChangeEquippedUpgrade((ScriptableTracksUpgrade)UpgradeManager.Instance.GetBaseUpgrade(2));
+
     }
 
     // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
@@ -215,7 +220,7 @@ public class PlayerController : BaseTank {
         RotateBody();
         UpdateIsGrounded();
         CalculateVelocity();
-        if(input.ResetCam)
+        if (input.ResetCam)
         {
             SetCamera();
         }
@@ -328,10 +333,18 @@ public class PlayerController : BaseTank {
         shootKnockback = baseShootKnockback + upgrade.shootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration + upgrade.shootKnockbackDuration;
 
-        mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+        mass = baseMass + equippedAttackUpgrade.mass;
+        if(equippedBodyUpgrade)
+        {
+            mass += equippedBodyUpgrade.mass;
+        }
+        if(equippedTracksUpgrade)
+        {
+            mass += equippedTracksUpgrade.mass;
+        }
 
         // Change the mesh for the cockpit to give the player visual feedback about what upgrade he has equipped
-        if(cockpitMeshes.Length > 1) // Bigger than 1, because there has to be one cockpit and one barrel mesh Filter inside of it
+        if (cockpitMeshes.Length > 1) // Bigger than 1, because there has to be one cockpit and one barrel mesh Filter inside of it
         {
             cockpitMeshes[0].mesh = upgrade.upgradeMesh;
             cockpitMeshes[1].mesh = upgrade.secondaryUpgradeMesh;
@@ -346,10 +359,18 @@ public class PlayerController : BaseTank {
         health = baseHealth + upgrade.health;
         defense = baseDefense + upgrade.defense;
 
-        mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+        mass = baseMass + equippedBodyUpgrade.mass;
+        if (equippedAttackUpgrade)
+        {
+            mass += equippedAttackUpgrade.mass;
+        }
+        if (equippedTracksUpgrade)
+        {
+            mass += equippedTracksUpgrade.mass;
+        }
 
         // Change the mesh for the body to give the player visual feedback about what upgrade he has equipped
-        if(bodyMesh)
+        if (bodyMesh)
         {
             bodyMesh.mesh = upgrade.upgradeMesh;
         }
@@ -364,17 +385,25 @@ public class PlayerController : BaseTank {
         acceleration = baseAcceleration + upgrade.acceleration;
         rotationSpeed = baseRotationSpeed + upgrade.rotationSpeed;
 
-        mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+        mass = baseMass + equippedTracksUpgrade.mass;
+        if (equippedBodyUpgrade)
+        {
+            mass += equippedBodyUpgrade.mass;
+        }
+        if (equippedAttackUpgrade)
+        {
+            mass += equippedAttackUpgrade.mass;
+        }
 
         // Change the mesh for the tracks to give the player visual feedback about what upgrade he has equipped
-        if(tracksMeshes.Length > 5) // Bigger than five, because there has to be two track mesh Filter and 4 wheel filter inside of it
+        if (tracksMeshes.Length > 5) // Bigger than five, because there has to be two track mesh Filter and 4 wheel filter inside of it
         {
             tracksMeshes[0].mesh = upgrade.upgradeMesh;
-            tracksMeshes[1].mesh = upgrade.upgradeMesh;
-            tracksMeshes[2].mesh = upgrade.secondaryUpgradeMesh;
-            tracksMeshes[3].mesh = upgrade.secondaryUpgradeMesh;
-            tracksMeshes[4].mesh = upgrade.secondaryUpgradeMesh;
-            tracksMeshes[5].mesh = upgrade.secondaryUpgradeMesh;
+            tracksMeshes[1].mesh = upgrade.secondaryUpgradeMesh;
+            tracksMeshes[2].mesh = upgrade.wheelsMesh;
+            tracksMeshes[3].mesh = upgrade.wheelsMesh;
+            tracksMeshes[4].mesh = upgrade.wheelsMesh;
+            tracksMeshes[5].mesh = upgrade.wheelsMesh;
         }
     }
 

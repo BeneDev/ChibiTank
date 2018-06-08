@@ -13,11 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: BaseTracks
   upgradeSprite: {fileID: 0}
-  upgradeMesh: {fileID: 4300000, guid: 6cf1c5b86a736304ab4388a74234016e, type: 3}
+  upgradeMesh: {fileID: 4300006, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   isUnlocked: 0
   mass: 1
-  secondaryUpgradeMesh: {fileID: 4300000, guid: f66ef7986bd1c6840b4b4a7d8002d656,
+  secondaryUpgradeMesh: {fileID: 4300000, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95,
     type: 3}
+  wheelsMesh: {fileID: 4300010, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   topSpeed: 1
   acceleration: 1
   rotationSpeed: 1

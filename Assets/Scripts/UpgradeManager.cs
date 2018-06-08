@@ -5,55 +5,15 @@ using UnityEngine;
 /// <summary>
 /// Manages the attributes of the player based on the upgrade he has equipped
 /// </summary>
-public class UpgradeManager : MonoBehaviour {
+public class UpgradeManager : Singleton<UpgradeManager> {
 
-	
+    [SerializeField] ScriptableObject[] upgrades;
 
-}
+    // kind 0 = attack | 1 = body | 2 = tracks
 
-class ConcreteSubject : BaseSubject
-{
-    private string state;
-
-    public string SubjectState
+    public ScriptableObject GetBaseUpgrade(int kind)
     {
-        get
-        {
-            return state;
-        }
-        set
-        {
-            state = value;
-        }
-    }
-}
-
-class ConcreteObserver : BaseObserver
-{
-    public ConcreteSubject Subject
-    {
-        get
-        {
-            return subject;
-        }
-        set
-        {
-            subject = value;
-        }
+        return upgrades[kind];
     }
 
-    private string name;
-    private string observerState;
-    private ConcreteSubject subject;
-
-    public ConcreteObserver(ConcreteSubject subject, string name)
-    {
-        this.subject = subject;
-        this.name = name;
-    }
-
-    public override void MakeUpdate()
-    {
-        observerState = subject.SubjectState;
-    }
 }

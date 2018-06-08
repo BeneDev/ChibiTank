@@ -20,6 +20,7 @@ public class ScriptableTracksUpgrade : BaseScriptableUpgrade
 
     // Put the wheel mesh in here
     public Mesh secondaryUpgradeMesh;
+    public Mesh wheelsMesh;
 
     [Header("Attributes")] public float topSpeed = 1f;
     public float acceleration = 1f;
