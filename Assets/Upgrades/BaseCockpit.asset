@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BaseCockpit
   m_EditorClassIdentifier: 
   upgradeName: BaseCockpit
-  upgradeSprite: {fileID: 21300000, guid: bc79830921e57b740961196221a2173e, type: 3}
+  upgradeSprite: {fileID: 21300000, guid: b9078e6744902f847aa6ea4e7a722e76, type: 3}
   upgradeMesh: {fileID: 4300016, guid: 4aaa5aa96f6a92f49b09ed2772ce8e95, type: 3}
   isUnlocked: 0
   mass: 0
