@@ -13,6 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: BaseCockpit
   upgradeSprite: {fileID: 0}
+  upgradeMesh: {fileID: 4300000, guid: 1b38329efe803194e8cc4372b47ff376, type: 3}
+  isUnlocked: 0
+  mass: 1
+  secondaryUpgradeMesh: {fileID: 4300000, guid: 1a80c6e5a4c61fa41b447ae4f005c44d,
+    type: 3}
   attack: 1
   fireRate: 1
   reloadSpeed: 1
