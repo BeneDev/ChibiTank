@@ -7,13 +7,13 @@ using UnityEngine;
 /// </summary>
 public class UpgradeManager : Singleton<UpgradeManager> {
 
-    [SerializeField] ScriptableObject[] upgrades;
+    [SerializeField] ScriptableObject[] baseUpgrades;
 
     // kind 0 = attack | 1 = body | 2 = tracks
 
     public ScriptableObject GetBaseUpgrade(int kind)
     {
-        return upgrades[kind];
+        return baseUpgrades[kind];
     }
 
 }
