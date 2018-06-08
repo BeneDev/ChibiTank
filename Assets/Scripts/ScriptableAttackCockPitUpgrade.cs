@@ -18,6 +18,9 @@ public class ScriptableAttackCockPitUpgrade : BaseScriptableUpgrade
         }
     }
 
+    // Put the barrel mesh in here
+    public Mesh secondaryUpgradeMesh;
+
     [Header("Attributes")] public int attack = 1;
     public float fireRate = 1f;
     public float reloadSpeed = 1f;

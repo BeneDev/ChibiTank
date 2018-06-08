@@ -167,6 +167,10 @@ public class PlayerController : BaseTank {
     ScriptableBodyUpgrade equippedBodyUpgrade;
     ScriptableTracksUpgrade equippedTracksUpgrade;
 
+    [SerializeField] MeshFilter[] cockpitMeshes;
+    [SerializeField] MeshFilter bodyMesh;
+    [SerializeField] MeshFilter[] tracksMeshes;
+
     #endregion
 
     #region Unity Messages
@@ -325,6 +329,8 @@ public class PlayerController : BaseTank {
         shootKnockbackDuration = baseShootKnockbackDuration + upgrade.shootKnockbackDuration;
 
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+
+        // TODO Change the mesh for the cockpit to give the player visual feedback about what upgrade he has equipped
     }
 
     // Changes the equipped body upgrade
@@ -336,6 +342,12 @@ public class PlayerController : BaseTank {
         defense = baseDefense + upgrade.defense;
 
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+
+        // Change the mesh for the body to give the player visual feedback about what upgrade he has equipped
+        if(bodyMesh)
+        {
+            bodyMesh.mesh = upgrade.upgradeMesh;
+        }
     }
 
     // Changes the equipped tracks upgrade
@@ -348,6 +360,8 @@ public class PlayerController : BaseTank {
         rotationSpeed = baseRotationSpeed + upgrade.rotationSpeed;
 
         mass = baseMass + equippedAttackUpgrade.mass + equippedBodyUpgrade.mass + equippedTracksUpgrade.mass;
+
+        // TODO Change the mesh for the tracks to give the player visual feedback about what upgrade he has equipped
     }
 
     // Make the tank die and explode and show the Gameover menu after that
