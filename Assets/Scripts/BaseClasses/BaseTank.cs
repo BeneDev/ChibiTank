@@ -228,7 +228,6 @@ public class BaseTank : BaseCharacter {
     protected virtual void StartReloading()
     {
         isReloading = true;
-        CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
     }
 
     protected virtual void WhenReloadFinished()

@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 198986758611732086}
   - component: {fileID: 199018140901026864}
   - component: {fileID: 82957352974692926}
+  - component: {fileID: 114803253481178202}
   m_Layer: 0
   m_Name: TankDeathExplosion
   m_TagString: Untagged
@@ -1566,6 +1567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathCamShakeAmount: 0.5
   deathCamShakeDuration: 0.2
+  autoReloadDelay: 0.3
   cockPitRotationSpeed: 6
   drag: 5
   gravityCap: 3
@@ -1580,6 +1582,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6249297f0c7c4034b9519e79e764cb49, type: 3}
   - {fileID: 8300000, guid: 0bc8dcfee9ab54044853cae832fc3991, type: 3}
   explosionAudioSource: {fileID: 82957352974692926}
+  reloadSource: {fileID: 0}
   patrolRadius: 20
   patrolSpeedMultiplier: 0.3
   searchPlayerDuration: 6
@@ -1588,6 +1591,7 @@ MonoBehaviour:
   baseAttack: 1
   basefireRate: 1
   baseReloadSpeed: 1
+  baseMagazineSize: 3
   baseShootKnockback: 20
   baseShootKnockbackDuration: 0.5
   baseHealth: 3
@@ -1596,6 +1600,18 @@ MonoBehaviour:
   baseAcceleration: 1.5
   baseRotationSpeed: 9
   baseMass: 1
+--- !u!114 &114803253481178202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763868222758574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd4442ac44643f4cafbfd15b77cae8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRange: 5
 --- !u!198 &198013242512037464
 ParticleSystem:
   m_ObjectHideFlags: 1

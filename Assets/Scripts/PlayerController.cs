@@ -483,6 +483,12 @@ public class PlayerController : BaseTank {
         }
     }
 
+    protected override void StartReloading()
+    {
+        base.StartReloading();
+        CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
+    }
+
     // Make the tank die and explode and show the Gameover menu after that
     protected override void Die()
     {
