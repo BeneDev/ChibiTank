@@ -17,7 +17,7 @@ public class ExplosionController : MonoBehaviour {
     }
 
     [SerializeField] float explosionRange = 1f;
-    int damage = 1;
+    int damage = 3;
     float timeWhenStarted = -100f;
 
     private void Update()
