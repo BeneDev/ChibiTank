@@ -13,6 +13,9 @@ public class PlayerInput : MonoBehaviour, IInput {
     bool bReloadInUse = false;
     bool bCancelInUse = false;
     bool bResetCamInUse = false;
+    bool bItem1InUse = false;
+    bool bItem2InUse = false;
+    bool bItem3InUse = false;
 
     #endregion
 
@@ -89,6 +92,66 @@ public class PlayerInput : MonoBehaviour, IInput {
             if (Input.GetAxisRaw("Reload") == 0)
             {
                 bReloadInUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool UseItem1
+    {
+        get
+        {
+            if (Input.GetAxisRaw("UseItem1") != 0)
+            {
+                if (bItem1InUse == false)
+                {
+                    bItem1InUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("UseItem1") == 0)
+            {
+                bItem1InUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool UseItem2
+    {
+        get
+        {
+            if (Input.GetAxisRaw("UseItem2") != 0)
+            {
+                if (bItem2InUse == false)
+                {
+                    bItem2InUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("UseItem2") == 0)
+            {
+                bItem2InUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool UseItem3
+    {
+        get
+        {
+            if (Input.GetAxisRaw("UseItem3") != 0)
+            {
+                if (bItem3InUse == false)
+                {
+                    bItem3InUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("UseItem3") == 0)
+            {
+                bItem3InUse = false;
             }
             return false;
         }

@@ -21,6 +21,11 @@ public interface IInput
     // The reload axis
     bool Reload { get; }
 
+    // The buttons for the items, the player has equipped
+    bool UseItem1 { get; }
+    bool UseItem2 { get; }
+    bool UseItem3 { get; }
+
     // Reset cam to look forward with those buttons
     bool ResetCam { get; }
 

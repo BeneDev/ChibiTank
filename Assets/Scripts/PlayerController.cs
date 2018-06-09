@@ -273,9 +273,17 @@ public class PlayerController : BaseTank {
         RotateBody();
         UpdateIsGrounded();
         CalculateVelocity();
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(input.UseItem1 && EquippedItem1)
         {
             UseItem(0);
+        }
+        if (input.UseItem2 && EquippedItem2)
+        {
+            UseItem(1);
+        }
+        if (input.UseItem3 && EquippedItem3)
+        {
+            UseItem(2);
         }
         if (input.ResetCam)
         {
