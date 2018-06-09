@@ -7,15 +7,21 @@ public class LandmineController : MonoBehaviour {
 
     [SerializeField] ParticleSystem explosionParticle;
     [SerializeField] int explosionDamage;
+    [SerializeField] AudioSource explosionAudioSource;
+    [SerializeField] float exploShakeAmount;
+    [SerializeField] float exploShakeDuration;
 
     float timeWhenPlanted;
     [SerializeField] float activationTime;
     bool isActive = false;
 
+    CameraShake camShake;
+
     private void Awake()
     {
         timeWhenPlanted = Time.realtimeSinceStartup;
         explosionParticle.gameObject.GetComponent<ExplosionController>().Damage = explosionDamage;
+        camShake = Camera.main.GetComponent<CameraShake>();
     }
 
     private void Update()
@@ -34,10 +40,15 @@ public class LandmineController : MonoBehaviour {
         if(!isActive) { return; }
         if(other.gameObject.GetComponentInParent<BaseCharacter>() && !other.isTrigger)
         {
-            print("activate?");
             if (!explosionParticle.isPlaying)
             {
                 explosionParticle.Play();
+                if (!explosionAudioSource.isPlaying)
+                {
+                    explosionAudioSource.Play();
+                }
+                camShake.shakeAmount = exploShakeAmount;
+                camShake.shakeDuration = exploShakeDuration;
             }
         }
     }
