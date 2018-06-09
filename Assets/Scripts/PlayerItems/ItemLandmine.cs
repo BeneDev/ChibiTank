@@ -6,12 +6,7 @@ using UnityEngine;
 public class ItemLandmine : BasePlayerItem
 {
     [SerializeField] GameObject landminePrefab;
-    GameObject player;
-
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    GameObject player; // This will always be empty. Works anyways... probably, because a null vector is used then
 
     public override void UseItem()
     {
