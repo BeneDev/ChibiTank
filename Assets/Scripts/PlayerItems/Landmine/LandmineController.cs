@@ -10,6 +10,12 @@ public class LandmineController : MonoBehaviour {
     [SerializeField] AudioSource explosionAudioSource;
     [SerializeField] float exploShakeAmount;
     [SerializeField] float exploShakeDuration;
+    [SerializeField] Light pointLight;
+    float lastTimeLightFlash;
+    [SerializeField] float flashOffset = 1f;
+    [SerializeField] float flashDuration = 0.2f;
+    [SerializeField] AudioSource beepAudioSource;
+    bool beepPlayed = false;
 
     float timeWhenPlanted;
     [SerializeField] float activationTime;
@@ -33,6 +39,24 @@ public class LandmineController : MonoBehaviour {
                 isActive = true;
             }
         }
+        if(pointLight && Time.realtimeSinceStartup > lastTimeLightFlash + flashOffset && isActive)
+        {
+            StartCoroutine(FlashUp(flashDuration));
+        }
+    }
+
+    IEnumerator FlashUp(float seconds)
+    {
+        if(beepAudioSource && !beepPlayed)
+        {
+            beepAudioSource.Play();
+            beepPlayed = true;
+        }
+        pointLight.enabled = true;
+        yield return new WaitForSeconds(seconds);
+        pointLight.enabled = false;
+        lastTimeLightFlash = Time.realtimeSinceStartup;
+        beepPlayed = false;
     }
 
     private void OnTriggerEnter(Collider other)
