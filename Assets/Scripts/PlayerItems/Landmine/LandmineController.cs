@@ -17,9 +17,12 @@ public class LandmineController : MonoBehaviour {
     [SerializeField] AudioSource beepAudioSource;
     bool beepPlayed = false;
 
+    MeshRenderer[] allMeshRenderer;
+
     float timeWhenPlanted;
     [SerializeField] float activationTime;
     bool isActive = false;
+    bool isExploded = false;
 
     CameraShake camShake;
 
@@ -28,6 +31,7 @@ public class LandmineController : MonoBehaviour {
         timeWhenPlanted = Time.realtimeSinceStartup;
         explosionParticle.gameObject.GetComponent<ExplosionController>().Damage = explosionDamage;
         camShake = Camera.main.GetComponent<CameraShake>();
+        allMeshRenderer = GetComponentsInChildren<MeshRenderer>();
     }
 
     private void Update()
@@ -39,7 +43,7 @@ public class LandmineController : MonoBehaviour {
                 isActive = true;
             }
         }
-        if(pointLight && Time.realtimeSinceStartup > lastTimeLightFlash + flashOffset && isActive)
+        if(pointLight && Time.realtimeSinceStartup > lastTimeLightFlash + flashOffset && isActive && !isExploded)
         {
             StartCoroutine(FlashUp(flashDuration));
         }
@@ -66,15 +70,27 @@ public class LandmineController : MonoBehaviour {
         {
             if (!explosionParticle.isPlaying)
             {
+                foreach(MeshRenderer rend in allMeshRenderer)
+                {
+                    rend.enabled = false;
+                }
+                isExploded = true;
                 explosionParticle.Play();
                 if (!explosionAudioSource.isPlaying)
                 {
                     explosionAudioSource.Play();
+                    StartCoroutine(DeleteAfterExplosion(explosionParticle.duration));
                 }
                 camShake.shakeAmount = exploShakeAmount;
                 camShake.shakeDuration = exploShakeDuration;
             }
         }
+    }
+
+    IEnumerator DeleteAfterExplosion(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
     }
 
 }
