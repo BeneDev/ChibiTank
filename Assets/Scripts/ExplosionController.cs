@@ -42,4 +42,10 @@ public class ExplosionController : MonoBehaviour {
             }
         }
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawSphere(transform.position, explosionRange);
+    //}
+
 }
