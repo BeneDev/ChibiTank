@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4736561394612830}
   - component: {fileID: 198234479001779168}
   - component: {fileID: 199458612486145078}
+  - component: {fileID: 114998052066275364}
   m_Layer: 0
   m_Name: TankDeathExplosion
   m_TagString: Untagged
@@ -413,6 +414,18 @@ Transform:
   m_Father: {fileID: 4736561394612830}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114998052066275364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397334651712026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd4442ac44643f4cafbfd15b77cae8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRange: 2
 --- !u!198 &198078975519923202
 ParticleSystem:
   m_ObjectHideFlags: 1

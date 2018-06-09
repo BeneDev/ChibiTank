@@ -142,7 +142,7 @@ public class BaseTank : BaseCharacter {
         }
     }
 
-    // Controls several aspects of the game whilst a tank is exploding, like screenshake, sound and slow motion
+    // Controls several aspects of the game whilst something is exploding, like screenshake and sound
     protected virtual IEnumerator ExplosionCameraShake()
     {
         if (explosionSounds[0] && explosionAudioSource)
