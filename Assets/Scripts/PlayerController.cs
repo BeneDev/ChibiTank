@@ -389,6 +389,7 @@ public class PlayerController : BaseTank {
     void EquippItem(int slot, BasePlayerItem item)
     {
         equippedItem[slot] = item;
+        item.ResetItemUsageTimes();
     }
 
     void UseItem(int slot)

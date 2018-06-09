@@ -8,16 +8,22 @@ public class ItemLandmine : BasePlayerItem
     [SerializeField] GameObject landminePrefab;
     GameObject player;
 
-    private void Awake()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public override void UseItem()
     {
-        if(landminePrefab)
+        if (landminePrefab && timesOfUseLeft > 0)
         {
+            // TODO play landmine deploy sound
             Instantiate(landminePrefab, player.transform.position, player.transform.rotation);
+            timesOfUseLeft--;
+        }
+        else
+        {
+            // TODO play general item out of usage times sound
         }
     }
 }
