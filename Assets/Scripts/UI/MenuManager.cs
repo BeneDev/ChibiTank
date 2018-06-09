@@ -212,7 +212,7 @@ public class MenuManager : Singleton<MenuManager> {
             }
         }
 
-        throw new MissingReferenceException("No prefab of type" + typeof(T) + "found.");
+        throw new MissingReferenceException("No prefab of type " + typeof(T) + " found.");
     }
 
     #endregion

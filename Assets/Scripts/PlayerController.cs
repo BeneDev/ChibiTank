@@ -259,6 +259,9 @@ public class PlayerController : BaseTank {
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableBodyUpgrade>("BaseBody"));
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableTracksUpgrade>("BaseTracks"));
 
+        //Equip the landmine
+        EquippItem(0, ItemManager.Instance.GetItem<ItemLandmine>());
+
     }
 
     // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
