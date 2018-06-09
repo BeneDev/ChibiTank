@@ -51,6 +51,7 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
         }
         if(item1Image && player.EquippedItem1)
         {
+            print(player.EquippedItem1.Sprite.name);
             item1Image.sprite = player.EquippedItem1.Sprite;
         }
         else
@@ -59,19 +60,19 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
         }
         if (item2Image && player.EquippedItem2)
         {
-            item1Image.sprite = player.EquippedItem2.Sprite;
+            item2Image.sprite = player.EquippedItem2.Sprite;
         }
         else
         {
-            item1Image.sprite = noItemSprite;
+            item2Image.sprite = noItemSprite;
         }
         if (item3Image && player.EquippedItem3)
         {
-            item1Image.sprite = player.EquippedItem3.Sprite;
+            item3Image.sprite = player.EquippedItem3.Sprite;
         }
         else
         {
-            item1Image.sprite = noItemSprite;
+            item3Image.sprite = noItemSprite;
         }
     }
 
