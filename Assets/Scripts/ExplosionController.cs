@@ -17,6 +17,7 @@ public class ExplosionController : MonoBehaviour {
     }
 
     [SerializeField] float explosionRange = 1f;
+    [SerializeField] float explosionDamageDelay = 1f;
     int damage = 3;
     float timeWhenStarted = -100f;
 
@@ -27,7 +28,7 @@ public class ExplosionController : MonoBehaviour {
         {
             timeWhenStarted = Time.realtimeSinceStartup;
         }
-        if (Time.realtimeSinceStartup >= timeWhenStarted + 1f)
+        if (Time.realtimeSinceStartup >= timeWhenStarted + explosionDamageDelay)
         {
             Collider[] charactersInExplosionRange = Physics.OverlapSphere(transform.position, explosionRange);
             if (charactersInExplosionRange.Length > 0)

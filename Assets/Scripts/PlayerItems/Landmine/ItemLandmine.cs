@@ -10,6 +10,7 @@ public class ItemLandmine : BasePlayerItem
 
     public override void UseItem()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         if (landminePrefab && timesOfUseLeft > 0)
         {
             // TODO play landmine deploy sound

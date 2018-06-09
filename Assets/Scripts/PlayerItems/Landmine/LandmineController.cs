@@ -32,8 +32,9 @@ public class LandmineController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if(!isActive) { return; }
-        if(other.gameObject.GetComponentInParent<BaseCharacter>())
+        if(other.gameObject.GetComponentInParent<BaseCharacter>() && !other.isTrigger)
         {
+            print("activate?");
             if (!explosionParticle.isPlaying)
             {
                 explosionParticle.Play();
