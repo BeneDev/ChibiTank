@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f486efb4ae34234489f9e9aca69bfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseUpgrades:
-  - {fileID: 11400000, guid: 109199d20954e024ab5fa82df194b556, type: 2}
+  upgrades:
   - {fileID: 11400000, guid: 471d67f9b12ec8f418be2c4b4e36b2c0, type: 2}
+  - {fileID: 11400000, guid: 109199d20954e024ab5fa82df194b556, type: 2}
   - {fileID: 11400000, guid: ac4bb1c1676dc9447954efc4998f26aa, type: 2}
 --- !u!114 &114820951599942674
 MonoBehaviour:

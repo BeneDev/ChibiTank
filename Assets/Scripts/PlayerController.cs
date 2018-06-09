@@ -147,7 +147,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return equippedItem1;
+            return equippedItem[0];
         }
     }
 
@@ -155,7 +155,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return equippedItem2;
+            return equippedItem[1];
         }
     }
 
@@ -163,7 +163,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return equippedItem3;
+            return equippedItem[2];
         }
     }
 
@@ -215,9 +215,7 @@ public class PlayerController : BaseTank {
     ScriptableBodyUpgrade equippedBodyUpgrade;
     ScriptableTracksUpgrade equippedTracksUpgrade;
 
-    BasePlayerItem equippedItem1;
-    BasePlayerItem equippedItem2;
-    BasePlayerItem equippedItem3;
+    BasePlayerItem[] equippedItem = new BasePlayerItem[3];
 
     [Header("Meshes For Upgrades"), SerializeField] MeshFilter[] cockpitMeshes; // 0 = cockpit | 1 = barrel
     [SerializeField] MeshFilter bodyMesh;
@@ -257,9 +255,9 @@ public class PlayerController : BaseTank {
         mass = baseMass;
 
         // Equip the base Upgrades for the tank
-        ChangeEquippedUpgrade((ScriptableAttackCockPitUpgrade)UpgradeManager.Instance.GetBaseUpgrade(0));
-        ChangeEquippedUpgrade((ScriptableBodyUpgrade)UpgradeManager.Instance.GetBaseUpgrade(1));
-        ChangeEquippedUpgrade((ScriptableTracksUpgrade)UpgradeManager.Instance.GetBaseUpgrade(2));
+        ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableAttackCockPitUpgrade>("BaseCockpit"));
+        ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableBodyUpgrade>("BaseBody"));
+        ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableTracksUpgrade>("BaseTracks"));
 
     }
 
@@ -371,6 +369,16 @@ public class PlayerController : BaseTank {
     public void SpendPointOnAttribute()
     {
 
+    }
+
+    void EquippItem(int slot, BasePlayerItem item)
+    {
+        equippedItem[slot] = item;
+    }
+
+    void UseItem(int slot)
+    {
+        equippedItem[slot].UseItem();
     }
 
     // Changes the equipped attack upgrade

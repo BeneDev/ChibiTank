@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO maybe make items a scriptable object, like the upgrades as well
-public class BasePlayerItem : MonoBehaviour {
+[CreateAssetMenu]
+public class BasePlayerItem : ScriptableObject {
 
     public string Name
     {
@@ -23,11 +23,10 @@ public class BasePlayerItem : MonoBehaviour {
 
     [SerializeField] protected string itemName;
     [SerializeField] protected Sprite itemSprite;
+    protected bool isUnlocked = false;
 
-    public virtual void UseItem()
-    {
-        // Here goes, what the Item does. The player just calls this function on his items in his item slots. 
-        // The items then proceed to do what is implemented for them, without the player having to worry about it
-    }
+    // Here goes, what the Item does. The player just calls this function on his items in his item slots. 
+    // The items then proceed to do what is implemented for them, without the player having to worry about it
+    public virtual void UseItem() { }
 
 }
