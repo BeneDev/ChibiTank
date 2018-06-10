@@ -11,6 +11,7 @@ public class BaseCharacter : MonoBehaviour {
 
     protected int health;
     protected int defense;
+    protected int shield;
 
     #endregion
 
@@ -19,9 +20,19 @@ public class BaseCharacter : MonoBehaviour {
     // The actual function, which gets called by the projectiles
     public virtual void TakeDamage(int damage)
     {
-        if (damage - defense > 1)
+        int actualDamage = damage;
+        if (shield > 0)
         {
-            health -= damage - defense;
+            actualDamage -= shield;
+            shield -= damage;
+        }
+        if(shield < 0)
+        {
+            shield = 0;
+        }
+        if (actualDamage - defense > 1)
+        {
+            health -= actualDamage - defense;
         }
         else
         {

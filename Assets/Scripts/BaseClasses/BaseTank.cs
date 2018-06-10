@@ -63,6 +63,24 @@ public class BaseTank : BaseCharacter {
 
     protected bool isReloading = false;
 
+    // Attributes of the tank for serialization
+    [Header("Offensive Attributes"), SerializeField] protected int baseAttack = 1;
+    [SerializeField] protected float basefireRate = 1f;
+    [SerializeField] protected float baseReloadSpeed = 1f;
+    [SerializeField] protected int baseMagazineSize = 5;
+    [SerializeField] protected float baseShootKnockback = 1f;
+    [SerializeField] protected float baseShootKnockbackDuration = 1f;
+
+    [Header("Defensive Attributes"), SerializeField] protected int baseHealth = 1;
+    [SerializeField] protected int baseDefense = 1;
+    [SerializeField] protected int baseShield = 0;
+
+    [Header("Agility Attributes"), SerializeField] protected float baseTopSpeed = 1f;
+    [SerializeField] protected float baseAcceleration = 1f;
+    [SerializeField] protected float baseRotationSpeed = 1f;
+
+    [Header("Overall Attributes"), SerializeField] protected float baseMass = 1f;
+
     #endregion
 
     #region Unity Messages
@@ -76,6 +94,25 @@ public class BaseTank : BaseCharacter {
         shootTime = Time.realtimeSinceStartup;
 
         CursorController.Instance.OnReloadFinished += WhenReloadFinished;
+
+        // Initialize Attributes with base Values
+        attack = baseAttack;
+        fireRate = basefireRate;
+        reloadSpeed = baseReloadSpeed;
+        magazineSize = baseMagazineSize;
+        shootKnockback = baseShootKnockback;
+        shootKnockbackDuration = baseShootKnockbackDuration;
+
+        health = baseHealth;
+        defense = baseDefense;
+        shield = baseShield;
+
+        topSpeed = baseTopSpeed;
+        acceleration = baseAcceleration;
+        rotationSpeed = baseRotationSpeed;
+        cockPitRotationSpeed = baseRotationSpeed;
+
+        mass = baseMass;
     }
 
     // This should be called at the end of each fixed update of all Tanks who inherit from this baseTank script, as it Calculates the velocity based on the current MoveDirection and the gravity. 

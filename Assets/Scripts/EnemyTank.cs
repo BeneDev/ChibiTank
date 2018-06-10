@@ -27,23 +27,6 @@ public class EnemyTank : BaseTank {
     [SerializeField] float sightReach; // How far the enemy can see the player
     [SerializeField] float aimingTolerance = 0.1f; // The difference between the actual aiming rotation and where the player is, to check if shooting makes sense
 
-    // Attributes for any enemy tank
-    [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
-    [SerializeField] float basefireRate = 1f;
-    [SerializeField] float baseReloadSpeed = 1f;
-    [SerializeField] int baseMagazineSize = 3;
-    [SerializeField] float baseShootKnockback = 1f;
-    [SerializeField] float baseShootKnockbackDuration = 1f;
-
-    [Header("Defensive Attributes"), SerializeField] int baseHealth = 1;
-    [SerializeField] int baseDefense = 1;
-
-    [Header("Agility Attributes"), SerializeField] float baseTopSpeed = 1f;
-    [SerializeField] float baseAcceleration = 1f;
-    [SerializeField] float baseRotationSpeed = 1f;
-
-    [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
-
     // The possible states and the field to store the current state for the enemy AI State Machine
     enum EnemyState
     {
@@ -62,22 +45,6 @@ public class EnemyTank : BaseTank {
     {
         base.Awake();
         player = GameObject.FindGameObjectWithTag("Player");
-
-        attack = baseAttack;
-        fireRate = basefireRate;
-        reloadSpeed = baseReloadSpeed;
-        magazineSize = baseMagazineSize;
-        shootKnockback = baseShootKnockback;
-        shootKnockbackDuration = baseShootKnockbackDuration;
-
-        health = baseHealth;
-        defense = baseDefense;
-
-        topSpeed = baseTopSpeed;
-        acceleration = baseAcceleration;
-        rotationSpeed = baseRotationSpeed;
-
-        mass = baseMass;
     }
 
     // Change the state of the enemy accordingly and react to the new state 

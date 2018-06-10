@@ -193,23 +193,6 @@ public class PlayerController : BaseTank {
 
     LayerMask terrainLayer; // LayerMask with the ground included, to raycast for isGrounded
 
-    // Attributes of the player
-    [Header("Offensive Attributes"), SerializeField] int baseAttack = 1;
-    [SerializeField] float basefireRate = 1f;
-    [SerializeField] float baseReloadSpeed = 1f;
-    [SerializeField] int baseMagazineSize = 5;
-    [SerializeField] float baseShootKnockback = 1f;
-    [SerializeField] float baseShootKnockbackDuration = 1f;
-
-    [Header("Defensive Attributes"), SerializeField] int baseHealth = 1;
-    [SerializeField] int baseDefense = 1;
-
-    [Header("Agility Attributes"), SerializeField] float baseTopSpeed = 1f;
-    [SerializeField] float baseAcceleration = 1f;
-    [SerializeField] float baseRotationSpeed = 1f;
-
-    [Header("Overall Attributes"), SerializeField] float baseMass = 1f;
-
     // The equipped upgrades, whose values get added to the base attribute values
     ScriptableAttackCockPitUpgrade equippedAttackUpgrade;
     ScriptableBodyUpgrade equippedBodyUpgrade;
@@ -235,24 +218,6 @@ public class PlayerController : BaseTank {
         // Create the layer Mask for the terrain
         int layer = LayerMask.NameToLayer("Terrain");
         terrainLayer = 1 << layer;
-
-        // Initialize Attributes with base Values
-        attack = baseAttack;
-        fireRate = basefireRate;
-        reloadSpeed = baseReloadSpeed;
-        magazineSize = baseMagazineSize;
-        shootKnockback = baseShootKnockback;
-        shootKnockbackDuration = baseShootKnockbackDuration;
-
-        health = baseHealth;
-        defense = baseDefense;
-
-        topSpeed = baseTopSpeed;
-        acceleration = baseAcceleration;
-        rotationSpeed = baseRotationSpeed;
-        cockPitRotationSpeed = baseRotationSpeed;
-
-        mass = baseMass;
 
         // Equip the base Upgrades for the tank
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableAttackCockPitUpgrade>("BaseCockpit"));
