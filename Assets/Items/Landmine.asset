@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Landmine
   m_EditorClassIdentifier: 
   itemName: Landmine
-  itemSprite: {fileID: 21300000, guid: 3c1e7c476ca16f34ea80525d992dad08, type: 3}
+  itemSprite: {fileID: 21300000, guid: 1617915c6545ba34888a37da3593e3b0, type: 3}
   maxTimesOfUse: 5
   landminePrefab: {fileID: 1442674530142326, guid: cef416d43b5a5e348bd85d8ced79e2eb,
     type: 2}

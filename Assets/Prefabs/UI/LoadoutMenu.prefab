@@ -563,7 +563,7 @@ MonoBehaviour:
   destroyWhenClosed: 1
   disableMenusUnderneath: 1
   buttonArray: []
-  noItemSprite: {fileID: 21300000, guid: 36b733eb8005acb4f8665222e83c2fe3, type: 3}
+  noItemSprite: {fileID: 21300000, guid: 221cee7839e63a542a8683684787ecb1, type: 3}
   attackName: {fileID: 114914055084704330}
   bodyName: {fileID: 114944590734779086}
   tracksName: {fileID: 114011787263490708}
