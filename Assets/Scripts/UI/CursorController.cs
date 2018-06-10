@@ -8,6 +8,11 @@ public class CursorController : Singleton<CursorController> {
     [SerializeField] Vector2 hotSpotOffset;
     CanvasGroup ownCanvasGroup;
     [SerializeField] GameObject image;
+
+    [SerializeField] Text shotsInMagazineText;
+    [SerializeField] Text magazineSizeText;
+
+    PlayerController player;
     
     public event System.Action OnReloadFinished;
 
@@ -18,6 +23,9 @@ public class CursorController : Singleton<CursorController> {
         Cursor.visible = false;
         ownCanvasGroup = GetComponent<CanvasGroup>();
         anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player.OnMagazineSizeChanged += ChangeMagazineSizeText;
+        player.OnShotsInMagazineChanged += ChangeShotsInMagazineText;
     }
 
     private void Update()
@@ -40,6 +48,16 @@ public class CursorController : Singleton<CursorController> {
         {
             Debug.LogError("There is no panel serialized for the Cursor Controller in the Inspector!");
         }
+    }
+
+    void ChangeMagazineSizeText(int newSize)
+    {
+        magazineSizeText.text = newSize.ToString();
+    }
+
+    void ChangeShotsInMagazineText(int newShotsCount)
+    {
+        shotsInMagazineText.text = newShotsCount.ToString();
     }
 
     public void FlashupAnimation()

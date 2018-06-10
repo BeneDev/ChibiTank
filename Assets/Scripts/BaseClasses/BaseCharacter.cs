@@ -26,6 +26,7 @@ public class BaseCharacter : MonoBehaviour {
         {
             actualDamage -= shield;
             shield -= damage;
+            // TODO give visual feedback about the fact, that the shield absorbed some damage
         }
         if(shield < 0)
         {

@@ -79,7 +79,7 @@ public class LandmineController : MonoBehaviour {
                 if (!explosionAudioSource.isPlaying)
                 {
                     explosionAudioSource.Play();
-                    StartCoroutine(DeleteAfterExplosion(explosionParticle.duration));
+                    StartCoroutine(DeleteAfterExplosion(explosionParticle.main.duration));
                 }
                 camShake.shakeAmount = exploShakeAmount;
                 camShake.shakeDuration = exploShakeDuration;

@@ -253,7 +253,9 @@ public class BaseTank : BaseCharacter {
             shotSparks.Play();
         }
         shootTime = Time.realtimeSinceStartup;
+        // TODO make this functional for different kinds of projectiles, even a flamethrower
         GameObject currentBall = GameManager.Instance.GetCannonBall(shootOrigin.transform.position, cockPit.transform.forward);
+
         currentBall.GetComponent<CannonBallController>().Damage = attack;
         currentBall.GetComponent<CannonBallController>().Owner = gameObject;
         anim.SetTrigger("Shoot");

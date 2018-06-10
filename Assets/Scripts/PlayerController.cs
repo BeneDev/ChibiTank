@@ -167,9 +167,44 @@ public class PlayerController : BaseTank {
         }
     }
 
+    private int ShotsInMagazine
+    {
+        get
+        {
+            return shotsInMagazine;
+        }
+        set
+        {
+            shotsInMagazine = value;
+            if(OnShotsInMagazineChanged != null)
+            {
+                OnShotsInMagazineChanged(shotsInMagazine);
+            }
+        }
+    }
+
+    private int MagazineSize
+    {
+        get
+        {
+            return magazineSize;
+        }
+        set
+        {
+            magazineSize = value;
+            if (OnMagazineSizeChanged != null)
+            {
+                OnMagazineSizeChanged(magazineSize);
+            }
+        }
+    }
+
     #endregion
 
     #region Private Fields
+
+    public event System.Action<int> OnShotsInMagazineChanged;
+    public event System.Action<int> OnMagazineSizeChanged;
 
     PlayerInput input;
     GameObject cameraArm;
@@ -226,7 +261,19 @@ public class PlayerController : BaseTank {
 
         //Equip the landmine
         EquippItem(0, ItemManager.Instance.GetItem<ItemLandmine>());
+    }
 
+    private void Start()
+    {
+        // Update the Ammo display
+        if (OnShotsInMagazineChanged != null)
+        {
+            OnShotsInMagazineChanged(ShotsInMagazine);
+        }
+        if (OnMagazineSizeChanged != null)
+        {
+            OnMagazineSizeChanged(MagazineSize);
+        }
     }
 
     // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
@@ -370,7 +417,7 @@ public class PlayerController : BaseTank {
         attack = baseAttack + upgrade.attack;
         fireRate = basefireRate + upgrade.fireRate;
         reloadSpeed = baseReloadSpeed + upgrade.reloadSpeed;
-        magazineSize = baseMagazineSize + upgrade.magazineSize;
+        MagazineSize = baseMagazineSize + upgrade.magazineSize;
         shootKnockback = baseShootKnockback + upgrade.shootKnockback;
         shootKnockbackDuration = baseShootKnockbackDuration + upgrade.shootKnockbackDuration;
 
@@ -454,6 +501,15 @@ public class PlayerController : BaseTank {
         CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
     }
 
+    protected override void WhenReloadFinished()
+    {
+        base.WhenReloadFinished();
+        if(OnShotsInMagazineChanged != null)
+        {
+            OnShotsInMagazineChanged(shotsInMagazine);
+        }
+    }
+
     // Make the tank die and explode and show the Gameover menu after that
     protected override void Die()
     {
@@ -471,6 +527,7 @@ public class PlayerController : BaseTank {
         }
         MenuManager.Instance.MenuStack.Clear();
         Camera.main.GetComponentInParent<Animator>().SetTrigger("Idle");
+        ShotsInMagazine = MagazineSize;
         isDead = false;
     }
 
@@ -544,6 +601,10 @@ public class PlayerController : BaseTank {
         CursorController.Instance.FlashupAnimation();
         camShake.shakeAmount = shootCameraShakeAmount;
         camShake.shakeDuration = shootCameraShakeDuration;
+        if (OnShotsInMagazineChanged != null)
+        {
+            OnShotsInMagazineChanged(shotsInMagazine);
+        }
     }
 
     // Play the sound of the tank engine at the right volume
