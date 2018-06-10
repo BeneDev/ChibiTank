@@ -18,6 +18,7 @@ public class ExplosionController : MonoBehaviour {
 
     [SerializeField] float explosionRange = 1f;
     [SerializeField] float explosionDamageDelay = 1f;
+    [SerializeField] float damageHitboxStayDuration = 1f; // This has to be bigger than explosionDamageDelay, or else, it wont do any damage at all
     int damage = 3;
     float timeWhenStarted = -100f;
 
@@ -28,7 +29,7 @@ public class ExplosionController : MonoBehaviour {
         {
             timeWhenStarted = Time.realtimeSinceStartup;
         }
-        if (Time.realtimeSinceStartup >= timeWhenStarted + explosionDamageDelay)
+        if (Time.realtimeSinceStartup >= timeWhenStarted + explosionDamageDelay && Time.realtimeSinceStartup < timeWhenStarted + damageHitboxStayDuration)
         {
             Collider[] charactersInExplosionRange = Physics.OverlapSphere(transform.position, explosionRange);
             if (charactersInExplosionRange.Length > 0)

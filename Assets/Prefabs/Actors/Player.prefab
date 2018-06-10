@@ -1813,13 +1813,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0bc8dcfee9ab54044853cae832fc3991, type: 3}
   explosionAudioSource: {fileID: 82966988425248558}
   reloadSource: {fileID: 82632078817419686}
-  rayToGroundLength: 1
-  talkDistance: 10
-  engineSound: {fileID: 82154836985891580}
-  engineSoundGain: 0.0116
-  idleEngineVolume: 0.04
-  shootCameraShakeAmount: 0.28
-  shootCameraShakeDuration: 0.11
   baseAttack: 1
   basefireRate: 0.4
   baseReloadSpeed: 1
@@ -1828,10 +1821,18 @@ MonoBehaviour:
   baseShootKnockbackDuration: 0.2
   baseHealth: 5
   baseDefense: 1
+  baseShield: 0
   baseTopSpeed: 14
   baseAcceleration: 2
   baseRotationSpeed: 10
   baseMass: 4
+  rayToGroundLength: 1
+  talkDistance: 10
+  engineSound: {fileID: 82154836985891580}
+  engineSoundGain: 0.0116
+  idleEngineVolume: 0.04
+  shootCameraShakeAmount: 0.28
+  shootCameraShakeDuration: 0.11
   cockpitMeshes:
   - {fileID: 33083206834476124}
   - {fileID: 33896363844268288}
@@ -1866,6 +1867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRange: 5
+  explosionDamageDelay: 1
+  damageHitboxStayDuration: 2
 --- !u!136 &136427828973047920
 CapsuleCollider:
   m_ObjectHideFlags: 1
