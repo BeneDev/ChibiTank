@@ -206,6 +206,8 @@ public class PlayerController : BaseTank {
     public event System.Action<int> OnShotsInMagazineChanged;
     public event System.Action<int> OnMagazineSizeChanged;
 
+    public event System.Action<int, Sprite> OnEquippedItemChanged;
+
     PlayerInput input;
     GameObject cameraArm;
 
@@ -258,9 +260,6 @@ public class PlayerController : BaseTank {
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableAttackCockPitUpgrade>("BaseCockpit"));
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableBodyUpgrade>("BaseBody"));
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableTracksUpgrade>("BaseTracks"));
-
-        //Equip the landmine
-        EquippItem(0, ItemManager.Instance.GetItem<ItemLandmine>());
     }
 
     private void Start()
@@ -274,6 +273,8 @@ public class PlayerController : BaseTank {
         {
             OnMagazineSizeChanged(MagazineSize);
         }
+        //Equip the landmine
+        EquippItem(0, ItemManager.Instance.GetItem<ItemLandmine>());
     }
 
     // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
@@ -402,6 +403,10 @@ public class PlayerController : BaseTank {
     {
         equippedItem[slot] = item;
         item.ResetItemUsageTimes();
+        if(OnEquippedItemChanged != null)
+        {
+            OnEquippedItemChanged(slot, item.Sprite);
+        }
     }
 
     void UseItem(int slot)

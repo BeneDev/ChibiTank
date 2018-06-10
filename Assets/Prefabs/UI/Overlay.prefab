@@ -300,7 +300,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1617915c6545ba34888a37da3593e3b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 221cee7839e63a542a8683684787ecb1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -476,6 +476,10 @@ MonoBehaviour:
   image: {fileID: 1494106381745774}
   shotsInMagazineText: {fileID: 114236068791128330}
   magazineSizeText: {fileID: 114410948505087138}
+  itemImages:
+  - {fileID: 114151120764523788}
+  - {fileID: 114036394889536584}
+  - {fileID: 114241791827137130}
 --- !u!114 &114596682457374958
 MonoBehaviour:
   m_ObjectHideFlags: 1
