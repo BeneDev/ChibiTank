@@ -21,6 +21,7 @@ public class BaseCharacter : MonoBehaviour {
     public virtual void TakeDamage(int damage)
     {
         int actualDamage = damage;
+        // Subtract the shield, if there is some, from the damage
         if (shield > 0)
         {
             actualDamage -= shield;
@@ -30,6 +31,13 @@ public class BaseCharacter : MonoBehaviour {
         {
             shield = 0;
         }
+        // If the shield tanked all damage, the character will not be damaged
+        if (actualDamage <= 0)
+        {
+            return;
+        }
+        // Else the character will be damaged at least one point, if the defense is greater than the damage. 
+        // Else the difference of the defense subtracted from the damage will be the damage, the character will suffer from
         if (actualDamage - defense > 1)
         {
             health -= actualDamage - defense;
