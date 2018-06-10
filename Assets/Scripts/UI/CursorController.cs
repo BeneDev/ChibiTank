@@ -14,6 +14,8 @@ public class CursorController : Singleton<CursorController> {
 
     [SerializeField] Image[] itemImages;
 
+    [SerializeField] Text[] itemUsageCountTexts;
+
     PlayerController player;
     
     public event System.Action OnReloadFinished;
@@ -30,6 +32,8 @@ public class CursorController : Singleton<CursorController> {
         player.OnShotsInMagazineChanged += ChangeShotsInMagazineText;
 
         player.OnEquippedItemChanged += ChangeEquippedItemDisplay;
+
+        player.OnEquippedItemUsageCountChanged += ChangeEquippedItemUsageCountText;
     }
 
     private void Update()
@@ -67,6 +71,11 @@ public class CursorController : Singleton<CursorController> {
     void ChangeEquippedItemDisplay(int slot, Sprite newSprite)
     {
         itemImages[slot].sprite = newSprite;
+    }
+
+    void ChangeEquippedItemUsageCountText(int slot, int newCount)
+    {
+        itemUsageCountTexts[slot].text = newCount.ToString();
     }
 
     public void FlashupAnimation()

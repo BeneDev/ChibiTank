@@ -480,6 +480,10 @@ MonoBehaviour:
   - {fileID: 114151120764523788}
   - {fileID: 114036394889536584}
   - {fileID: 114241791827137130}
+  itemUsageCountTexts:
+  - {fileID: 114953745759921784}
+  - {fileID: 114687299916389718}
+  - {fileID: 114868860610350934}
 --- !u!114 &114596682457374958
 MonoBehaviour:
   m_ObjectHideFlags: 1

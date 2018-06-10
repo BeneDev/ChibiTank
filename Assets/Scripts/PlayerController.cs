@@ -147,7 +147,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return equippedItem[0];
+            return equippedItems[0];
         }
     }
 
@@ -155,7 +155,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return equippedItem[1];
+            return equippedItems[1];
         }
     }
 
@@ -163,7 +163,7 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return equippedItem[2];
+            return equippedItems[2];
         }
     }
 
@@ -207,6 +207,7 @@ public class PlayerController : BaseTank {
     public event System.Action<int> OnMagazineSizeChanged;
 
     public event System.Action<int, Sprite> OnEquippedItemChanged;
+    public event System.Action<int, int> OnEquippedItemUsageCountChanged;
 
     PlayerInput input;
     GameObject cameraArm;
@@ -235,7 +236,7 @@ public class PlayerController : BaseTank {
     ScriptableBodyUpgrade equippedBodyUpgrade;
     ScriptableTracksUpgrade equippedTracksUpgrade;
 
-    BasePlayerItem[] equippedItem = new BasePlayerItem[3];
+    BasePlayerItem[] equippedItems = new BasePlayerItem[3];
 
     [Header("Meshes For Upgrades"), SerializeField] MeshFilter[] cockpitMeshes; // 0 = cockpit | 1 = barrel
     [SerializeField] MeshFilter bodyMesh;
@@ -260,6 +261,9 @@ public class PlayerController : BaseTank {
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableAttackCockPitUpgrade>("BaseCockpit"));
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableBodyUpgrade>("BaseBody"));
         ChangeEquippedUpgrade(UpgradeManager.Instance.GetUpgrade<ScriptableTracksUpgrade>("BaseTracks"));
+
+        //Equip the landmine
+        EquippItem(0, ItemManager.Instance.GetItem<ItemLandmine>());
     }
 
     private void Start()
@@ -273,8 +277,46 @@ public class PlayerController : BaseTank {
         {
             OnMagazineSizeChanged(MagazineSize);
         }
-        //Equip the landmine
-        EquippItem(0, ItemManager.Instance.GetItem<ItemLandmine>());
+        // Update the item count display
+        if (OnEquippedItemUsageCountChanged != null)
+        {
+            if (equippedItems[0])
+            {
+                OnEquippedItemUsageCountChanged(0, equippedItems[0].TimesOfUseLeft);
+                if(OnEquippedItemChanged != null)
+                {
+                    OnEquippedItemChanged(0, equippedItems[0].Sprite);
+                }
+            }
+            else
+            {
+                OnEquippedItemUsageCountChanged(0, 0);
+            }
+            if (equippedItems[1])
+            {
+                OnEquippedItemUsageCountChanged(1, equippedItems[1].TimesOfUseLeft);
+                if(OnEquippedItemChanged != null)
+                {
+                    OnEquippedItemChanged(1, equippedItems[1].Sprite);
+                }
+            }
+            else
+            {
+                OnEquippedItemUsageCountChanged(1, 0);
+            }
+            if (equippedItems[2])
+            {
+                OnEquippedItemUsageCountChanged(2, equippedItems[2].TimesOfUseLeft);
+                if (OnEquippedItemChanged != null)
+                {
+                    OnEquippedItemChanged(2, equippedItems[2].Sprite);
+                }
+            }
+            else
+            {
+                OnEquippedItemUsageCountChanged(2, 0);
+            }
+        }
     }
 
     // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
@@ -401,7 +443,7 @@ public class PlayerController : BaseTank {
 
     void EquippItem(int slot, BasePlayerItem item)
     {
-        equippedItem[slot] = item;
+        equippedItems[slot] = item;
         item.ResetItemUsageTimes();
         if(OnEquippedItemChanged != null)
         {
@@ -411,7 +453,11 @@ public class PlayerController : BaseTank {
 
     void UseItem(int slot)
     {
-        equippedItem[slot].UseItem();
+        equippedItems[slot].UseItem();
+        if(OnEquippedItemUsageCountChanged != null)
+        {
+            OnEquippedItemUsageCountChanged(slot, equippedItems[slot].TimesOfUseLeft);
+        }
     }
 
     // Changes the equipped attack upgrade

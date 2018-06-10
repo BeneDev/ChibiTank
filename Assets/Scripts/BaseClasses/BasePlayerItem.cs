@@ -22,6 +22,14 @@ public class BasePlayerItem : ScriptableObject
         }
     }
 
+    public int TimesOfUseLeft
+    {
+        get
+        {
+            return timesOfUseLeft;
+        }
+    }
+
     [SerializeField] protected string itemName;
     [SerializeField] protected Sprite itemSprite;
     [SerializeField] protected int maxTimesOfUse = 1;
