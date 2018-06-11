@@ -3,19 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShieldBarController : MonoBehaviour {
-
-    [SerializeField] Text numberDisplay;
-    [SerializeField] Slider barSlider;
-    CanvasGroup canvasGroup;
-
-    PlayerController player;
-
-    private void Awake()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
+public class ShieldBarController : BaseBarController {
 
     private void Start()
     {
@@ -23,30 +11,18 @@ public class ShieldBarController : MonoBehaviour {
         player.OnMaxShieldChanged += ChangeBarMaximum;
     }
 
-    void ChangeBarValue(int newValue)
+    protected override void ChangeBarMaximum(int newMax)
     {
-        barSlider.value = newValue;
-    }
-
-    void ChangeBarMaximum(int newMax)
-    {
-        barSlider.maxValue = newMax;
+        base.ChangeBarMaximum(newMax);
         if(newMax <= 0 && canvasGroup)
         {
             canvasGroup.alpha = 0f;
+            canModifyAlphaOutside = false;
         }
         else if (newMax > 0 && canvasGroup)
         {
             canvasGroup.alpha = 1f;
-        }
-    }
-
-    public void OnBarValueChanged(float newValue)
-    {
-        if(numberDisplay)
-        {
-            int displayValue = (int)newValue;
-            numberDisplay.text = displayValue.ToString();
+            canModifyAlphaOutside = true;
         }
     }
 }

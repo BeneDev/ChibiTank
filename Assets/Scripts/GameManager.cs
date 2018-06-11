@@ -72,6 +72,12 @@ public class GameManager : MonoBehaviour {
 
     bool isCursorVisible = true;
 
+    public List<GameObject> enemiesNearbyPlayer;
+
+    public event System.Action<int> OnEnemiesNearbyPlayerChanged;
+
+    int oldEnemiesNearbyPlayerCount;
+
     #endregion
 
     #region Unity Messages
@@ -103,6 +109,7 @@ public class GameManager : MonoBehaviour {
                 freeCannonBalls.Push(ballToPush);
             }
         }
+        oldEnemiesNearbyPlayerCount = enemiesNearbyPlayer.Count;
     }
 
     private void Update()
@@ -115,6 +122,11 @@ public class GameManager : MonoBehaviour {
         if(!isControllerInput && !isCursorVisible)
         {
             isCursorVisible = true;
+        }
+        if(oldEnemiesNearbyPlayerCount != enemiesNearbyPlayer.Count)
+        {
+            OnEnemiesNearbyPlayerChanged(enemiesNearbyPlayer.Count);
+            oldEnemiesNearbyPlayerCount = enemiesNearbyPlayer.Count;
         }
     }
 

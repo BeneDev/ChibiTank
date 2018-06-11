@@ -17,6 +17,9 @@ public class OverlayController : Singleton<OverlayController> {
     [SerializeField] Text[] itemUsageCountTexts;
 
     PlayerController player;
+
+    [SerializeField] BaseBarController[] bars; // To fade out the health and shield bar when not in a fight
+    bool areBarsFadedIn = true;
     
     public event System.Action OnReloadFinished;
 
@@ -34,6 +37,53 @@ public class OverlayController : Singleton<OverlayController> {
         player.OnEquippedItemChanged += ChangeEquippedItemDisplay;
 
         player.OnEquippedItemUsageCountChanged += ChangeEquippedItemUsageCountText;
+        GameManager.Instance.OnEnemiesNearbyPlayerChanged += ControlBars;
+    }
+
+    void ControlBars(int enemyCount)
+    {
+        if(enemyCount <= 0 && areBarsFadedIn)
+        {
+            StartCoroutine(FadeOutBars(1f));
+        }
+        else if (enemyCount > 0 && !areBarsFadedIn)
+        {
+            StartCoroutine(FadeInBars(1f));
+        }
+    }
+
+    IEnumerator FadeInBars(float duration)
+    {
+        areBarsFadedIn = true;
+        for(float t = 0; t < duration; t += Time.deltaTime)
+        {
+            foreach (BaseBarController obj in bars)
+            {
+                obj.CanvasAlpha = t / duration;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        foreach (BaseBarController obj in bars)
+        {
+            obj.CanvasAlpha = 1f;
+        }
+    }
+
+    IEnumerator FadeOutBars(float duration)
+    {
+        areBarsFadedIn = false;
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            foreach (BaseBarController obj in bars)
+            {
+                obj.CanvasAlpha = 1 - t / duration;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        foreach (BaseBarController obj in bars)
+        {
+            obj.CanvasAlpha = 0f;
+        }
     }
 
     private void Update()

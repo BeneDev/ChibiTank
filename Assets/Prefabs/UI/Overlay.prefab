@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 224328992835715970}
   - component: {fileID: 114768276659684410}
   - component: {fileID: 114274971088155090}
+  - component: {fileID: 225399259048472672}
   m_Layer: 5
   m_Name: ShieldBar
   m_TagString: Untagged
@@ -295,6 +296,7 @@ GameObject:
   - component: {fileID: 224233757108902268}
   - component: {fileID: 114951111726435304}
   - component: {fileID: 114870168437168620}
+  - component: {fileID: 225446881283330240}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -609,10 +611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberDisplay: {fileID: 114022968338048230}
   barSlider: {fileID: 114768276659684410}
-  displayingElements:
-  - {fileID: 1467338658295264}
-  - {fileID: 1051383001176544}
-  - {fileID: 1367416750101226}
 --- !u!114 &114401931085402448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -750,6 +748,9 @@ MonoBehaviour:
   - {fileID: 114953745759921784}
   - {fileID: 114687299916389718}
   - {fileID: 114868860610350934}
+  bars:
+  - {fileID: 114870168437168620}
+  - {fileID: 114274971088155090}
 --- !u!114 &114555205972426526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1724,6 +1725,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225399259048472672
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1578894885375858}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!225 &225427761886591212
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -1734,4 +1746,15 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!225 &225446881283330240
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606174850014226}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

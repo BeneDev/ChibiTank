@@ -1600,6 +1600,7 @@ MonoBehaviour:
   patrolSpeedMultiplier: 0.3
   searchPlayerDuration: 6
   sightReach: 25
+  sightReachMultiplier: 2.5
   aimingTolerance: 0.01
 --- !u!114 &114803253481178202
 MonoBehaviour:

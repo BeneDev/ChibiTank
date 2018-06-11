@@ -25,6 +25,7 @@ public class EnemyTank : BaseTank {
     [SerializeField] float searchPlayerDuration = 3f; // How long the enemy will search for the player after he lost sight
 
     [SerializeField] float sightReach; // How far the enemy can see the player
+    [SerializeField] float sightReachMultiplier; // This value will get multiplied to the sight reach, making up the distance, when the enemy communicates, that he is nearby the player
     [SerializeField] float aimingTolerance = 0.1f; // The difference between the actual aiming rotation and where the player is, to check if shooting makes sense
 
     // The possible states and the field to store the current state for the enemy AI State Machine
@@ -59,6 +60,14 @@ public class EnemyTank : BaseTank {
                 Destroy(gameObject);
             }
             return;
+        }
+        if(!isDead && toPlayer.magnitude < sightReach * sightReachMultiplier && !GameManager.Instance.enemiesNearbyPlayer.Contains(gameObject))
+        {
+            GameManager.Instance.enemiesNearbyPlayer.Add(gameObject);
+        }
+        else if (isDead || toPlayer.magnitude > sightReach * sightReachMultiplier && GameManager.Instance.enemiesNearbyPlayer.Contains(gameObject))
+        {
+            GameManager.Instance.enemiesNearbyPlayer.Remove(gameObject);
         }
         if (state == EnemyState.patroling)
         {
