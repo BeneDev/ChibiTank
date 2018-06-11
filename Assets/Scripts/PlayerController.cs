@@ -12,11 +12,11 @@ public class PlayerController : BaseTank {
     {
         get
         {
-            return baseHealth;
+            return maxHealth;
         }
         set
         {
-            baseHealth = value;
+            maxHealth = value;
             if (OnMaxHealthChanged != null)
             {
                 OnMaxHealthChanged(MaxHealth);
@@ -37,6 +37,39 @@ public class PlayerController : BaseTank {
             if (OnHealthChanged != null)
             {
                 OnHealthChanged(Health);
+            }
+        }
+    }
+
+    private int MaxShield
+    {
+        get
+        {
+            return maxShield;
+        }
+        set
+        {
+            maxShield = value;
+            if (OnMaxShieldChanged != null)
+            {
+                OnMaxShieldChanged(MaxShield);
+            }
+
+        }
+    }
+
+    private int Shield
+    {
+        get
+        {
+            return shield;
+        }
+        set
+        {
+            shield = value;
+            if (OnShieldChanged != null)
+            {
+                OnShieldChanged(Shield);
             }
         }
     }
@@ -245,6 +278,9 @@ public class PlayerController : BaseTank {
     public event System.Action<int> OnMaxHealthChanged;
     public event System.Action<int> OnHealthChanged;
 
+    public event System.Action<int> OnMaxShieldChanged;
+    public event System.Action<int> OnShieldChanged;
+
     PlayerInput input;
     GameObject cameraArm;
 
@@ -436,6 +472,10 @@ public class PlayerController : BaseTank {
         {
             OnHealthChanged(Health);
         }
+        if(OnShieldChanged != null)
+        {
+            OnShieldChanged(Shield);
+        }
     }
 
     void EquippItem(int slot, BasePlayerItem item)
@@ -495,6 +535,8 @@ public class PlayerController : BaseTank {
         Health = baseHealth + upgrade.health;
         MaxHealth = baseHealth + upgrade.health;
         defense = baseDefense + upgrade.defense;
+        Shield = baseShield + upgrade.shield;
+        MaxShield = baseShield + upgrade.shield;
 
         mass = baseMass + equippedBodyUpgrade.mass;
         if (equippedAttackUpgrade)
@@ -740,6 +782,14 @@ public class PlayerController : BaseTank {
             if (OnMaxHealthChanged != null)
             {
                 OnMaxHealthChanged(MaxHealth);
+            }
+            if (OnShieldChanged != null)
+            {
+                OnShieldChanged(Shield);
+            }
+            if (OnMaxShieldChanged != null)
+            {
+                OnMaxShieldChanged(MaxShield);
             }
         }
     }
