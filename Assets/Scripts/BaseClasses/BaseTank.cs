@@ -95,7 +95,7 @@ public class BaseTank : BaseCharacter {
 
         shootTime = Time.realtimeSinceStartup;
 
-        CursorController.Instance.OnReloadFinished += WhenReloadFinished;
+        OverlayController.Instance.OnReloadFinished += WhenReloadFinished;
 
         // Initialize Attributes with base Values
         attack = baseAttack;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CursorController : Singleton<CursorController> {
+public class OverlayController : Singleton<OverlayController> {
 
     [SerializeField] Vector2 hotSpotOffset;
     CanvasGroup ownCanvasGroup;

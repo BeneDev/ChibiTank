@@ -7,13 +7,14 @@ public class ShieldBarController : MonoBehaviour {
 
     [SerializeField] Text numberDisplay;
     [SerializeField] Slider barSlider;
-    [SerializeField] GameObject[] displayingElements;
+    CanvasGroup canvasGroup;
 
     PlayerController player;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Start()
@@ -30,19 +31,13 @@ public class ShieldBarController : MonoBehaviour {
     void ChangeBarMaximum(int newMax)
     {
         barSlider.maxValue = newMax;
-        if(newMax <= 0 && displayingElements.Length > 0)
+        if(newMax <= 0 && canvasGroup)
         {
-            foreach(GameObject obj in displayingElements)
-            {
-                obj.SetActive(false);
-            }
+            canvasGroup.alpha = 0f;
         }
-        else if (newMax > 0 && displayingElements.Length > 0)
+        else if (newMax > 0 && canvasGroup)
         {
-            foreach (GameObject obj in displayingElements)
-            {
-                obj.SetActive(true);
-            }
+            canvasGroup.alpha = 1f;
         }
     }
 

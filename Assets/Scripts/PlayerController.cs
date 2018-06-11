@@ -589,7 +589,7 @@ public class PlayerController : BaseTank {
     protected override void StartReloading()
     {
         base.StartReloading();
-        CursorController.Instance.TriggerReloadAnimation(reloadSpeed);
+        OverlayController.Instance.TriggerReloadAnimation(reloadSpeed);
     }
 
     protected override void WhenReloadFinished()
@@ -689,7 +689,7 @@ public class PlayerController : BaseTank {
     protected override void Shoot()
     {
         base.Shoot();
-        CursorController.Instance.FlashupAnimation();
+        OverlayController.Instance.FlashupAnimation();
         camShake.shakeAmount = shootCameraShakeAmount;
         camShake.shakeDuration = shootCameraShakeDuration;
         if (OnShotsInMagazineChanged != null)
