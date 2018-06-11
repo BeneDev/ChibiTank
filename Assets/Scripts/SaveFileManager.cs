@@ -28,14 +28,11 @@ public class SaveFileManager : MonoBehaviour {
 
     // TODO give in an int parameter to choose which savefile to load. Savefiles are named savefile1, savefile2, ... This way, you can choose the right savefile in the load menu
     // Load data this way
-    public static void LoadGame()
+    public static SaveFile LoadGame()
     {
         string filename = "savefile" + saveIndex.ToString();
         SaveFile save = SaveFile.Load(filename);
-        if(save != null)
-        {
-            GameObject.FindGameObjectWithTag("Player").transform.position = save.playerPos;
-        }
+        return save;
         //Debug.LogFormat("Load - Pos.x: {0} | Pos.y: {1} | Pos.z: {2}", save.playerPos.x, save.playerPos.y, save.playerPos.z);
     }
 

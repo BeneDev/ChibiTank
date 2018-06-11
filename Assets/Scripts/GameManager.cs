@@ -79,7 +79,8 @@ public class GameManager : MonoBehaviour {
     private void Awake()
     {
         // Load the game if there is a savestate
-        SaveFileManager.LoadGame();
+        SaveFile save = SaveFileManager.LoadGame();
+        GameObject.FindGameObjectWithTag("Player").transform.position = save.playerPos;
         // Lock the mouse to the game window
         lockedToWindow = CursorLockMode.Confined;
         Cursor.lockState = lockedToWindow;
