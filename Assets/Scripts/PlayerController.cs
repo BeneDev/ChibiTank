@@ -8,6 +8,39 @@ public class PlayerController : BaseTank {
 
     #region Properties
 
+    private int MaxHealth
+    {
+        get
+        {
+            return baseHealth;
+        }
+        set
+        {
+            baseHealth = value;
+            if (OnMaxHealthChanged != null)
+            {
+                OnMaxHealthChanged(MaxHealth);
+            }
+
+        }
+    }
+
+    private int Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = value;
+            if (OnHealthChanged != null)
+            {
+                OnHealthChanged(Health);
+            }
+        }
+    }
+
     // Lets the enemies react to a dead player, instead of keeping attacking
     public bool IsDead
     {
@@ -209,6 +242,9 @@ public class PlayerController : BaseTank {
     public event System.Action<int, Sprite> OnEquippedItemChanged;
     public event System.Action<int, int> OnEquippedItemUsageCountChanged;
 
+    public event System.Action<int> OnMaxHealthChanged;
+    public event System.Action<int> OnHealthChanged;
+
     PlayerInput input;
     GameObject cameraArm;
 
@@ -268,55 +304,7 @@ public class PlayerController : BaseTank {
 
     private void Start()
     {
-        // Update the Ammo display
-        if (OnShotsInMagazineChanged != null)
-        {
-            OnShotsInMagazineChanged(ShotsInMagazine);
-        }
-        if (OnMagazineSizeChanged != null)
-        {
-            OnMagazineSizeChanged(MagazineSize);
-        }
-        // Update the item count display
-        if (OnEquippedItemUsageCountChanged != null)
-        {
-            if (equippedItems[0])
-            {
-                OnEquippedItemUsageCountChanged(0, equippedItems[0].TimesOfUseLeft);
-                if(OnEquippedItemChanged != null)
-                {
-                    OnEquippedItemChanged(0, equippedItems[0].Sprite);
-                }
-            }
-            else
-            {
-                OnEquippedItemUsageCountChanged(0, 0);
-            }
-            if (equippedItems[1])
-            {
-                OnEquippedItemUsageCountChanged(1, equippedItems[1].TimesOfUseLeft);
-                if(OnEquippedItemChanged != null)
-                {
-                    OnEquippedItemChanged(1, equippedItems[1].Sprite);
-                }
-            }
-            else
-            {
-                OnEquippedItemUsageCountChanged(1, 0);
-            }
-            if (equippedItems[2])
-            {
-                OnEquippedItemUsageCountChanged(2, equippedItems[2].TimesOfUseLeft);
-                if (OnEquippedItemChanged != null)
-                {
-                    OnEquippedItemChanged(2, equippedItems[2].Sprite);
-                }
-            }
-            else
-            {
-                OnEquippedItemUsageCountChanged(2, 0);
-            }
-        }
+        InitialDelegateCalls();
     }
 
     // Let the player move and shoot, whilst playing the right animations and particle effects, reacting to the environment at all times
@@ -441,6 +429,15 @@ public class PlayerController : BaseTank {
 
     }
 
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if(OnHealthChanged != null)
+        {
+            OnHealthChanged(Health);
+        }
+    }
+
     void EquippItem(int slot, BasePlayerItem item)
     {
         equippedItems[slot] = item;
@@ -495,7 +492,8 @@ public class PlayerController : BaseTank {
     {
         equippedBodyUpgrade = upgrade;
 
-        health = baseHealth + upgrade.health;
+        Health = baseHealth + upgrade.health;
+        MaxHealth = baseHealth + upgrade.health;
         defense = baseDefense + upgrade.defense;
 
         mass = baseMass + equippedBodyUpgrade.mass;
@@ -571,7 +569,7 @@ public class PlayerController : BaseTank {
     // Get the player tank into the original form. Called after the tank respawns
     public void ResetPlayerTank()
     {
-        health = baseHealth;
+        Health = MaxHealth;
         foreach(var menu in MenuManager.Instance.MenuStack)
         {
             Destroy(menu.gameObject);
@@ -681,6 +679,68 @@ public class PlayerController : BaseTank {
         else
         {
             bIsGrounded = false;
+        }
+    }
+
+    // Calls all the player delegates one time to ensure, that all the ui is up to date and initialized correctly
+    private void InitialDelegateCalls()
+    {
+        // Update the Ammo display
+        if (OnShotsInMagazineChanged != null)
+        {
+            OnShotsInMagazineChanged(ShotsInMagazine);
+        }
+        if (OnMagazineSizeChanged != null)
+        {
+            OnMagazineSizeChanged(MagazineSize);
+        }
+        // Update the item count display
+        if (OnEquippedItemUsageCountChanged != null)
+        {
+            if (equippedItems[0])
+            {
+                OnEquippedItemUsageCountChanged(0, equippedItems[0].TimesOfUseLeft);
+                if (OnEquippedItemChanged != null)
+                {
+                    OnEquippedItemChanged(0, equippedItems[0].Sprite);
+                }
+            }
+            else
+            {
+                OnEquippedItemUsageCountChanged(0, 0);
+            }
+            if (equippedItems[1])
+            {
+                OnEquippedItemUsageCountChanged(1, equippedItems[1].TimesOfUseLeft);
+                if (OnEquippedItemChanged != null)
+                {
+                    OnEquippedItemChanged(1, equippedItems[1].Sprite);
+                }
+            }
+            else
+            {
+                OnEquippedItemUsageCountChanged(1, 0);
+            }
+            if (equippedItems[2])
+            {
+                OnEquippedItemUsageCountChanged(2, equippedItems[2].TimesOfUseLeft);
+                if (OnEquippedItemChanged != null)
+                {
+                    OnEquippedItemChanged(2, equippedItems[2].Sprite);
+                }
+            }
+            else
+            {
+                OnEquippedItemUsageCountChanged(2, 0);
+            }
+            if (OnHealthChanged != null)
+            {
+                OnHealthChanged(Health);
+            }
+            if (OnMaxHealthChanged != null)
+            {
+                OnMaxHealthChanged(MaxHealth);
+            }
         }
     }
 

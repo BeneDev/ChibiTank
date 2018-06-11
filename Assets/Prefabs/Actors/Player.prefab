@@ -1820,6 +1820,7 @@ MonoBehaviour:
   baseShootKnockback: 60
   baseShootKnockbackDuration: 0.2
   baseHealth: 5
+  maxHealth: 0
   baseDefense: 1
   baseShield: 0
   baseTopSpeed: 14

@@ -72,6 +72,7 @@ public class BaseTank : BaseCharacter {
     [SerializeField] protected float baseShootKnockbackDuration = 1f;
 
     [Header("Defensive Attributes"), SerializeField] protected int baseHealth = 1;
+    [SerializeField] protected int maxHealth;
     [SerializeField] protected int baseDefense = 1;
     [SerializeField] protected int baseShield = 0;
 
@@ -104,6 +105,7 @@ public class BaseTank : BaseCharacter {
         shootKnockbackDuration = baseShootKnockbackDuration;
 
         health = baseHealth;
+        maxHealth = baseHealth;
         defense = baseDefense;
         shield = baseShield;
 
