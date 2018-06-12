@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class BarController : BaseBarController {
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         player.OnHealthChanged += ChangeBarValue;
         player.OnMaxHealthChanged += ChangeBarMaximum;
     }

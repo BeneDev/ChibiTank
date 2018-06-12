@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class ShieldBarController : BaseBarController {
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         player.OnShieldChanged += ChangeBarValue;
         player.OnMaxShieldChanged += ChangeBarMaximum;
     }
