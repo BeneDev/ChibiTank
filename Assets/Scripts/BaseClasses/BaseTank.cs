@@ -128,6 +128,7 @@ public class BaseTank : BaseCharacter {
         {
             velocity += (Vector3.down * (-Physics.gravity.y * mass)) * Time.fixedDeltaTime;
         }
+        // TODO This causes a weird bug, making the enemy jumping to (-infinity, -infinity, infinity) probably after some time, because the velocity gets too big in the gravity value
         transform.position += velocity * Time.fixedDeltaTime;
         if(shotsInMagazine <= 0 && !isReloading)
         {

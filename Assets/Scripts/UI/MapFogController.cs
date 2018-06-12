@@ -9,7 +9,6 @@ public class MapFogController : MonoBehaviour {
     RawImage image;
 
     GameObject player;
-    Vector2 pixelToUnhideAround;
 
     Texture2D mapFogTexture;
 
@@ -45,22 +44,17 @@ public class MapFogController : MonoBehaviour {
 
     private void Update()
     {
-        pixelToUnhideAround = new Vector2(player.transform.position.x + 500f, player.transform.position.z + 500f);
-        SetTransparencyWherePlayerWas(pixelToUnhideAround, unhideRadius);
-        //print(mapFogTexture.GetPixel((int)pixelToUnhideAround.x, (int)pixelToUnhideAround.y).a);
+        SetTransparencyWherePlayerWas((int)player.transform.position.x + 500, (int)player.transform.position.z + 500, unhideRadius);
     }
 
-    void SetTransparencyWherePlayerWas(Vector2 position, int radius)
+    void SetTransparencyWherePlayerWas(int x, int y, int radius)
     {
-        for (int x = (int)position.x - radius; x < (int)position.x + radius; x++)
+        // TODO Make this a smoothed out circle
+        for (int forX = x - radius; forX < x + radius; forX++)
         {
-            for (int y = (int)position.y - radius; y < (int)position.y + radius; y++)
+            for (int forY = y - radius; forY < y + radius; forY++)
             {
-                //if ((int)Mathf.Sqrt(Mathf.Pow(position.x - x, 2) + Mathf.Pow(position.y - y, 2)) < radius)
-                //{
-                //    ChangePixelAlphaTo(position, 0f);
-                //}
-                ChangePixelAlphaTo(x, y, 0f);
+                ChangePixelAlphaTo(forX, forY, 0f);
             }
         }
         mapFogTexture.Apply();
