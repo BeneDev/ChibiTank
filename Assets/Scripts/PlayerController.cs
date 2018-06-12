@@ -283,6 +283,7 @@ public class PlayerController : BaseTank {
 
     PlayerInput input;
     GameObject cameraArm;
+    Camera camera;
 
     // Stores an enemy if the player aims at one
     GameObject enemyInFront;
@@ -324,6 +325,8 @@ public class PlayerController : BaseTank {
         base.Awake();
         input = GetComponent<PlayerInput>();
         cameraArm = Camera.main.transform.parent.gameObject;
+
+        camera = Camera.main;
 
         // Create the layer Mask for the terrain
         int layer = LayerMask.NameToLayer("Terrain");
@@ -617,7 +620,7 @@ public class PlayerController : BaseTank {
             Destroy(menu.gameObject);
         }
         MenuManager.Instance.MenuStack.Clear();
-        Camera.main.GetComponentInParent<Animator>().SetTrigger("Idle");
+        camera.GetComponentInParent<Animator>().SetTrigger("Idle");
         ShotsInMagazine = MagazineSize;
         isDead = false;
     }
@@ -663,7 +666,7 @@ public class PlayerController : BaseTank {
             {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     RaycastHit hit;
                     Physics.Raycast(ray, out hit, 500f);
                     Vector3 mousePosInWorld = hit.point;
@@ -674,7 +677,7 @@ public class PlayerController : BaseTank {
             }
             else
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit, 500f);
                 Vector3 mousePosInWorld = hit.point;
