@@ -1252,11 +1252,6 @@ Prefab:
       propertyPath: sun
       value: 
       objectReference: {fileID: 2027937934}
-    - target: {fileID: 114820951599942674, guid: d4b391b6509239941a097a64e18ed336,
-        type: 2}
-      propertyPath: dayStartAt
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d4b391b6509239941a097a64e18ed336, type: 2}
   m_IsPrefabParent: 0

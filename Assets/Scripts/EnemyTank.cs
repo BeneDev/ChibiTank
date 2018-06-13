@@ -54,6 +54,10 @@ public class EnemyTank : BaseTank {
         toPlayer = player.transform.position - transform.position;
         if(isDead)
         {
+            if (GameManager.Instance.enemiesNearbyPlayer.Contains(gameObject))
+            {
+                GameManager.Instance.enemiesNearbyPlayer.Remove(gameObject);
+            }
             // TODO Let the player control this value in options menu
             if(toPlayer.magnitude > 150f)
             {

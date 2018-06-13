@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour {
     [Range(5, 9), SerializeField] int dayStartAt = 8;
     float dayNightCycleOffset = -120; // This number defines when the sunrise is. At -120, sunrise is at 8 am
 
+    [Range(0, 23), SerializeField] int gameStartsAtDayTime;
+
     public event System.Action<int> OnEnemiesNearbyPlayerChanged;
 
     int oldEnemiesNearbyPlayerCount;
@@ -128,7 +130,7 @@ public class GameManager : MonoBehaviour {
             }
         }
         oldEnemiesNearbyPlayerCount = enemiesNearbyPlayer.Count;
-        SetUpSun(8);
+        SetUpSun(gameStartsAtDayTime);
     }
 
     private void Start()
