@@ -53,6 +53,14 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public bool IsDay
+    {
+        get
+        {
+            return isDay;
+        }
+    }
+
     #endregion
 
     #region Fields
@@ -76,10 +84,13 @@ public class GameManager : MonoBehaviour {
 
     public List<GameObject> enemiesNearbyPlayer;
 
+    bool isDay;
+
     System.DateTime inGameTime;
 
     [SerializeField] GameObject sun;
-    [SerializeField] float DayNightCycleOffset = -120; // This number defines when the sunrise is. At -120, sunrise is at 8 am
+    [Range(5, 9), SerializeField] int dayStartAt = 8;
+    float dayNightCycleOffset = -120; // This number defines when the sunrise is. At -120, sunrise is at 8 am
 
     public event System.Action<int> OnEnemiesNearbyPlayerChanged;
 
@@ -117,7 +128,7 @@ public class GameManager : MonoBehaviour {
             }
         }
         oldEnemiesNearbyPlayerCount = enemiesNearbyPlayer.Count;
-        sun.transform.rotation = Quaternion.Euler(new Vector3(GetSunRotationForTime(inGameTime.Hour, inGameTime.Minute), sun.transform.rotation.y, sun.transform.rotation.z));
+        SetUpSun(8);
     }
 
     private void Start()
@@ -152,6 +163,18 @@ public class GameManager : MonoBehaviour {
 
     #region Helper Methods
 
+    void SetUpSun(int initialHoursToAdd)
+    {
+        // Calculate the offset based on the fact, that every hour, the cyclus goes on 15 degrees
+        dayNightCycleOffset = dayStartAt * -15;
+
+        // Add hours to define the beginning day time of the game
+        inGameTime = inGameTime.AddHours(initialHoursToAdd);
+
+        // Set the suns rotation to support the daytime
+        sun.transform.rotation = Quaternion.Euler(new Vector3(GetSunRotationForTime(inGameTime.Hour, inGameTime.Minute), sun.transform.rotation.y, sun.transform.rotation.z));
+    }
+
     void TimePasses()
     {
         inGameTime = inGameTime.AddMinutes(1f);
@@ -164,11 +187,19 @@ public class GameManager : MonoBehaviour {
         {
             OnInGameTimeChanged(inGameTime.Hour, inGameTime.Minute);
         }
+        if(inGameTime.Hour < dayStartAt + 12 && inGameTime.Hour >= dayStartAt)
+        {
+            isDay = true;
+        }
+        else
+        {
+            isDay = false;
+        }
     }
 
     float GetSunRotationForTime(int hour, int minute)
     {
-        return ((hour * 60 + minute) * 0.25f) + DayNightCycleOffset;
+        return ((hour * 60 + minute) * 0.25f) + dayNightCycleOffset;
     }
 
     // Looks for any connected controller and updates the counter for every connected controller

@@ -61,6 +61,15 @@ public class EnemyTank : BaseTank {
             }
             return;
         }
+        // TODO make the enemy toggle on his flashlight dependent on surrounding darkness and not time of day
+        if (!GameManager.Instance.IsDay && !flashLight.activeSelf)
+        {
+            ToggleFlashlight();
+        }
+        else if (GameManager.Instance.IsDay && flashLight.activeSelf)
+        {
+            ToggleFlashlight();
+        }
         if(!isDead && toPlayer.magnitude < sightReach * sightReachMultiplier && !GameManager.Instance.enemiesNearbyPlayer.Contains(gameObject))
         {
             GameManager.Instance.enemiesNearbyPlayer.Add(gameObject);

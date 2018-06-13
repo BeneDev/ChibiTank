@@ -88,3 +88,4 @@ MonoBehaviour:
   isControllerInput: 0
   enemiesNearbyPlayer: []
   sun: {fileID: 0}
+  dayStartAt: 8
