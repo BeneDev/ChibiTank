@@ -86,3 +86,5 @@ MonoBehaviour:
   cannonBallPrefab: {fileID: 1890751960956592, guid: 18854b74eb0d2b0438bff524804227f2,
     type: 2}
   isControllerInput: 0
+  enemiesNearbyPlayer: []
+  sun: {fileID: 0}

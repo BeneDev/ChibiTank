@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour {
 
     #region Fields
 
+    public event System.Action<int, int> OnInGameTimeChanged;
+
     [Header("Cannon Balls"), SerializeField] int cannonBallCount = 100; // How many cannonball projectiles will be instantiated at the beginning of the game for object pooling
     [SerializeField] public GameObject cannonBallParent; // Where in the hierarchy every cannonball gets stored to prevent the hierarchy from getting flodded
     [SerializeField] GameObject cannonBallPrefab;
@@ -73,6 +75,10 @@ public class GameManager : MonoBehaviour {
     bool isCursorVisible = true;
 
     public List<GameObject> enemiesNearbyPlayer;
+
+    System.DateTime inGameTime;
+
+    [SerializeField] GameObject sun;
 
     public event System.Action<int> OnEnemiesNearbyPlayerChanged;
 
@@ -110,6 +116,12 @@ public class GameManager : MonoBehaviour {
             }
         }
         oldEnemiesNearbyPlayerCount = enemiesNearbyPlayer.Count;
+        sun.transform.rotation = Quaternion.Euler(new Vector3(GetSunRotationForTime(inGameTime.Hour, inGameTime.Minute), sun.transform.rotation.y, sun.transform.rotation.z));
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("TimePasses", 0f, 1f);
     }
 
     private void Update()
@@ -128,11 +140,35 @@ public class GameManager : MonoBehaviour {
             OnEnemiesNearbyPlayerChanged(enemiesNearbyPlayer.Count);
             oldEnemiesNearbyPlayerCount = enemiesNearbyPlayer.Count;
         }
+        if (sun)
+        {
+            Quaternion newRot = Quaternion.Euler(new Vector3(GetSunRotationForTime(inGameTime.Hour, inGameTime.Minute), sun.transform.rotation.y, sun.transform.rotation.z));
+            sun.transform.rotation = Quaternion.Lerp(sun.transform.rotation, newRot, 0.1f);
+        }
     }
 
     #endregion
 
     #region Helper Methods
+
+    void TimePasses()
+    {
+        inGameTime = inGameTime.AddMinutes(1f);
+        // Change the time of day
+        //if(sun)
+        //{
+        //    sun.transform.rotation = Quaternion.Lerp(sun.transform.rotation, Quaternion.Euler(new Vector3(GetSunRotationForTime(inGameTime.Hour, inGameTime.Minute), sun.transform.rotation.y, sun.transform.rotation.z)), 1f);
+        //}
+        if(OnInGameTimeChanged != null)
+        {
+            OnInGameTimeChanged(inGameTime.Hour, inGameTime.Minute);
+        }
+    }
+
+    float GetSunRotationForTime(int hour, int minute)
+    {
+        return (hour * 60 + minute) * 0.25f;
+    }
 
     // Looks for any connected controller and updates the counter for every connected controller
     void GetControllerCount()
