@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour, IInput {
 
     bool bShootInUse = false;
     bool bReloadInUse = false;
+    bool bFlashlightInUse = false;
     bool bCancelInUse = false;
     bool bResetCamInUse = false;
     bool bItem1InUse = false;
@@ -92,6 +93,26 @@ public class PlayerInput : MonoBehaviour, IInput {
             if (Input.GetAxisRaw("Reload") == 0)
             {
                 bReloadInUse = false;
+            }
+            return false;
+        }
+    }
+
+    public bool ToggleFlashlight
+    {
+        get
+        {
+            if (Input.GetAxisRaw("ToggleFlashlight") != 0)
+            {
+                if (bFlashlightInUse == false)
+                {
+                    bFlashlightInUse = true;
+                    return true;
+                }
+            }
+            if (Input.GetAxisRaw("ToggleFlashlight") == 0)
+            {
+                bFlashlightInUse = false;
             }
             return false;
         }

@@ -371,6 +371,10 @@ public class PlayerController : BaseTank {
         {
             SetCamera();
         }
+        if(input.ToggleFlashlight)
+        {
+            ToggleFlashlight();
+        }
         // TODO this code block, having two times almost the same for no EventSystem and one EventSystem HAS TO BE CHANGED.
         if (EventSystem.current)
         {

@@ -21,6 +21,9 @@ public interface IInput
     // The reload axis
     bool Reload { get; }
 
+    // Toggles the flashlight on or off
+    bool ToggleFlashlight { get; }
+
     // The buttons for the items, the player has equipped
     bool UseItem1 { get; }
     bool UseItem2 { get; }

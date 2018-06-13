@@ -34,6 +34,7 @@ public class BaseTank : BaseCharacter {
 
     [Header("Parts"), SerializeField] protected GameObject cockPit; // The cockpit gameobject, to rotate it
     [SerializeField] protected GameObject shootOrigin; // The point, where projectiles will be instantiated
+    [SerializeField] protected GameObject flashLight;
 
     [Header("Particles"), SerializeField] ParticleSystem shotSparks; // The particle system for shots
     [SerializeField] ParticleSystem deathExplosion; // The particle system for dying
@@ -147,6 +148,14 @@ public class BaseTank : BaseCharacter {
     #endregion
 
     #region Helper Methods
+
+    protected virtual void ToggleFlashlight()
+    {
+        if(flashLight)
+        {
+            flashLight.SetActive(!flashLight.activeSelf);
+        }
+    }
 
     IEnumerator AutoStartReloading(float seconds)
     {
