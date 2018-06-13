@@ -393,7 +393,7 @@ public class PlayerController : BaseTank {
                     }
                 }
             }
-            if(input.Reload && magazineSize != shotsInMagazine)
+            if(input.Reload && magazineSize != shotsInMagazine && !isReloading)
             {
                 StartReloading();
             }

@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour {
     System.DateTime inGameTime;
 
     [SerializeField] GameObject sun;
+    [SerializeField] float DayNightCycleOffset = -120; // This number defines when the sunrise is. At -120, sunrise is at 8 am
 
     public event System.Action<int> OnEnemiesNearbyPlayerChanged;
 
@@ -167,7 +168,7 @@ public class GameManager : MonoBehaviour {
 
     float GetSunRotationForTime(int hour, int minute)
     {
-        return (hour * 60 + minute) * 0.25f;
+        return ((hour * 60 + minute) * 0.25f) + DayNightCycleOffset;
     }
 
     // Looks for any connected controller and updates the counter for every connected controller
