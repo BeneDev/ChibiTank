@@ -42,17 +42,19 @@ public class MapFogController : MonoBehaviour {
         image.texture = mapFogTexture;
     }
 
-    private void Update()
+    private void Start()
     {
-        SetTransparencyWherePlayerWas((int)player.transform.position.x + 500, (int)player.transform.position.z + 500, unhideRadius);
+        InvokeRepeating("SetTransparencyWherePlayerWas", 0f, 1f);
     }
 
-    void SetTransparencyWherePlayerWas(int x, int y, int radius)
+    void SetTransparencyWherePlayerWas()
     {
+        int x = (int)player.transform.position.x + 500;
+        int y = (int)player.transform.position.z + 500;
         // TODO Make this a smoothed out circle
-        for (int forX = x - radius; forX < x + radius; forX++)
+        for (int forX = x - unhideRadius; forX < x + unhideRadius; forX++)
         {
-            for (int forY = y - radius; forY < y + radius; forY++)
+            for (int forY = y - unhideRadius; forY < y + unhideRadius; forY++)
             {
                 ChangePixelAlphaTo(forX, forY, 0f);
             }
