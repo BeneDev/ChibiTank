@@ -295,9 +295,10 @@ public class PlayerController : BaseTank {
     [SerializeField] float rayToGroundLength = 1f; 
     [SerializeField] float talkDistance = 5f; // How far the player can be away from an NPC and still talk to him instead of shoot at him
     
-    [SerializeField] AudioSource engineSound;
+    [Header("Sounds"), SerializeField] AudioSource engineSound;
     [Range(0f, 0.1f), SerializeField] float engineSoundGain = 0.01f; // How much the engine sound volume gains when the player starts driving
     [Range(0f, 1f), SerializeField] float idleEngineVolume = 0.01f; // The volume of the engine sound, when the player is not driving
+    [SerializeField] AudioSource flashLightSource;
 
     [Header("Camera Shake"), SerializeField] float shootCameraShakeAmount = 1f;
     [SerializeField] float shootCameraShakeDuration = 1f;
@@ -470,6 +471,15 @@ public class PlayerController : BaseTank {
     public void SpendPointOnAttribute()
     {
 
+    }
+
+    protected override void ToggleFlashlight()
+    {
+        base.ToggleFlashlight();
+        if(flashLightSource)
+        {
+            flashLightSource.PlayOneShot(flashLightSource.clip);
+        }
     }
 
     public override void TakeDamage(int damage)
