@@ -37,6 +37,8 @@ public class MenuManager : Singleton<MenuManager> {
 
     #region Private Fields
 
+    public event System.Action<bool> OnMenuCountZero;
+
     private Stack<Menu> menuStack = new Stack<Menu>(); // The stack which stores all the open menus
     [SerializeField] private Menu[] menuPrefabs; // The array which stores all the known prefabs which can be shown
 
@@ -87,6 +89,7 @@ public class MenuManager : Singleton<MenuManager> {
                 camAnim.SetTrigger("ZoomIn");
                 cameraIsInZoom = true;
             }
+
         }
         else
         {
@@ -142,6 +145,10 @@ public class MenuManager : Singleton<MenuManager> {
         }
 
         menuStack.Push(instance);
+        if(OnMenuCountZero != null)
+        {
+            OnMenuCountZero(false);
+        }
     }
 
     // Closes a menu. Will log an error if there are no menus at all of if the chosen menu is not the top menu. Otherwise CloseTopMenu is called
@@ -193,6 +200,10 @@ public class MenuManager : Singleton<MenuManager> {
             {
                 break;
             }
+        }
+        if(OnMenuCountZero != null && menuStack.Count <= 0)
+        {
+            OnMenuCountZero(true);
         }
     }
 

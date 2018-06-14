@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class OverlayController : Singleton<OverlayController> {
 
-    [SerializeField] Vector2 hotSpotOffset;
     CanvasGroup ownCanvasGroup;
+
+    [SerializeField] Vector2 hotSpotOffset;
+    [SerializeField] CanvasGroup cursorCanvasGroup;
     [SerializeField] GameObject image;
 
     [SerializeField] Text shotsInMagazineText;
@@ -38,10 +40,24 @@ public class OverlayController : Singleton<OverlayController> {
 
         player.OnEquippedItemUsageCountChanged += ChangeEquippedItemUsageCountText;
         GameManager.Instance.OnEnemiesNearbyPlayerChanged += ControlBars;
+        MenuManager.Instance.OnMenuCountZero += ToggleFadeForMenus;
+    }
+
+    void ToggleFadeForMenus(bool isFaded)
+    {
+        if(isFaded)
+        {
+            ownCanvasGroup.alpha = 1f;
+        }
+        else if(!isFaded)
+        {
+            ownCanvasGroup.alpha = 0f;
+        }
     }
 
     void ControlBars(int enemyCount)
     {
+        // TODO control bars with animations just as items
         if(enemyCount <= 0 && areBarsFadedIn)
         {
             StartCoroutine(FadeOutBars(1f));
@@ -89,14 +105,14 @@ public class OverlayController : Singleton<OverlayController> {
     private void Update()
     {
         Cursor.visible = false;
-        if (!GameManager.Instance.IsCursorVisible)
+        if (!GameManager.Instance.IsCursorVisible && cursorCanvasGroup)
         {
-            ownCanvasGroup.alpha = 0f;
+            cursorCanvasGroup.alpha = 0f;
             return;
         }
-        else
+        else if (cursorCanvasGroup)
         {
-            ownCanvasGroup.alpha = 1f;
+            cursorCanvasGroup.alpha = 1f;
         }
         if(image)
         {

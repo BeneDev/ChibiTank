@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 223918670474006646}
   - component: {fileID: 114354926025541402}
   - component: {fileID: 114059016532572828}
+  - component: {fileID: 225713904016328378}
   m_Layer: 5
   m_Name: CursorCanvas
   m_TagString: Untagged
@@ -812,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hotSpotOffset: {x: 0, y: 0}
+  cursorCanvasGroup: {fileID: 225713904016328378}
   image: {fileID: 1494106381745774}
   shotsInMagazineText: {fileID: 114236068791128330}
   magazineSizeText: {fileID: 114410948505087138}
@@ -2010,6 +2012,17 @@ CanvasGroup:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1606174850014226}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225713904016328378
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889205045226500}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1

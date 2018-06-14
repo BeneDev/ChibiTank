@@ -51,7 +51,6 @@ public class LoadoutMenu : Menu<LoadoutMenu> {
         }
         if(item1Image && player.EquippedItem1)
         {
-            print(player.EquippedItem1.Sprite.name);
             item1Image.sprite = player.EquippedItem1.Sprite;
         }
         else
