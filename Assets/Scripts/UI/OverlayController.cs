@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class OverlayController : Singleton<OverlayController> {
 
-    CanvasGroup ownCanvasGroup;
-
     [SerializeField] Vector2 hotSpotOffset;
     [SerializeField] CanvasGroup cursorCanvasGroup;
     [SerializeField] GameObject image;
+
+    [SerializeField] CanvasGroup itemCanvasGroup;
+    [SerializeField] CanvasGroup dayTimeCanvasGroup;
 
     [SerializeField] Text shotsInMagazineText;
     [SerializeField] Text magazineSizeText;
@@ -30,7 +31,6 @@ public class OverlayController : Singleton<OverlayController> {
     private void Awake()
     {
         Cursor.visible = false;
-        ownCanvasGroup = GetComponent<CanvasGroup>();
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player.OnMagazineSizeChanged += ChangeMagazineSizeText;
@@ -47,11 +47,21 @@ public class OverlayController : Singleton<OverlayController> {
     {
         if(isFaded)
         {
-            ownCanvasGroup.alpha = 1f;
+            dayTimeCanvasGroup.alpha = 1f;
+            itemCanvasGroup.alpha = 1f;
+            foreach (BaseBarController obj in bars)
+            {
+                obj.CanvasAlpha = 1f;
+            }
         }
         else if(!isFaded)
         {
-            ownCanvasGroup.alpha = 0f;
+            dayTimeCanvasGroup.alpha = 0f;
+            itemCanvasGroup.alpha = 0f;
+            foreach (BaseBarController obj in bars)
+            {
+                obj.CanvasAlpha = 0f;
+            }
         }
     }
 

@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 114050722132639626}
   - component: {fileID: 114109268725876094}
   - component: {fileID: 114777646126780740}
+  - component: {fileID: 225239704462969598}
   m_Layer: 5
   m_Name: TimeCanvas
   m_TagString: Untagged
@@ -261,6 +262,7 @@ GameObject:
   - component: {fileID: 223051627498801434}
   - component: {fileID: 114555873882709190}
   - component: {fileID: 114453097857338094}
+  - component: {fileID: 225380166458264418}
   m_Layer: 5
   m_Name: ItemCanvas
   m_TagString: Untagged
@@ -815,6 +817,8 @@ MonoBehaviour:
   hotSpotOffset: {x: 0, y: 0}
   cursorCanvasGroup: {fileID: 225713904016328378}
   image: {fileID: 1494106381745774}
+  itemCanvasGroup: {fileID: 225380166458264418}
+  dayTimeCanvasGroup: {fileID: 225239704462969598}
   shotsInMagazineText: {fileID: 114236068791128330}
   magazineSizeText: {fileID: 114410948505087138}
   itemImages:
@@ -1984,6 +1988,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225239704462969598
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186206981916096}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225380166458264418
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1545495067081914}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!225 &225399259048472672
 CanvasGroup:
   m_ObjectHideFlags: 1
