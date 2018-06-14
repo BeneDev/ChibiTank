@@ -21,6 +21,11 @@ public class MapFogController : MonoBehaviour {
     {
         image = imageObject.GetComponent<RawImage>();
         player = GameObject.FindGameObjectWithTag("Player");
+        CreateMapFogTexture();
+    }
+
+    private void CreateMapFogTexture()
+    {
         textureWidth = (int)imageObject.GetComponent<RectTransform>().rect.width;
         textureHeight = (int)imageObject.GetComponent<RectTransform>().rect.height;
         mapFogTexture = new Texture2D(textureWidth, textureHeight);
@@ -30,9 +35,9 @@ public class MapFogController : MonoBehaviour {
             {
                 int currPixl = textureWidth * y + x;
                 float currPNC = Mathf.PerlinNoise((float)x / textureWidth * 10, (float)y / textureHeight * 10);
-
-                // TODO make the perlin noise texture darker in general and set the transparency based on the white factor (the whiter, the more transparent)
-                Color tempColor = new Color(currPNC, currPNC, currPNC, 1);
+                
+                // Set the transparency based on the white amount of the color
+                Color tempColor = new Color(currPNC, currPNC, currPNC, (1f - currPNC) + 0.2f);
 
                 mapFogTexture.SetPixel(x, y, tempColor);
 
