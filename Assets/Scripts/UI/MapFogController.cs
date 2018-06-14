@@ -16,6 +16,7 @@ public class MapFogController : MonoBehaviour {
     int textureHeight;
 
     [SerializeField] int unhideRadius = 5;
+    [Range(0.3f, 3f), SerializeField] float mapUpdateStep = 0.75f;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class MapFogController : MonoBehaviour {
 
     private void Start()
     {
-        InvokeRepeating("SetTransparencyWherePlayerWas", 0f, 1f);
+        InvokeRepeating("SetTransparencyWherePlayerWas", 0f, mapUpdateStep);
     }
 
     void SetTransparencyWherePlayerWas()
@@ -61,7 +62,8 @@ public class MapFogController : MonoBehaviour {
         {
             for (int forY = y - unhideRadius; forY < y + unhideRadius; forY++)
             {
-                ChangePixelAlphaTo(forX, forY, 0f);
+                float alpha = Mathf.Sqrt(Mathf.Pow(x - forX, 2)+ Mathf.Pow(y - forY, 2)) / unhideRadius;
+                ChangePixelAlphaTo(forX, forY, alpha);
             }
         }
         mapFogTexture.Apply();
@@ -70,8 +72,31 @@ public class MapFogController : MonoBehaviour {
 
     void ChangePixelAlphaTo(int x, int y, float alpha)
     {
-        Color tempColor = new Color(0f, 0f, 0f, alpha);
+        Color tempColor = new Color(mapFogTexture.GetPixel(x, y).r, mapFogTexture.GetPixel(x, y).g, mapFogTexture.GetPixel(x, y).b, mapFogTexture.GetPixel(x, y).a - (1f -alpha));
+        if (mapFogTexture.GetPixel(x, y).a < tempColor.a)
+        {
+            tempColor.a = mapFogTexture.GetPixel(x, y).a;
+        }
+        if (tempColor.a < 0)
+        {
+            tempColor.a = 0;
+        }
         mapFogTexture.SetPixel(x, y, tempColor);
+    }
+
+    float PingPongLerp(float a, float b, float middle, float x)
+    {
+        if (x <= a || x >= b) return 1f;
+        if (x == middle) return 0f;
+
+        if(x < middle)
+        {
+            return Mathf.Lerp(middle, a, x);
+        }
+        else
+        {
+            return Mathf.Lerp(middle, b, x);
+        }
     }
 
 }
